@@ -5,5 +5,5 @@
  * add the username and password to the repository
  */
 
-public class signUpPage {
+public class SignUpPage {
 }

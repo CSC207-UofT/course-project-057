@@ -3,5 +3,5 @@
  * buttons on the bottom to play again or exit game
  */
 
-public class leaderboard {
+public class Leaderboard {
 }

@@ -5,5 +5,5 @@
  * there is also a button below to sign up
  */
 
-public class loginPage {
+public class LoginPage {
 }

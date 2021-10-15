@@ -6,5 +6,5 @@
  * When the game is exited, go back to main menu
  */
 
-public class inGameSettings {
+public class InGameSettings {
 }

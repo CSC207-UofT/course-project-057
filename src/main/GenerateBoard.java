@@ -6,5 +6,6 @@
  * the list should be random, Tiles with consecutive keys should not be adjacent
  */
 
-public class generateBoard {
+public class GenerateBoard {
+
 }

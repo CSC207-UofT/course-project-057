@@ -2,5 +2,5 @@
  * Use Case Class
  */
 
-public class userAccount {
+public class UserAccount {
 }
