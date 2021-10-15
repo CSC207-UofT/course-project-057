@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.*;
 import java.util.Scanner;
 
@@ -43,17 +42,29 @@ public class Tile {
     // method to arrange the tile list into a 4x3 grid
     // use a 2d array for dashes and a corresponding one for the tiles
 
-    public static void main (String [] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        final String[][] matrix = {
-                { "-", "-", "-" }, { "-", "-", "-" },
-                { "-", "-", "-" }
-        };
+    public void runGame() {
+        Scanner scanner = new Scanner(System.in);
+        // sets up a matrix of dashes to be initially displayed in the console
+        final String[][] dashBoard = {{"-", "-", "-", "-"}, {"-", "-", "-", "-"}, {"-", "-", "-", "-"}};
+
+        // setting up a matrix of the keys of the Tile objects in the randomized arrayList
+        int[][] keyBoard = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}; // sets each value in the 2d array to 0
+        int arrayListIndex = 0; // this counts the indexes of arrayList
+        ArrayList<Tile> tileList;
+        tileList = createTileList(); // create randomized list of Tile objects
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 4; j++) {
+                // sets the value of the matrix in the current position to the key of the corresponding tile object
+                keyBoard[i][j] = tileList.get(arrayListIndex).getKey();
+                arrayListIndex++; // increases ArrayList index by 1
+            }
+        }
+
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
-                System.out.println(matrix[i][j] + " ");
+                System.out.println(dashBoard[i][j] + " ");
             }
             System.out.println();
         }
@@ -66,6 +77,11 @@ public class Tile {
         String input_2 = scanner.nextLine();
         // if the two inputs match, leave them as numerical keys
         // if they do not match, turn them both back to dashes
+
+    }
+
+    public static void main (String [] args) {
+        runGame();
 
     }
 
