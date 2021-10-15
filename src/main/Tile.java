@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.*;
 import java.util.Scanner;
 
+// write tests for this
+
 /**
  * Entity Class
  * returns a Tile with a numerical key and image based on the theme
@@ -18,7 +20,7 @@ public class Tile {
         this.key = key;
     }
 
-    public int getKey () {
+    public int getKey() {
         return this.key;
     }
 
@@ -60,32 +62,6 @@ public class Tile {
         return keyBoard;
     }
 
-
-    public void runGame() {
-        String[][] baseBoard = setUpDashBoard(); // this board will track the user's correct matches
-        final String[][] keyBoard = setUpKeyBoard(); // the board representation of the arrayList of Tile keys
-        String flexBoard[][] = setUpDashBoard(); // the board which will be changed when user's first choice is printed
-        Scanner scanner = new Scanner(System.in); // scanner
-
-        printBoard(baseBoard);
-
-        // getting input from first user choice
-        System.out.println("Please enter a number from 1-12 for the tile you want to flip.");
-        System.out.println("The numbers go from left->right and then top->bottom");
-        String input_1 = scanner.nextLine();
-
-        // TO-DO: change the tile which corresponds to input from a - to its numerical key
-
-        // getting input from second user choice
-        System.out.println("Please enter another number from 1-12 for the tile you want to flip.");
-        System.out.println("The numbers go from left->right and then top->bottom");
-        String input_2 = scanner.nextLine();
-
-        // if the two inputs match, leave them as numerical keys
-        // if they do not match, turn them both back to dashes
-
-    }
-
     public void printBoard(String[][] board) {
         // prints dashboard
         for (int i = 0; i < 3; i++) {
@@ -96,8 +72,40 @@ public class Tile {
         }
     }
 
+
+    public void runGame() {
+        String[][] baseBoard = setUpDashBoard(); // this board will track the user's correct matches
+        final String[][] keyBoard = setUpKeyBoard(); // the board representation of the arrayList of Tile keys
+        String flexBoard[][] = setUpDashBoard(); // the board which will be changed when user's first choice is printed
+        Scanner scanner = new Scanner(System.in); // scanner
+
+        printBoard(baseBoard);
+
+        // getting input from first user choice
+        System.out.println("Please enter the row for the tile you want to flip.");
+        String move1_row = scanner.nextLine();
+        System.out.println("Please enter the column for the tile you want to flip.");
+        String move1_column = scanner.nextLine();
+
+        // TO-DO: change the tile in flexBoard which corresponds to input from a - to its numerical key
+        printBoard(flexBoard);
+
+        // getting input from second user choice
+        System.out.println("Please enter the row for the next tile you want to flip.");
+        String move2_row = scanner.nextLine();
+        System.out.println("Please enter the column for the next tile you want to flip.");
+        String move2_column = scanner.nextLine();
+
+        // TO-DO: change the tile in flexBoard which corresponds to input from a - to its numerical key
+        printBoard(flexBoard);
+        // TO-DO: if the two inputs match, leave them as numerical keys. if they do not match, turn them both back to dashes
+
+    }
+
+
+
     public static void main (String [] args) {
-        runGame();
+        runGame(); // figure out static stuff :(
 
     }
 
