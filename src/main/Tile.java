@@ -88,36 +88,47 @@ public class Tile {
         login();
         String[][] baseBoard = setUpDashBoard(); // this board will track the user's correct matches
         final String[][] keyBoard = setUpKeyBoard(); // the board representation of the arrayList of Tile keys
-        String flexBoard[][] = setUpDashBoard(); // the board which will be changed when user's first choice is printed
+        String[][] flexBoard = setUpDashBoard(); // the board which will be changed when user's first choice is printed
         Scanner scanner = new Scanner(System.in); // scanner
 
         printBoard(baseBoard);
 
         // getting input from first user choice
         System.out.println("Please enter the row for the tile you want to flip.");
-        String move1_row = scanner.nextLine();
+        int move1_row = Integer.parseInt(scanner.nextLine());
         System.out.println("Please enter the column for the tile you want to flip.");
-        String move1_column = scanner.nextLine();
+        int move1_column = Integer.parseInt(scanner.nextLine());
 
-        // TO-DO: change the tile in flexBoard which corresponds to input from a - to its numerical key
+        // change the tile in flexBoard which corresponds to input from a - to its numerical key
+        flexBoard[move1_row][move1_column] = keyBoard[move1_row][move1_column];
         printBoard(flexBoard);
 
         // getting input from second user choice
         System.out.println("Please enter the row for the next tile you want to flip.");
-        String move2_row = scanner.nextLine();
+        int move2_row = Integer.parseInt(scanner.nextLine());
         System.out.println("Please enter the column for the next tile you want to flip.");
-        String move2_column = scanner.nextLine();
+        int move2_column = Integer.parseInt(scanner.nextLine());
 
-        // TO-DO: change the tile in flexBoard which corresponds to input from a - to its numerical key
+        // change the tile in flexBoard which corresponds to input from a - to its numerical key
+        flexBoard[move2_row][move2_column] = keyBoard[move2_row][move2_column];
         printBoard(flexBoard);
-        // TO-DO: if the two inputs match, leave them as numerical keys. if they do not match, turn them both back to dashes
 
+        // check if the two tiles are a match
+        if (Objects.equals(flexBoard[move1_row][move1_column], flexBoard[move2_row][move2_column])) { // if the two numbers shown are equal (match)
+            baseBoard[move1_row][move1_column] = flexBoard[move1_row][move1_column]; // set baseboard to reflect this match
+            baseBoard[move2_row][move2_column] = flexBoard[move2_row][move2_column];
+        }
+        else { // reset the moves to dashes
+            flexBoard[move1_row][move1_column] = "-";
+            flexBoard[move2_row][move2_column] = "-";
+        }
+        printBoard(baseBoard);
     }
 
 
 
     public static void main (String [] args) {
-        // declare scanner
+        // declare scanner?
 
         runGame(); // figure out static stuff :(
 
