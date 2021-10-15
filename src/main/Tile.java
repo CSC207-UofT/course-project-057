@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Tile {
 
-    private int key;
+    private final int key;
     // TO-DO private String theme
 
 
@@ -24,12 +24,13 @@ public class Tile {
         return this.key;
     }
 
-    public void setKey(int newKey) {
-        this.key = newKey;
-    }
+    // not sure if we need the setter
+    // public void setKey(int newKey) {
+        // this.key = newKey;
+    // }
 
     public ArrayList<Tile> createTileList () {
-        ArrayList<Tile> tileList = new ArrayList<Tile>();
+        ArrayList<Tile> tileList = new ArrayList<>();
         for (int i = 0; i < 6; i++) {          // loops 6 times, this value is used for keys
             for (int j = 0; j < 2; j++) {      // each key is used twice
                 Tile newTile = new Tile(i);     // creates 2 tiles with consecutive keys
@@ -43,9 +44,7 @@ public class Tile {
 
     public String[][] setUpDashBoard() {
         // sets up a matrix of dashes to be initially displayed in the console
-        String[][] dashBoard =
-                {{"-", "-", "-", "-"}, {"-", "-", "-", "-"}, {"-", "-", "-", "-"}};
-        return dashBoard;
+        return new String[][]{{"-", "-", "-", "-"}, {"-", "-", "-", "-"}, {"-", "-", "-", "-"}};
     }
 
     public String[][] setUpKeyBoard() {
@@ -65,9 +64,8 @@ public class Tile {
 
     public void printBoard(String[][] board) {
         // prints dashboard
-        for (int n = 0 ; n < board.length ; n++)
-        {
-            System.out.println(Arrays.toString(board[n]));
+        for (String[] strings : board) {
+            System.out.println(Arrays.toString(strings));
         }
     }
 
@@ -100,7 +98,7 @@ public class Tile {
         String[][] baseBoard = setUpDashBoard(); // this board will track the user's correct matches
         final String[][] keyBoard = setUpKeyBoard(); // the board representation of the arrayList of Tile keys
         String[][] flexBoard = setUpDashBoard(); // the board which will be changed when user's first choice is printed
-        List<String[][]> boardList = new ArrayList<String[][]>();
+        List<String[][]> boardList = new ArrayList<>();
         boardList.add(baseBoard);
         boardList.add(keyBoard);
         boardList.add(flexBoard);
