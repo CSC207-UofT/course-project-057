@@ -72,8 +72,20 @@ public class Tile {
         }
     }
 
+    public String[] login() {
+        String [] account = new String[2];
+        Scanner scanner = new Scanner(System.in); // scanner
+        System.out.println("Please enter your username.");
+        account[0] = scanner.nextLine();
+        System.out.println("Please enter your password.");
+        account[1] = scanner.nextLine();
+        return account;
+        // add password check
+    }
+
 
     public void runGame() {
+        login();
         String[][] baseBoard = setUpDashBoard(); // this board will track the user's correct matches
         final String[][] keyBoard = setUpKeyBoard(); // the board representation of the arrayList of Tile keys
         String flexBoard[][] = setUpDashBoard(); // the board which will be changed when user's first choice is printed
@@ -105,6 +117,8 @@ public class Tile {
 
 
     public static void main (String [] args) {
+        // declare scanner
+
         runGame(); // figure out static stuff :(
 
     }
