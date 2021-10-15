@@ -5,5 +5,5 @@
  * @param key
  */
 
-public class Tile {
+public class tile {
 }
