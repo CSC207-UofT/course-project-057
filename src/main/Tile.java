@@ -118,20 +118,36 @@ public class Tile {
             printBoard(baseBoard);
 
             // getting input from first user choice
-            System.out.println("Please enter the row (1-3) for the tile you want to flip.");
-            int move1_row = Integer.parseInt(scanner.nextLine())-1;
+
+            int move1_row;
+            int move1_column;
+            int move2_row;
+            int move2_column;
+
+            System.out.println("Please enter the row (1-3) for the next tile you want to flip.");
+            move1_row = Integer.parseInt(scanner.nextLine()) - 1;
+
+
+
             System.out.println("Please enter the column (1-4) for the tile you want to flip.");
-            int move1_column = Integer.parseInt(scanner.nextLine())-1;
+            move1_column = Integer.parseInt(scanner.nextLine())-1;
+
+
 
             // change the tile in flexBoard which corresponds to input from a - to its numerical key
             flexBoard[move1_row][move1_column] = keyBoard[move1_row][move1_column];
             printBoard(flexBoard);
 
-            // getting input from second user choice
+
             System.out.println("Please enter the row (1-3) for the next tile you want to flip.");
-            int move2_row = Integer.parseInt(scanner.nextLine())-1;
-            System.out.println("Please enter the column (1-4) for the next tile you want to flip.");
-            int move2_column = Integer.parseInt(scanner.nextLine())-1;
+            move2_row = Integer.parseInt(scanner.nextLine()) - 1;
+
+
+            System.out.println("Please enter the column (1-4) for the tile you want to flip.");
+            move2_column = Integer.parseInt(scanner.nextLine())-1;
+
+
+
             // TODO:something to catch the indexes that are out of bound
 
             // change the tile in flexBoard which corresponds to input from a - to its numerical key
