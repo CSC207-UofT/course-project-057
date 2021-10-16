@@ -63,7 +63,7 @@ public class Tile {
     }
 
     public void printBoard(String[][] board) {
-        // prints a dashboard
+        // prints dashboard
         for (String[] strings : board) {
             System.out.println(Arrays.toString(strings));
         }
