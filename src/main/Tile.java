@@ -95,11 +95,9 @@ public class Tile {
     }
 
     public List<String[][]> setUpBoard() {
-        String[][] baseBoard = setUpDashBoard(); // this board will track the user's correct matches
         final String[][] keyBoard = setUpKeyBoard(); // the board representation of the arrayList of Tile keys
         String[][] flexBoard = setUpDashBoard(); // the board which will be changed when user's first choice is printed
         List<String[][]> boardList = new ArrayList<>();
-        boardList.add(baseBoard);
         boardList.add(keyBoard);
         boardList.add(flexBoard);
         return boardList;
@@ -109,46 +107,28 @@ public class Tile {
     public void runGame(String userName) {
         Scanner scanner = new Scanner(System.in); // scanner
 
-        String[][] baseBoard = setUpBoard().get(0);
-        String[][] keyBoard = setUpBoard().get(1);
-        String[][] flexBoard = setUpBoard().get(2);
+        String[][] keyBoard = setUpBoard().get(0);
+        String[][] flexBoard = setUpBoard().get(1);
 
         int moves = 0;
-        while (!flipped(baseBoard)){
-            printBoard(baseBoard);
+        while (!flipped(flexBoard)){
+            printBoard(flexBoard);
 
             // getting input from first user choice
-
-            int move1_row;
-            int move1_column;
-            int move2_row;
-            int move2_column;
-
-            System.out.println("Please enter the row (1-3) for the next tile you want to flip.");
-            move1_row = Integer.parseInt(scanner.nextLine()) - 1;
-
-
-
+            System.out.println("Please enter the row (1-3) for the tile you want to flip.");
+            int move1_row = Integer.parseInt(scanner.nextLine())-1;
             System.out.println("Please enter the column (1-4) for the tile you want to flip.");
-            move1_column = Integer.parseInt(scanner.nextLine())-1;
-
-
+            int move1_column = Integer.parseInt(scanner.nextLine())-1;
 
             // change the tile in flexBoard which corresponds to input from a - to its numerical key
             flexBoard[move1_row][move1_column] = keyBoard[move1_row][move1_column];
             printBoard(flexBoard);
 
-
+            // getting input from second user choice
             System.out.println("Please enter the row (1-3) for the next tile you want to flip.");
-            move2_row = Integer.parseInt(scanner.nextLine()) - 1;
-
-
-            System.out.println("Please enter the column (1-4) for the tile you want to flip.");
-            move2_column = Integer.parseInt(scanner.nextLine())-1;
-
-
-
-            // TODO:something to catch the indexes that are out of bound
+            int move2_row = Integer.parseInt(scanner.nextLine())-1;
+            System.out.println("Please enter the column (1-4) for the next tile you want to flip.");
+            int move2_column = Integer.parseInt(scanner.nextLine())-1;
 
             // change the tile in flexBoard which corresponds to input from a - to its numerical key
             flexBoard[move2_row][move2_column] = keyBoard[move2_row][move2_column];
@@ -156,8 +136,6 @@ public class Tile {
 
             // check if the two tiles are a match
             if (Objects.equals(flexBoard[move1_row][move1_column], flexBoard[move2_row][move2_column])) { // if the two numbers shown are equal (match)
-                baseBoard[move1_row][move1_column] = flexBoard[move1_row][move1_column]; // set baseboard to reflect this match
-                baseBoard[move2_row][move2_column] = flexBoard[move2_row][move2_column];
                 System.out.println("You found a match.");
             }
             else { // reset the moves to dashes
@@ -178,6 +156,5 @@ public class Tile {
         Tile newGame = new Tile(0);
         String userName = newGame.login()[0];
         newGame.runGame(userName);
-        System.out.println();
     }
 }
