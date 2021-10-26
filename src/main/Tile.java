@@ -24,10 +24,11 @@ public class Tile {
         return this.key;
     }
 
-    // not sure if we need the setter
-    // public void setKey(int newKey) {
-        // this.key = newKey;
-    // }
+    @Override
+    public String toString() {
+        return Integer.toString(getKey());
+    }
+
 
     public ArrayList<Tile> createTileList () {
         ArrayList<Tile> tileList = new ArrayList<>();
@@ -49,7 +50,7 @@ public class Tile {
 
     public String[][] setUpKeyBoard() {
         // setting up a matrix of the keys of the Tile objects in the randomized arrayList
-        String[][] keyBoard = setUpDashBoard(); // make a board which will eventually contain the keys
+        String[][] keyBoard = new String[][]{{"-", "-", "-", "-"}, {"-", "-", "-", "-"}, {"-", "-", "-", "-"}}; // make a board which will eventually contain the keys
         int arrayListIndex = 0; // this counts the indexes of arrayList
         ArrayList<Tile> tileList = createTileList(); // create randomized list of Tile objects
         for (int i = 0; i < 3; i++) {
@@ -155,13 +156,5 @@ public class Tile {
         System.out.println("Congratulations! You've won the game!");
         System.out.println("Leaderboard:");
         System.out.println("1: Player" + userName + ", Moves: " + moves);
-    }
-
-
-    public static void main (String [] args) {
-        Tile newGame = new Tile(0);
-        String userName = newGame.login()[0];
-        newGame.runGame(userName);
-        System.out.println();
     }
 }
