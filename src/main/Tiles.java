@@ -9,14 +9,14 @@ import java.util.Scanner;
  * returns a Tile with a numerical key and image based on the theme
  */
 
-public class Tile {
+public class Tiles {
 
     private final int key;
     // TO-DO private String theme
 
 
     // constructor for Tile object
-    public Tile(int key) {         // add String "theme" as a parameter for phase 1/2
+    public Tiles(int key) {         // add String "theme" as a parameter for phase 1/2
         this.key = key;
     }
 
@@ -30,11 +30,11 @@ public class Tile {
     }
 
 
-    public ArrayList<Tile> createTileList () {
-        ArrayList<Tile> tileList = new ArrayList<>();
+    public ArrayList<Tiles> createTileList () {
+        ArrayList<Tiles> tileList = new ArrayList<>();
         for (int i = 0; i < 6; i++) {          // loops 6 times, this value is used for keys
             for (int j = 0; j < 2; j++) {      // each key is used twice
-                Tile newTile = new Tile(i);     // creates 2 tiles with consecutive keys
+                Tiles newTile = new Tiles(i);     // creates 2 tiles with consecutive keys
                 tileList.add(newTile);          // adds newly created tile to the list of tiles
             }
         }
@@ -52,7 +52,7 @@ public class Tile {
         // setting up a matrix of the keys of the Tile objects in the randomized arrayList
         String[][] keyBoard = new String[][]{{"-", "-", "-", "-"}, {"-", "-", "-", "-"}, {"-", "-", "-", "-"}}; // make a board which will eventually contain the keys
         int arrayListIndex = 0; // this counts the indexes of arrayList
-        ArrayList<Tile> tileList = createTileList(); // create randomized list of Tile objects
+        ArrayList<Tiles> tileList = createTileList(); // create randomized list of Tile objects
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
                 // sets the value of the matrix in the current position to the key of the corresponding tile object

@@ -4,11 +4,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TileTest {
-    Tile tt;
+    Tiles tt;
 
     @Before
     public void setUp() {
-        tt = new Tile(0);
+        tt = new Tiles(0);
     }
 
     @Test(timeout = 50)
