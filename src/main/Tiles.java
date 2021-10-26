@@ -9,14 +9,14 @@ import java.util.Scanner;
  * returns a Tile with a numerical key and image based on the theme
  */
 
-public class Tiles {
+public class Tile {
 
     private final int key;
     // TO-DO private String theme
 
 
     // constructor for Tile object
-    public Tiles(int key) {         // add String "theme" as a parameter for phase 1/2
+    public Tile(int key) {         // add String "theme" as a parameter for phase 1/2
         this.key = key;
     }
 
@@ -24,17 +24,16 @@ public class Tiles {
         return this.key;
     }
 
-    @Override
-    public String toString() {
-        return Integer.toString(getKey());
-    }
+    // not sure if we need the setter
+    // public void setKey(int newKey) {
+        // this.key = newKey;
+    // }
 
-
-    public ArrayList<Tiles> createTileList () {
-        ArrayList<Tiles> tileList = new ArrayList<>();
+    public ArrayList<Tile> createTileList () {
+        ArrayList<Tile> tileList = new ArrayList<>();
         for (int i = 0; i < 6; i++) {          // loops 6 times, this value is used for keys
             for (int j = 0; j < 2; j++) {      // each key is used twice
-                Tiles newTile = new Tiles(i);     // creates 2 tiles with consecutive keys
+                Tile newTile = new Tile(i);     // creates 2 tiles with consecutive keys
                 tileList.add(newTile);          // adds newly created tile to the list of tiles
             }
         }
@@ -50,9 +49,9 @@ public class Tiles {
 
     public String[][] setUpKeyBoard() {
         // setting up a matrix of the keys of the Tile objects in the randomized arrayList
-        String[][] keyBoard = new String[][]{{"-", "-", "-", "-"}, {"-", "-", "-", "-"}, {"-", "-", "-", "-"}}; // make a board which will eventually contain the keys
+        String[][] keyBoard = setUpDashBoard(); // make a board which will eventually contain the keys
         int arrayListIndex = 0; // this counts the indexes of arrayList
-        ArrayList<Tiles> tileList = createTileList(); // create randomized list of Tile objects
+        ArrayList<Tile> tileList = createTileList(); // create randomized list of Tile objects
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
                 // sets the value of the matrix in the current position to the key of the corresponding tile object
@@ -96,11 +95,9 @@ public class Tiles {
     }
 
     public List<String[][]> setUpBoard() {
-        String[][] baseBoard = setUpDashBoard(); // this board will track the user's correct matches
         final String[][] keyBoard = setUpKeyBoard(); // the board representation of the arrayList of Tile keys
         String[][] flexBoard = setUpDashBoard(); // the board which will be changed when user's first choice is printed
         List<String[][]> boardList = new ArrayList<>();
-        boardList.add(baseBoard);
         boardList.add(keyBoard);
         boardList.add(flexBoard);
         return boardList;
@@ -110,46 +107,28 @@ public class Tiles {
     public void runGame(String userName) {
         Scanner scanner = new Scanner(System.in); // scanner
 
-        String[][] baseBoard = setUpBoard().get(0);
-        String[][] keyBoard = setUpBoard().get(1);
-        String[][] flexBoard = setUpBoard().get(2);
+        String[][] keyBoard = setUpBoard().get(0);
+        String[][] flexBoard = setUpBoard().get(1);
 
         int moves = 0;
-        while (!flipped(baseBoard)){
-            printBoard(baseBoard);
+        while (!flipped(flexBoard)){
+            printBoard(flexBoard);
 
             // getting input from first user choice
-
-            int move1_row;
-            int move1_column;
-            int move2_row;
-            int move2_column;
-
-            System.out.println("Please enter the row (1-3) for the next tile you want to flip.");
-            move1_row = Integer.parseInt(scanner.nextLine()) - 1;
-
-
-
+            System.out.println("Please enter the row (1-3) for the tile you want to flip.");
+            int move1_row = Integer.parseInt(scanner.nextLine())-1;
             System.out.println("Please enter the column (1-4) for the tile you want to flip.");
-            move1_column = Integer.parseInt(scanner.nextLine())-1;
-
-
+            int move1_column = Integer.parseInt(scanner.nextLine())-1;
 
             // change the tile in flexBoard which corresponds to input from a - to its numerical key
             flexBoard[move1_row][move1_column] = keyBoard[move1_row][move1_column];
             printBoard(flexBoard);
 
-
+            // getting input from second user choice
             System.out.println("Please enter the row (1-3) for the next tile you want to flip.");
-            move2_row = Integer.parseInt(scanner.nextLine()) - 1;
-
-
-            System.out.println("Please enter the column (1-4) for the tile you want to flip.");
-            move2_column = Integer.parseInt(scanner.nextLine())-1;
-
-
-
-            // TODO:something to catch the indexes that are out of bound
+            int move2_row = Integer.parseInt(scanner.nextLine())-1;
+            System.out.println("Please enter the column (1-4) for the next tile you want to flip.");
+            int move2_column = Integer.parseInt(scanner.nextLine())-1;
 
             // change the tile in flexBoard which corresponds to input from a - to its numerical key
             flexBoard[move2_row][move2_column] = keyBoard[move2_row][move2_column];
@@ -157,8 +136,6 @@ public class Tiles {
 
             // check if the two tiles are a match
             if (Objects.equals(flexBoard[move1_row][move1_column], flexBoard[move2_row][move2_column])) { // if the two numbers shown are equal (match)
-                baseBoard[move1_row][move1_column] = flexBoard[move1_row][move1_column]; // set baseboard to reflect this match
-                baseBoard[move2_row][move2_column] = flexBoard[move2_row][move2_column];
                 System.out.println("You found a match.");
             }
             else { // reset the moves to dashes
@@ -172,5 +149,12 @@ public class Tiles {
         System.out.println("Congratulations! You've won the game!");
         System.out.println("Leaderboard:");
         System.out.println("1: Player" + userName + ", Moves: " + moves);
+    }
+
+
+    public static void main (String [] args) {
+        Tile newGame = new Tile(0);
+        String userName = newGame.login()[0];
+        newGame.runGame(userName);
     }
 }
