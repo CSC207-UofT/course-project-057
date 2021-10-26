@@ -1,65 +1,59 @@
-import java.util.ArrayList;
-import java.util.Collections;
+/*
+TileBoard Entity Class
+
+The main object that will be acted on by other use case classes for the game. Related to Tile class.
+ */
+
+import java.util.Arrays;
 
 public class TileBoard {
     private final Tile[][] TilePositions;
-    private final int numKeys;
+    private final int numPairs;
     private final int totalKeys;
     private final int numRows;
     private final int numCols;
 
-    private int getNumKeys() {
-        return this.numKeys;
-    }
-
     public TileBoard(int numRows, int numCols) {
         this.TilePositions = new Tile[numRows][numCols];
-        this.numKeys = numRows * numCols / 2;
+        this.numPairs = numRows * numCols / 2;
         this.totalKeys = numRows * numCols;
         this.numRows = numRows;
         this.numCols = numCols;
     }
 
-    public ArrayList<Tile> generateTileList() {
-        ArrayList<Tile> tileList = new ArrayList<>();
-        for (int i = 0; i < numKeys; i++) {          // loops 6 times, this value is used for keys
-            for (int j = 0; j < 2; j++) {      // each key is used twice
-                Tile newTile = new Tile(i);     // creates 2 tiles with consecutive keys
-                tileList.add(newTile);          // adds newly created tile to the list of tiles
-            }
-        }
-        Collections.shuffle(tileList); // randomizes tiles
-
-        return tileList;
+    public int getTotalKeys() {
+        return this.totalKeys;
     }
 
-
-    public void GenerateBoard() {
-        int arrayListIndex = 0; // this counts the indexes of arrayList
-        ArrayList<Tile> tileList = generateTileList(); // create randomized list of Tile objects
-        for (int i = 0; i < this.numRows; i++) {
-            for (int j = 0; j < this.numCols; j++) {
-                // sets the value of the matrix in the current position to the key of the corresponding tile object
-                this.TilePositions[i][j] = tileList.get(arrayListIndex);
-                arrayListIndex++; // increases ArrayList index by 1
-            }
-        }
-        // adds newly created tile to the list of tile
+    public int getNumPairs() {
+        return this.numPairs;
     }
 
-    public static void main(String[] args) {
-        TileBoard tileBoard = new TileBoard(3, 4);
-        System.out.println(tileBoard.generateTileList());
-        tileBoard.GenerateBoard();
-        Tile tile1 = new Tile(1);
-        System.out.println(tile1);
-        // prints dashboard
-//        for (Tile[] row : tileBoard.TilePositions) {
-//            for (Tile tile : row) {
-//                System.out.println(tile);
-//            }
-//        }
-        System.out.println(tileBoard.TilePositions[1][2]);
+    public int getNumRows() {
+        return numRows;
+    }
+
+    public int getNumCols() {
+        return numCols;
+    }
+
+    public int getTileKey(int row, int col) {
+        return this.TilePositions[row][col].getKey();
+    }
+
+    public Tile[][] getTilePositions() {
+        return this.TilePositions;
+    }
+
+    public void setTilePositions(int row, int col, Tile tile) {
+        this.TilePositions[row][col] = tile;
+    }
+
+    // String form of TileBoard object returns the key values of each Tile in their respective TilePositions
+    // Useful for testing in BoardGenerator
+    @Override
+    public String toString() {
+       return Arrays.deepToString(getTilePositions());
     }
 }
 
