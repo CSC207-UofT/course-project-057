@@ -41,6 +41,10 @@ public class TileBoard {
         return this.TilePositions[row][col].getKey();
     }
 
+    public Tile getTileAtIndex(int row, int col) {
+        return this.getTilePositions()[row][col];
+    }
+
     public Tile[][] getTilePositions() {
         return this.TilePositions;
     }
