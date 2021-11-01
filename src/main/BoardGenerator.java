@@ -6,13 +6,12 @@ public class BoardGenerator {
 
     public BoardGenerator() {}
 
+    /*
+    Helper method for GenerateBoard
+
+    Creates a randomized ArrayList of Tile objects that are put into the tileBoard object.
+     */
     private static ArrayList<Tile> generateTileList(int numPairs) {
-        /*
-        Helper method for GenerateBoard
-
-        Creates a randomized ArrayList of Tile objects that are put into the tileBoard object.
-         */
-
         ArrayList<Tile> tileList = new ArrayList<>();
         for (int i = 0; i < numPairs; i++) {          // loops numPairs times, this value is used for keys
             for (int j = 0; j < 2; j++) {      // adds 2 Tiles of same value to list, this is for creating pairs
