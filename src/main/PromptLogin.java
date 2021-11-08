@@ -15,5 +15,6 @@ public class PromptLogin {
         account[1] = scanner.nextLine();
         return account;
         // add password check
+        // Chris and Akansha added a password check in UserLogin
     }
 }
