@@ -1,13 +1,11 @@
 import java.util.Scanner;
 
 /**
- * Controller Class
- * has an option to enter a username and a password
- * the password will be checked with PasswordCheck class/method
- * there is also a button below to sign up
- */
+ * UI Class
+ * Enter user
+ **/
 
-public class LoginPage {
+public class PromptLogin {
     public String[] login() {
         String [] account = new String[2];
         Scanner scanner = new Scanner(System.in); // scanner
