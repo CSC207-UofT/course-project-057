@@ -8,7 +8,6 @@ public class UserLogin {
 
         Scanner s = new Scanner(System.in);
         String [] userInput = new String[2];
-        boolean [] allCorrect = new boolean[2]; // both are true when user creds are valid
 
         System.out.print("Please enter your username: ");
         userInput[0] = s.next();

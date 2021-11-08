@@ -23,4 +23,12 @@ public class User {
         return this.password;
     }
 
+    public void setUsername(String new_username) {
+        this.username = new_username;
+    }
+
+    public void setPassword (String new_password) {
+        this.password = new_password;
+    }
+
 }
