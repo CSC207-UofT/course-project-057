@@ -42,5 +42,9 @@ public class BoardGenerator {
         TileBoard tileBoard = GenerateBoard(3, 4);
         System.out.println(tileBoard.getTotalKeys());
         System.out.println(tileBoard);
+        BoardManager.flipTile(tileBoard, 1, 1);
+//        System.out.println(tileBoard.getTileAtIndex(1, 1).getFlipped());
+//        System.out.println(tileBoard.getTileAtIndex(1, 2).getFlipped());
+
     }
 }
