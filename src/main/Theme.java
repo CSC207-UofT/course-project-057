@@ -1,5 +1,6 @@
-/*
-Abstract class
+/**
+ * Abstract Class
+ * stores images etc.
  */
 
 public class Theme {
