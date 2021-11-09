@@ -1,5 +1,5 @@
 /**
- * what is the difference between this and game manager?
+ * Use  case for game settings
  */
 
 public class GameSettingsManager {

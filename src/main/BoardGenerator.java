@@ -3,7 +3,11 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * IS THE MAIN METHOD FOR TESTING?
+ * Use Case Class
+ * Calls the Tile class to create Tile objects and puts them into a list
+ * The list should be random, Tiles with consecutive keys should not be adjacent
+ *
+ * main is for testing, delete later
  */
 
 public class BoardGenerator {
@@ -44,6 +48,7 @@ public class BoardGenerator {
 
 
 
+    // for testing
     public static void main(String[] args) {
         TileBoard tileBoard = GenerateBoard(3, 4);
         System.out.println(tileBoard.getTotalKeys());

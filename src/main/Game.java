@@ -1,7 +1,8 @@
 /**
  * main method
- * either login is called and ends here, then game is called
- * or login is called and it runs game
+ * login is called, runs its methods, and the player/user and difficulty chosen are returned
+ * then, game is called from main, and user + difficulty are passed in
+ * NOTE: the actual game calls leaderboard, not the main
  */
 
 public class Game {
