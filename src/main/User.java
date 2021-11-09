@@ -1,8 +1,8 @@
-/** stores username and password as well as game history/statistics
+/** stores username and password
  * Entity Class
  * @param username
  * @param password
- * @param gameHistory of type dictionary, where key is an int and value is an array with score, difficulty, and time
+ * Game History is being stored in a database
  **/
 
 public class User {

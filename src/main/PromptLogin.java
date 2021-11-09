@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 /**
- * UI Class
- * Enter user
+ * DUPLICATE CLASS
+ * Disregard, use "User Login" instead
  **/
 
 public class PromptLogin {

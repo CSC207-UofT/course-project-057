@@ -7,6 +7,7 @@ import java.io.*;
  * option to sign up for a new account
  * make sure the username isn't taken
  * add the username and password to the repository
+ * Move Username taken check to InfoChecker
  */
 
 public class SignUpPage {
@@ -19,7 +20,7 @@ public class SignUpPage {
         do {
             System.out.print("Please enter a username: ");
             userInput[0] = s.next();
-            if (!user_database.checkUsername(userInput[0])) {
+            if (!user_database.checkUsername(userInput[0])) { // move to InfoChecker
                 nameValid = false;
                 System.out.println("Your username has been taken. Please enter a different username.");
             } else {

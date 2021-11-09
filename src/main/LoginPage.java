@@ -1,10 +1,8 @@
 import java.util.Scanner;
 
 /**
- * Controller Class
- * has an option to enter a username and a password
- * the password will be checked with PasswordCheck class/method
- * there is also a button below to sign up
+ * DUPLICATE CLASS
+ * Disregard, use "User Login" instead
  */
 
 public class LoginPage {
@@ -17,5 +15,6 @@ public class LoginPage {
         account[1] = scanner.nextLine();
         return account;
         // add password check
+        // Chris and Akansha added a password check in UserLogin
     }
 }

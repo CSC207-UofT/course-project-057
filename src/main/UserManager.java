@@ -1,3 +1,7 @@
+/**
+ * Manages User Attributes
+ */
+
 public class UserManager {
     public static void createUser(String username, String password) {
         User user = new User(username, password);

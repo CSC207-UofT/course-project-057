@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * IS THE MAIN METHOD FOR TESTING?
+ */
+
 public class BoardGenerator {
 
     public BoardGenerator() {}
@@ -37,6 +41,8 @@ public class BoardGenerator {
         }
         return tileBoard;
     }
+
+
 
     public static void main(String[] args) {
         TileBoard tileBoard = GenerateBoard(3, 4);
