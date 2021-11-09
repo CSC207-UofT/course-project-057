@@ -3,7 +3,7 @@
  */
 
 public class UserManager {
-    public static void createUser(String username, String password) {
+    public static void createUser(String username, String password) { // this is to add to database
         User user = new User(username, password);
     }
 
