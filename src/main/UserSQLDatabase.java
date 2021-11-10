@@ -17,7 +17,6 @@ public class UserSQLDatabase {
             stmt.executeUpdate("DROP TABLE IF EXISTS users");
             // Create a table called 'users' that stores user information
             stmt.executeUpdate("CREATE TABLE users (Username TEXT, Password TEXT, PRIMARY KEY (Username))");
-            System.out.println("Table created in method.");
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -82,10 +81,8 @@ public class UserSQLDatabase {
     }
 
     public static void main (String[] args) throws SQLException {
-        String DB_URL = "jdbc:postgresql://localhost:5432/userdatabase";
-        String USER = "postgres";
-        String PASS = "Password";
-        Test new_class = new Test();
+        //TODO: Test for the methods, we can move it test classes later!!!!!!!!
+        UserSQLDatabase new_class = new UserSQLDatabase();
         new_class.createTable();
         new_class.addUser("Jun", "1234");
         System.out.println(new_class.checkUsernameAvailable("Jun"));
@@ -93,30 +90,5 @@ public class UserSQLDatabase {
         System.out.println(new_class.checkPassword("Jun", "1234"));
         System.out.println(new_class.checkPassword("Jun", "12345"));
         System.out.println(new_class.checkPassword("Artur", "1234"));
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class not found " + e);
-        }
-        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement stmt = conn.createStatement();){
-            System.out.println("connection worked!");
-            // Removes the table 'users' if it already exists in the database
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users");
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
-            while (rs.next()) {
-                for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(",  ");
-                    String columnValue = rs.getString(i);
-                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
-                }
-                System.out.println("");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
     }
 }
