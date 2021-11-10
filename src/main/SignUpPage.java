@@ -33,6 +33,8 @@ public class SignUpPage {
 
         UserManager.createUser(userInput[0], userInput[1]); // call User or UserManager?
 
+
+
     }
 
 }
