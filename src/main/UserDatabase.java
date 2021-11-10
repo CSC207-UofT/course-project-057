@@ -1,12 +1,12 @@
 import java.util.*;
+import java.sql.*;
 
+
+/*** MOVED TO USERSQLDATABASE CLASS BECAUSE WE ARE USING SQL NOW!!!
+ ***/
 public class UserDatabase {
 
     Hashtable<String, String> userDatabase = new Hashtable<String, String>();
-
-    public void UserDatabase() {
-        this.userDatabase = userDatabase;
-    }
 
     public void addToDatabase(User user) {
         userDatabase.put(user.getUsername(), user.getPassword());
@@ -36,5 +36,6 @@ public class UserDatabase {
         }
         return true;
     }
+
 
 }
