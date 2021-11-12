@@ -1,6 +1,4 @@
-import java.util.Hashtable;
 import java.util.Scanner;
-import java.io.*;
 
 /**
  * Use this instead of LoginPage and PromptLogin
@@ -9,7 +7,7 @@ import java.io.*;
 
 public class UserLogin {
 
-    public boolean UserLogin(userSQLDatabase user_database) {
+    public boolean UserLogin(UserSQLDatabase user_database) {
 
         Scanner s = new Scanner(System.in);
         String [] userInput = new String[2];

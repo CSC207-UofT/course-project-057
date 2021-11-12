@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class userSQLDatabase {
+public class UserSQLDatabase {
     private final String DB_URL = "jdbc:postgresql://localhost:5432/userdatabase";
     private final String USER = "postgres";
     private final String PASS = "Password";
@@ -93,7 +93,7 @@ public class userSQLDatabase {
 
     public static void main (String[] args) throws SQLException {
         //TODO: Test for the methods, we can move it test classes later!!!!!!!!
-        userSQLDatabase new_class = new userSQLDatabase();
+        UserSQLDatabase new_class = new UserSQLDatabase();
         new_class.createTable();
         new_class.addUser("Jun", "1234");
         System.out.println(new_class.checkUsernameAvailable("Jun"));

@@ -1,6 +1,4 @@
-import java.util.Hashtable;
 import java.util.Scanner;
-import java.io.*;
 
 /**
  * Controller Class
@@ -12,7 +10,7 @@ import java.io.*;
 
 public class SignUpPage {
 
-    public void SignUpPage(userSQLDatabase user_database) {
+    public void SignUpPage(UserSQLDatabase user_database) {
         Scanner s = new Scanner(System.in);
         String [] userInput = new String[2];
         // nameValid is false when user name has been taken

@@ -7,11 +7,11 @@ import static org.junit.Assert.*;
 
 
 public class userSQLDatabaseTest {
-    userSQLDatabase db;
+    UserSQLDatabase db;
 
     @Before
     public void setUp() {
-        db = new userSQLDatabase();
+        db = new UserSQLDatabase();
     }
 
     @Test(timeout = 50)
