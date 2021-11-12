@@ -21,8 +21,8 @@ public class GameHistorySQLDatabase {
             // Removes the table 'GameHistory' if it already exists in the database
             stmt.executeUpdate("DROP TABLE IF EXISTS GameHistory");
             // Create a table called 'GameHistory' that stores user information
-            stmt.executeUpdate("CREATE TABLE GameHistory (GID INT, Username TEXT, TotalMoves INT, Time FLOAT, " +
-                    "Difficulty TEXT, PRIMARY KEY (GID))");
+            stmt.executeUpdate("CREATE TABLE GameHistory (GID INT NOT NULL, Username TEXT, TotalMoves INT, " +
+                    "Time FLOAT, Difficulty TEXT, PRIMARY KEY (GID))");
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
