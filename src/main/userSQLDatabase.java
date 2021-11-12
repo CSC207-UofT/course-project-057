@@ -1,9 +1,12 @@
 import java.sql.*;
 
-public class UserSQLDatabase {
-    String DB_URL = "jdbc:postgresql://localhost:5432/userdatabase";
-    String USER = "postgres";
-    String PASS = "Password";
+public class userSQLDatabase {
+    private final String DB_URL = "jdbc:postgresql://localhost:5432/userdatabase";
+    private final String USER = "postgres";
+    private final String PASS = "Password";
+
+    Connection conn = null;
+    ResultSet rs = null;
 
     public void createTable() throws SQLException {
         try {
@@ -20,6 +23,8 @@ public class UserSQLDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
+        } finally {
+            try { if (conn != null) conn.close(); } catch (Exception e) {};
         }
     }
 
@@ -38,6 +43,8 @@ public class UserSQLDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
+        } finally {
+            try { if (conn != null) conn.close(); } catch (Exception e) {};
         }
     }
 
@@ -51,11 +58,13 @@ public class UserSQLDatabase {
         try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();){
             // Check for new_username in table 'users'
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + new_username + "'");
+            rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + new_username + "'");
             // if the resultset is empty:
             return !rs.isBeforeFirst();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try { if (conn != null) conn.close(); } catch (Exception e) {};
         }
         return false;
     }
@@ -76,13 +85,15 @@ public class UserSQLDatabase {
             return rs.isBeforeFirst();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try { if (conn != null) conn.close(); } catch (Exception e) {};
         }
         return false;
     }
 
     public static void main (String[] args) throws SQLException {
         //TODO: Test for the methods, we can move it test classes later!!!!!!!!
-        UserSQLDatabase new_class = new UserSQLDatabase();
+        userSQLDatabase new_class = new userSQLDatabase();
         new_class.createTable();
         new_class.addUser("Jun", "1234");
         System.out.println(new_class.checkUsernameAvailable("Jun"));

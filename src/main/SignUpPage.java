@@ -12,15 +12,16 @@ import java.io.*;
 
 public class SignUpPage {
 
-    public void SignUpPage(UserDatabase user_database) {
-
+    public void SignUpPage(userSQLDatabase user_database) {
         Scanner s = new Scanner(System.in);
         String [] userInput = new String[2];
+        // nameValid is false when user name has been taken
         boolean nameValid;
         do {
             System.out.print("Please enter a username: ");
             userInput[0] = s.next();
-            if (!user_database.checkUsername(userInput[0])) { // move to InfoChecker
+            // if the username is not available
+            if (!user_database.checkUsernameAvailable(userInput[0])) { // move to InfoChecker
                 nameValid = false;
                 System.out.println("Your username has been taken. Please enter a different username.");
             } else {
@@ -32,9 +33,6 @@ public class SignUpPage {
         userInput[1] = s.next();
 
         UserManager.createUser(userInput[0], userInput[1]); // call User or UserManager?
-
-
-
     }
 
 }
