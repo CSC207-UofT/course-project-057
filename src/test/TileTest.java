@@ -4,11 +4,11 @@
 //import static org.junit.Assert.*;
 //
 //public class TileTest {
-//    Tile tt;
+//    Entity.Tile tt;
 //
 //    @Before
 //    public void setUp() {
-//        tt = new Tile(0);
+//        tt = new Entity.Tile(0);
 //    }
 //
 //    @Test(timeout = 50)

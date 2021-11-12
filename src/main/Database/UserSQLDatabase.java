@@ -1,3 +1,5 @@
+package Database;
+
 import java.sql.*;
 
 public class UserSQLDatabase {
@@ -89,17 +91,5 @@ public class UserSQLDatabase {
             try { if (conn != null) conn.close(); } catch (Exception e) {};
         }
         return false;
-    }
-
-    public static void main (String[] args) throws SQLException {
-        //TODO: Test for the methods, we can move it test classes later!!!!!!!!
-        UserSQLDatabase new_class = new UserSQLDatabase();
-        new_class.createTable();
-        new_class.addUser("Jun", "1234");
-        System.out.println(new_class.checkUsernameAvailable("Jun"));
-        System.out.println(new_class.checkUsernameAvailable("aRTUR"));
-        System.out.println(new_class.checkPassword("Jun", "1234"));
-        System.out.println(new_class.checkPassword("Jun", "12345"));
-        System.out.println(new_class.checkPassword("Artur", "1234"));
     }
 }

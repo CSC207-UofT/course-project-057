@@ -1,8 +1,10 @@
+package Entity;
+
 /** stores username and password
  * Entity Class
  * @param username
  * @param password
- * Game History is being stored in a database
+ * UI.Game History is being stored in a database
  **/
 
 public class User {

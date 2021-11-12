@@ -1,10 +1,13 @@
-/*
-TileBoard Entity Class
+package Entity;
 
-The main object that will be acted on by other use case classes for the game. Related to Tile class.
- */
+import Entity.Tile;
 
 import java.util.Arrays;
+
+/***
+ * Entity.TileBoard Entity Class
+ * The main object that will be acted on by other use case classes for the game. Related to Entity.Tile class.
+ ***/
 
 public class TileBoard {
     private final Tile[][] TilePositions;
@@ -53,8 +56,8 @@ public class TileBoard {
         this.TilePositions[row][col] = tile;
     }
 
-    // String form of TileBoard object returns the key values of each Tile in their respective TilePositions
-    // Useful for testing in BoardGenerator
+    // String form of Entity.TileBoard object returns the key values of each Entity.Tile in their respective TilePositions
+    // Useful for testing in UseCase.BoardGenerator
     @Override
     public String toString() {
        return Arrays.deepToString(getTilePositions());

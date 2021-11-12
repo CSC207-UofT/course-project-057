@@ -1,10 +1,13 @@
+package UseCase;
+
+import Entity.*;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 /**
  * Use Case Class
- * Calls the Tile class to create Tile objects and puts them into a list
+ * Calls the Entity.Tile class to create Entity.Tile objects and puts them into a list
  * The list should be random, Tiles with consecutive keys should not be adjacent
  *
  * main is for testing, delete later
@@ -17,7 +20,7 @@ public class BoardGenerator {
     /*
     Helper method for GenerateBoard
 
-    Creates a randomized ArrayList of Tile objects that are put into the tileBoard object.
+    Creates a randomized ArrayList of Entity.Tile objects that are put into the tileBoard object.
      */
     private static ArrayList<Tile> generateTileList(int numPairs) {
         ArrayList<Tile> tileList = new ArrayList<>();

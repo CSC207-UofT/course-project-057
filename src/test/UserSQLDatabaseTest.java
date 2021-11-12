@@ -1,3 +1,4 @@
+import Database.UserSQLDatabase;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,8 +15,9 @@ public class UserSQLDatabaseTest {
         db = new UserSQLDatabase();
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void checkUserAvailableTest() throws SQLException {
+        // Create a new table called 'users' in the database
         db.createTable();
         db.addUser("Jun", "1234");
         // username does not exist (is available)
@@ -24,7 +26,7 @@ public class UserSQLDatabaseTest {
         assertFalse(db.checkUsernameAvailable("Jun"));
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void checkPasswordTest() throws SQLException {
         db.createTable();
         db.addUser("Jun", "1234");
