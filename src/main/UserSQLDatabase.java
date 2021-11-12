@@ -19,7 +19,7 @@ public class UserSQLDatabase {
             // Removes the table 'users' if it already exists in the database
             stmt.executeUpdate("DROP TABLE IF EXISTS users");
             // Create a table called 'users' that stores user information
-            stmt.executeUpdate("CREATE TABLE users (Username TEXT, Password TEXT, PRIMARY KEY (Username))");
+            stmt.executeUpdate("CREATE TABLE users (Username TEXT NOT NULL, Password TEXT, PRIMARY KEY (Username))");
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
