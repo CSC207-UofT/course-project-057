@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.*;
 
 
-public class userSQLDatabaseTest {
+public class UserSQLDatabaseTest {
     UserSQLDatabase db;
 
     @Before

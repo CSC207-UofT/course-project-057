@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class UserSQLDatabase {
-    private final String DB_URL = "jdbc:postgresql://localhost:5432/userdatabase";
+    private final String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
     private final String USER = "postgres";
     private final String PASS = "Password";
 
