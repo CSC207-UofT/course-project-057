@@ -1,3 +1,7 @@
+package UI;
+
+import Database.UserSQLDatabase;
+
 import java.util.Scanner;
 
 /**

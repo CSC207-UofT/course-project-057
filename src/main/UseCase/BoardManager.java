@@ -1,3 +1,7 @@
+package UseCase;
+
+import Entity.*;
+
 public class BoardManager {
 
     public BoardManager() {}

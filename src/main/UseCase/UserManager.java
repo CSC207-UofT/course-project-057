@@ -1,5 +1,10 @@
+package UseCase;
+
+import Entity.*;
+
 /**
- * Manages User Attributes
+ * Manages Entity.User Attributes
+ * Use Case class
  */
 
 public class UserManager {

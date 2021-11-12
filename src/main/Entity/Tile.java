@@ -1,3 +1,5 @@
+package Entity;
+
 import java.util.ArrayList;
 import java.util.*;
 import java.util.Scanner;
@@ -6,7 +8,7 @@ import java.util.Scanner;
 
 /**
  * Entity Class
- * returns a Tile with a numerical key and image based on the theme
+ * returns a Entity.Tile with a numerical key and image based on the theme
  */
 
 public class Tile {
@@ -16,7 +18,7 @@ public class Tile {
     // TO-DO private String theme
 
 
-    // constructor for Tile object
+    // constructor for Entity.Tile object
     public Tile(int key) {         // add String "theme" as a parameter for phase 1/2
         this.key = key;
         this.flipped = false;
@@ -40,12 +42,12 @@ public class Tile {
     }
 
 
-    //Helper function in BoardGenerator.generateBoard()
-//    public ArrayList<Tile> createTileList () {
-//        ArrayList<Tile> tileList = new ArrayList<>();
+    //Helper function in UseCase.BoardGenerator.generateBoard()
+//    public ArrayList<Entity.Tile> createTileList () {
+//        ArrayList<Entity.Tile> tileList = new ArrayList<>();
 //        for (int i = 0; i < 6; i++) {          // loops 6 times, this value is used for keys
 //            for (int j = 0; j < 2; j++) {      // each key is used twice
-//                Tile newTile = new Tile(i);     // creates 2 tiles with consecutive keys
+//                Entity.Tile newTile = new Entity.Tile(i);     // creates 2 tiles with consecutive keys
 //                tileList.add(newTile);          // adds newly created tile to the list of tiles
 //            }
 //        }
@@ -59,12 +61,12 @@ public class Tile {
 //        return new String[][]{{"-", "-", "-", "-"}, {"-", "-", "-", "-"}, {"-", "-", "-", "-"}};
 //    }
 
-    //BoardGenerator.generateBoard()
+    //UseCase.BoardGenerator.generateBoard()
 //    public String[][] setUpKeyBoard() {
-//        // setting up a matrix of the keys of the Tile objects in the randomized arrayList
+//        // setting up a matrix of the keys of the Entity.Tile objects in the randomized arrayList
 //        String[][] keyBoard = new String[][]{{"-", "-", "-", "-"}, {"-", "-", "-", "-"}, {"-", "-", "-", "-"}}; // make a board which will eventually contain the keys
 //        int arrayListIndex = 0; // this counts the indexes of arrayList
-//        ArrayList<Tile> tileList = createTileList(); // create randomized list of Tile objects
+//        ArrayList<Entity.Tile> tileList = createTileList(); // create randomized list of Entity.Tile objects
 //        for (int i = 0; i < 3; i++) {
 //            for (int j = 0; j < 4; j++) {
 //                // sets the value of the matrix in the current position to the key of the corresponding tile object
@@ -75,7 +77,7 @@ public class Tile {
 //        return keyBoard;
 //    }
 
-    //For Demo - String representation for TileBoard implemented
+    //For Demo - String representation for Entity.TileBoard implemented
 //    public void printBoard(String[][] board) {
 //        // prints dashboard
 //        for (String[] strings : board) {
@@ -111,7 +113,7 @@ public class Tile {
     //Demo
 //    public List<String[][]> setUpBoard() {
 //        String[][] baseBoard = setUpDashBoard(); // this board will track the user's correct matches
-//        final String[][] keyBoard = setUpKeyBoard(); // the board representation of the arrayList of Tile keys
+//        final String[][] keyBoard = setUpKeyBoard(); // the board representation of the arrayList of Entity.Tile keys
 //        String[][] flexBoard = setUpDashBoard(); // the board which will be changed when user's first choice is printed
 //        List<String[][]> boardList = new ArrayList<>();
 //        boardList.add(baseBoard);

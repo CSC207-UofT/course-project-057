@@ -1,5 +1,11 @@
+package Database;
+
 import java.sql.*;
 
+/***
+ * Database class
+ *
+***/
 public class GameHistorySQLDatabase {
     private final String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
     private final String USER = "postgres";
@@ -32,7 +38,7 @@ public class GameHistorySQLDatabase {
     }
 
     // This method adds a game record to the game history
-    public void AddGameHistory(Integer GID, String Username, Integer TotalMoves, Double Time, String Difficulty)
+    public void addGameHistory(Integer GID, String Username, Integer TotalMoves, Double Time, String Difficulty)
             throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
@@ -49,36 +55,6 @@ public class GameHistorySQLDatabase {
             throw e;
         } finally {
             try { if (conn != null) conn.close(); } catch (Exception e) {};
-        }
-    }
-
-    public static void main (String[] args) throws SQLException {
-        //TODO: Test for the methods, we can move it test classes later!!!!!!!!
-        String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
-        String USER = "postgres";
-        String PASS = "Password";
-
-
-        GameHistorySQLDatabase db = new GameHistorySQLDatabase();
-        db.createTable();
-        db.AddGameHistory(1, "Jun", 12, 30.5, "easy");
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class not found " + e);
-        }
-        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement stmt = conn.createStatement();){
-            ResultSet results = stmt.executeQuery("SELECT * FROM GameHistory");
-            while (results.next()) {
-                String gid = results.getString("GID");
-                String Username = results.getString("Username");
-                String Time = results.getString("Time");
-                System.out.println("GID: " + gid + ", Username: " + Username
-                        + ", Time: " + Time);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 }

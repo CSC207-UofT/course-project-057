@@ -1,3 +1,5 @@
+package Database;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -15,7 +17,8 @@ public class LeaderboardSQLDatabase  {
     Connection conn = null;
     ResultSet rs = null;
 
-    public void GenerateLeaderboard(String Difficulty) throws SQLException {
+    public void generateLeaderboard(String Difficulty) throws SQLException {
+        ArrayList<String> leaderboard_list = new ArrayList<>();
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -24,7 +27,6 @@ public class LeaderboardSQLDatabase  {
         try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();) {
             // updates a leaderboard according to the given difficulty
-            System.out.println(Difficulty);
             ResultSet rs = stmt.executeQuery("SELECT DENSE_RANK AS rank, username, totalmoves, time FROM " +
                     "(SELECT *, DENSE_RANK() OVER(ORDER BY totalmoves, time) FROM gamehistory WHERE difficulty = '" +
                     Difficulty + "') AS t1 WHERE DENSE_RANK <= 10 ORDER BY DENSE_RANK;");
@@ -33,8 +35,8 @@ public class LeaderboardSQLDatabase  {
                 String Username = rs.getString("Username");
                 String TotalMoves = rs.getString("totalmoves");
                 String Time = rs.getString("Time");
-                System.out.println("Rank: " + Rank + ", Username: " + Username + ", TotalMoves: " + TotalMoves
-                        + ", Time: " + Time);
+                System.out.println("Rank: " + Rank + ", Username: " + Username
+                        + ", TotalMoves: " + TotalMoves + ", Time: " + Time);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,7 +47,7 @@ public class LeaderboardSQLDatabase  {
     }
 
     public static void main (String[] args) throws SQLException {
-        //TODO: Test for the methods, we can move it test classes later!!!!!!!!
+        //TODO: Test methods
         String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
         String USER = "postgres";
         String PASS = "Password";
@@ -53,20 +55,23 @@ public class LeaderboardSQLDatabase  {
 
         GameHistorySQLDatabase db = new GameHistorySQLDatabase();
         db.createTable();
-        db.AddGameHistory(1, "Jun", 12, 30.5, "easy");
-        db.AddGameHistory(2, "Akansha", 20, 50.0, "medium");
-        db.AddGameHistory(3, "Jun", 10, 29.0, "easy");
-        db.AddGameHistory(4, "Akansha", 10, 29.0, "easy");
-        db.AddGameHistory(5, "Chris", 12, 60.4, "hard");
-        db.AddGameHistory(6, "Chris", 16, 62.4, "hard");
-        db.AddGameHistory(7, "Jun", 26, 29.4, "hard");
-        db.AddGameHistory(8, "Akansha", 9, 30.2, "easy");
-        db.AddGameHistory(9, "Iris", 30, 20.2, "medium");
-        db.AddGameHistory(10, "Koji", 30, 30.2, "medium");
+        db.addGameHistory(1, "Jun", 12, 30.5, "easy");
+        db.addGameHistory(2, "Akansha", 20, 50.0, "medium");
+        db.addGameHistory(3, "Jun", 10, 29.0, "easy");
+        db.addGameHistory(4, "Akansha", 10, 29.0, "easy");
+        db.addGameHistory(5, "Chris", 12, 60.4, "hard");
+        db.addGameHistory(6, "Chris", 16, 62.4, "hard");
+        db.addGameHistory(7, "Jun", 26, 29.4, "hard");
+        db.addGameHistory(8, "Akansha", 9, 30.2, "easy");
+        db.addGameHistory(9, "Iris", 30, 20.2, "medium");
+        db.addGameHistory(10, "Koji", 30, 30.2, "medium");
 
         LeaderboardSQLDatabase lb = new LeaderboardSQLDatabase();
-        lb.GenerateLeaderboard("easy");
-        lb.GenerateLeaderboard("medium");
-        lb.GenerateLeaderboard("hard");
+        System.out.println("easy");
+        lb.generateLeaderboard("easy");
+        System.out.println("medium");
+        lb.generateLeaderboard("medium");
+        System.out.println("hard");
+        lb.generateLeaderboard("hard");
     }
 }

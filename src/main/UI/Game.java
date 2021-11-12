@@ -1,3 +1,5 @@
+package UI;
+
 /**
  * main method
  * login is called, runs its methods, and the player/user and difficulty chosen are returned

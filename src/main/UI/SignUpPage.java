@@ -1,7 +1,12 @@
+package UI;
+
+import Database.UserSQLDatabase;
+import UseCase.UserManager;
+
 import java.util.Scanner;
 
 /**
- * Controller Class
+ * UI Class
  * option to sign up for a new account
  * make sure the username isn't taken
  * add the username and password to the repository
@@ -19,7 +24,7 @@ public class SignUpPage {
             System.out.print("Please enter a username: ");
             userInput[0] = s.next();
             // if the username is not available
-            if (!user_database.checkUsernameAvailable(userInput[0])) { // move to InfoChecker
+            if (!user_database.checkUsernameAvailable(userInput[0])) {
                 nameValid = false;
                 System.out.println("Your username has been taken. Please enter a different username.");
             } else {
@@ -30,7 +35,7 @@ public class SignUpPage {
         System.out.print("Please enter your password: ");
         userInput[1] = s.next();
 
-        UserManager.createUser(userInput[0], userInput[1]); // call User or UserManager?
+        UserManager.createUser(userInput[0], userInput[1]); // call Entity.User or UseCase.UserManager?
     }
 
 }
