@@ -9,7 +9,7 @@ public class BoardManager {
     /*
     checks if the board has all the elements flipped
      */
-    public boolean checkAllFlipped(TileBoard board) {
+    public static boolean AllFlipped(TileBoard board) {
         for(Tile[] row : board.getTilePositions()) {
             for(Tile tile : row) {
                 if(!tile.getFlipped()) {
@@ -25,10 +25,14 @@ public class BoardManager {
         tile.setFlipped(!tile.getFlipped());
     }
 
-    public boolean checkIfMatched(TileBoard board, int row1, int col1, int row2, int col2) {
+    public static boolean checkIfMatched(TileBoard board, int row1, int col1, int row2, int col2) {
         Tile tile1 = board.getTileAtIndex(row1, col1);
         Tile tile2 = board.getTileAtIndex(row2, col2);
 
         return tile1.getKey() == tile2.getKey();
     }
+
+
+
+
 }

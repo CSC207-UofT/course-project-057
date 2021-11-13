@@ -38,7 +38,12 @@ public class Tile {
 
     @Override
     public String toString() {
-        return Integer.toString(getKey());
+        if (this.getFlipped()) {
+            return Integer.toString(getKey());
+        }
+        else {
+            return "-";
+        }
     }
 
 
