@@ -8,9 +8,9 @@ import java.util.Collections;
 /**
  * Use Case Class
  * Calls the Entity.Tile class to create Entity.Tile objects and puts them into a list
- * The list should be random, Tiles with consecutive keys should not be adjacent
+ * The list should be random
  *
- * main is for testing, delete later
+ * TODO main is for testing, delete later
  */
 
 public class BoardGenerator {
@@ -18,7 +18,7 @@ public class BoardGenerator {
     public BoardGenerator() {}
 
     /*
-    Helper method for GenerateBoard
+    Helper method for generateBoard
 
     Creates a randomized ArrayList of Entity.Tile objects that are put into the tileBoard object.
      */
@@ -34,7 +34,22 @@ public class BoardGenerator {
         return tileList;
     }
 
-    public static TileBoard GenerateBoard(int numRows, int numCols) {
+    public static TileBoard generateBoard(int difficulty) {
+        int numRows;
+        int numCols;
+        if (difficulty == 1) {
+            numRows = 3;
+            numCols = 4;
+        }
+        else if (difficulty == 2) {
+            numRows = 4;
+            numCols = 5;
+        }
+        else {
+            numRows = 5;
+            numCols = 6;
+        }
+
         TileBoard tileBoard = new TileBoard(numRows, numCols);
         ArrayList<Tile> tileList;
         tileList = generateTileList(tileBoard.getNumPairs());
@@ -53,7 +68,7 @@ public class BoardGenerator {
 
     // for testing
     public static void main(String[] args) {
-        TileBoard tileBoard = GenerateBoard(3, 4);
+        TileBoard tileBoard = generateBoard(1);
         System.out.println(tileBoard.getTotalKeys());
         System.out.println(tileBoard);
         BoardManager.flipTile(tileBoard, 1, 1);

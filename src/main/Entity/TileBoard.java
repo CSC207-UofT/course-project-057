@@ -60,7 +60,32 @@ public class TileBoard {
     // Useful for testing in UseCase.BoardGenerator
     @Override
     public String toString() {
-       return Arrays.deepToString(getTilePositions());
+        boolean first = true;
+        StringBuilder result = new StringBuilder("");
+        for (Tile[] row : getTilePositions()) {
+            if (first) {
+                first = false;
+            }
+            else { result.append("\n");
+            }
+            result.append(Arrays.deepToString(row));
+        }
+//        for (Tile[] row : getTilePositions()) {
+//            result.append("[");
+//            for (Tile tile : row) {
+//
+//                if (tile.getFlipped()) {
+//                    result.append(tile.getKey());
+//                }
+//                else {
+//                    result.append("-");
+//                }
+//            }
+//            result.append("]\n");
+//        }
+//        result.append("]");
+//        return Arrays.deepToString(getTilePositions());
+        return result.toString();
     }
 }
 
