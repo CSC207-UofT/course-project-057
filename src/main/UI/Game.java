@@ -1,9 +1,17 @@
 package UI;
 
 import Controller.UserGameInput;
+import Database.GameHistorySQLDatabase;
+import Database.LeaderboardSQLDatabase;
+import Database.UserSQLDatabase;
 import Entity.TileBoard;
+import Entity.User;
 import UseCase.BoardGenerator;
 import UseCase.BoardManager;
+import UI.UserLogin;
+import UI.SignUpPage;
+
+import java.util.Timer;
 
 /**
  * main method
@@ -47,14 +55,21 @@ public class Game {
         return new int[]{rowMove, colMove};
     }
 
-    public static void runGame() {
+    public static long[] runGame() {
+        //TODO add time
         //get user difficulty
+        Timer timer = new Timer();
+
+        long[] statistics = new long[2];
         int difficulty = UserGameInput.getUserDifficulty();
+        int numMoves = 0;
+
         TileBoard tileBoard = BoardGenerator.generateBoard(difficulty);
 
         System.out.println("Input a row number from 1 to " + (tileBoard.getNumRows())
                 + " and a column from 1 to " + (tileBoard.getNumCols()) + ". Tile must not be revealed.");
         System.out.println(tileBoard);
+        long startTime = System.currentTimeMillis();
 
         // Game runs until all tiles are flipped
         while(!BoardManager.AllFlipped(tileBoard)) {
@@ -72,11 +87,48 @@ public class Game {
                 System.out.println("No Match!");
                 System.out.println(tileBoard);
             }
+            numMoves++;
         }
         System.out.println("Congratulations! You matched all the tiles.");
+        statistics[0] = numMoves;
+        statistics[1] = System.currentTimeMillis() - startTime;
+        return statistics;
+    }
+
+    public static String[] loginOrSignup(UserSQLDatabase UserDatabase) {
+        String input = UserGameInput.promptLoginOrSignup();
+        String[] userData = new String[]{};
+        if (input.equals("login")) {
+            userData = UserLogin.login(UserDatabase);
+        }
+        else if (input.equals("sign up")) {
+            SignUpPage.signUp(UserDatabase);
+            userData = UserLogin.login(UserDatabase);
+        }
+        else {
+            //TODO implement invalid input exception
+        }
+        return userData;
     }
 
     public static void main (String [] args) {
+
+        UserSQLDatabase UserDatabase = new UserSQLDatabase();
+        LeaderboardSQLDatabase LeaderboardDatabase = new LeaderboardSQLDatabase();
+        GameHistorySQLDatabase GameHistoryDatabase = new GameHistorySQLDatabase();
+
+        //TODO 1. Implement login
+        String[] userData = loginOrSignup(UserDatabase);
+        String username = userData[0];
+
+        //TODO 2. Implement run game
+        long[] statistics = runGame();
+        int numMoves = (int) statistics[0];
+        long time = statistics[1];
+        System.out.println(numMoves);
+        System.out.println(time);
+//        LeaderboardSQLDatabase.generateLeaderboard()
         runGame();
+
     }
 }

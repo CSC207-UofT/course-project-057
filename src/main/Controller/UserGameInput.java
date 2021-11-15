@@ -1,12 +1,13 @@
 package Controller;
 
+import UI.UserLogin;
+
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class UserGameInput {
 
     public static int[] getUserMove(int numRows, int numCols) {
-        //TODO implement exception for invalid inputs
         //Store move data in an array [row number, column number]
         int[] input = new int[2];
         //Get user's move and store in input
@@ -46,7 +47,6 @@ public class UserGameInput {
     public static int getUserDifficulty() {
         int input = 0;
         Scanner scanner = new Scanner(System.in);
-        //TODO: Implement exception for invalid input
         boolean done = false;
         while (!done){
             System.out.println("Enter Difficulty (1-3): ");
@@ -60,14 +60,13 @@ public class UserGameInput {
             catch (InputMismatchException e){
                 scanner.nextLine();
             }
-
         }
         return input;
-
-        //return Integer.parseInt(scanner.nextLine());
     }
 
-    public static void main(String[] args) {
-        int [] a = getUserMove(3,4);
+    public static String promptLoginOrSignup() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Type 'login' or 'sign up':");
+        return s.nextLine();
     }
 }

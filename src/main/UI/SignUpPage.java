@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class SignUpPage {
 
-    public void SignUpPage(UserSQLDatabase user_database) {
+    public static void signUp(UserSQLDatabase user_database) {
         Scanner s = new Scanner(System.in);
         String [] userInput = new String[2];
         // nameValid is false when user name has been taken

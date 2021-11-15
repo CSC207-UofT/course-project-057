@@ -11,7 +11,8 @@ import java.util.Scanner;
 
 public class UserLogin {
 
-    public String[] UserLogin(UserSQLDatabase user_database) {
+
+    public static String[] login(UserSQLDatabase user_database) {
 
         Scanner s = new Scanner(System.in);
         String [] userInput = new String[2];
@@ -28,7 +29,7 @@ public class UserLogin {
             System.out.println("Login successful");
         } else {
             System.out.println("Login unsuccessful, please re-enter your criteria.");
-            UserLogin(user_database);
+            login(user_database);
         }
         return userInput;
     }
