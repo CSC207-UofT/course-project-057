@@ -3,6 +3,7 @@ package UI;
 import Database.UserSQLDatabase;
 import UseCase.UserManager;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Scanner;
 
 public class SignUpPage {
 
-    public static void signUp(UserSQLDatabase user_database) {
+    public static void signUp(UserSQLDatabase user_database) throws SQLException {
         Scanner s = new Scanner(System.in);
         String [] userInput = new String[2];
         // nameValid is false when user name has been taken
@@ -36,6 +37,7 @@ public class SignUpPage {
         userInput[1] = s.next();
 
         UserManager.createUser(userInput[0], userInput[1]); // call Entity.User or UseCase.UserManager?
+        user_database.addUser(userInput[0], userInput[1]);
     }
 
 }

@@ -1,5 +1,6 @@
 package UseCase;
 
+import Database.UserSQLDatabase;
 import Entity.*;
 
 /**

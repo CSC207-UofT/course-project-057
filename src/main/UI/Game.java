@@ -11,6 +11,9 @@ import UseCase.BoardManager;
 import UI.UserLogin;
 import UI.SignUpPage;
 
+import java.util.Random;
+
+import java.sql.SQLException;
 import java.util.Timer;
 
 /**
@@ -60,7 +63,7 @@ public class Game {
         //get user difficulty
         Timer timer = new Timer();
 
-        long[] statistics = new long[2];
+        long[] statistics = new long[3];
         int difficulty = UserGameInput.getUserDifficulty();
         int numMoves = 0;
 
@@ -92,10 +95,11 @@ public class Game {
         System.out.println("Congratulations! You matched all the tiles.");
         statistics[0] = numMoves;
         statistics[1] = System.currentTimeMillis() - startTime;
+        statistics[2] = difficulty;
         return statistics;
     }
 
-    public static String[] loginOrSignup(UserSQLDatabase UserDatabase) {
+    public static String[] loginOrSignup(UserSQLDatabase UserDatabase) throws SQLException {
         String input = UserGameInput.promptLoginOrSignup();
         String[] userData = new String[]{};
         if (input.equals("login")) {
@@ -111,7 +115,7 @@ public class Game {
         return userData;
     }
 
-    public static void main (String [] args) {
+    public static void main (String [] args) throws SQLException {
 
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         LeaderboardSQLDatabase LeaderboardDatabase = new LeaderboardSQLDatabase();
@@ -125,10 +129,21 @@ public class Game {
         long[] statistics = runGame();
         int numMoves = (int) statistics[0];
         long time = statistics[1];
-        System.out.println(numMoves);
-        System.out.println(time);
-//        LeaderboardSQLDatabase.generateLeaderboard()
-        runGame();
-
+        long difficulty_num = statistics[2];
+        String difficulty;
+        if (difficulty_num == 1) {
+            difficulty = "easy";
+        } else if (difficulty_num == 2) {
+            difficulty = "medium";
+        } else {
+            difficulty = "hard";
+        }
+        //System.out.println(numMoves);
+        //System.out.println(time);
+        Random rand = new Random();
+        Integer GID = rand.nextInt();
+        System.out.println("Leaderboard for difficulty " + difficulty);
+        GameHistoryDatabase.addGameHistory(GID, userData[0], numMoves, (double) (time/1000), difficulty);
+        LeaderboardDatabase.generateLeaderboard(difficulty);
     }
 }
