@@ -18,18 +18,18 @@ public class LeaderboardSQLDatabase  {
     ResultSet rs = null;
 
     public void generateLeaderboard(String Difficulty) throws SQLException {
-        ArrayList<String> leaderboard_list = new ArrayList<>();
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("Class not found " + e);
         }
         try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement stmt = conn.createStatement();) {
+            Statement stmt = conn.createStatement()) {
             // updates a leaderboard according to the given difficulty
             ResultSet rs = stmt.executeQuery("SELECT DENSE_RANK AS rank, username, totalmoves, time FROM " +
                     "(SELECT *, DENSE_RANK() OVER(ORDER BY totalmoves, time) FROM gamehistory WHERE difficulty = '" +
                     Difficulty + "') AS t1 WHERE DENSE_RANK <= 10 ORDER BY DENSE_RANK;");
+            System.out.println("Leaderboard for difficulty " + Difficulty);
             while (rs.next()) {
                 String Rank = rs.getString("rank");
                 String Username = rs.getString("Username");
