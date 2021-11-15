@@ -55,7 +55,7 @@ public class UserGameInput {
         //TODO: Implement exception for invalid input
         boolean done = false;
         while (!done){
-            System.out.println("Enter UseCase.Difficulty (1-3): ");
+            System.out.println("Enter Difficulty (1-3): ");
             try {
                 int n = scanner.nextInt();
                 if (n <= 3 && n>0){
