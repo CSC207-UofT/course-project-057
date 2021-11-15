@@ -20,7 +20,9 @@ public class Game {
         do {
             //TODO implement exception for invalid inputs in UserGameInput
             //Get user's move input as an array [row number, column number] (starting index 1) using controller class
-            int[] input = UserGameInput.getUserMove();
+            int numRows = tileBoard.getNumRows();
+            int numCols = tileBoard.getNumCols();
+            int[] input = UserGameInput.getUserMove(numRows, numCols);
             //Subtract 1 to account for index starting at 1 for user
             rowMove = input[0] - 1;
             colMove = input[1] - 1;
