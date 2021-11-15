@@ -12,7 +12,6 @@ import java.util.InputMismatchException;
 public class UserGameInput {
 
     public static int[] getUserMove(int numRows, int numCols) {
-        //TODO implement exception for invalid inputs
         //Store move data in an array [row number, column number]
         int[] input = new int[2];
         //Get user's move and store in input
@@ -70,7 +69,7 @@ public class UserGameInput {
         }
         return input;
 
-        //return Integer.parseInt(scanner.nextLine());
+
     }
 
     public static String promptLoginOrSignup() {
