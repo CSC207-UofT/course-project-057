@@ -17,7 +17,7 @@ public class LeaderboardSQLDatabase  {
     Connection conn = null;
     ResultSet rs = null;
 
-    public static void generateLeaderboard(String Difficulty) throws SQLException {
+    public void generateLeaderboard(String Difficulty) throws SQLException {
         ArrayList<String> leaderboard_list = new ArrayList<>();
         try {
             Class.forName("org.postgresql.Driver");

@@ -24,7 +24,7 @@ public class UserLogin {
         userInput[1] = s.next();
 
         // move to InfoChecker
-        if (user_database.checkUsernameAvailable(userInput[0]) &&
+        if (!user_database.checkUsernameAvailable(userInput[0]) &&
                 user_database.checkPassword(userInput[0], userInput[1])) {
             System.out.println("Login successful");
         } else {
