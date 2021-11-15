@@ -30,14 +30,14 @@ public class GameHistorySQLDatabaseTest {
             System.out.println("Class not found " + e);
         }
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-             Statement stmt = conn.createStatement();) {
+             Statement stmt = conn.createStatement()) {
             ResultSet results = stmt.executeQuery("SELECT * FROM GameHistory");
             while (results.next()) {
                 assertEquals("1", results.getString("GID"));
                 assertEquals("Jun", results.getString("Username"));
                 assertEquals("12", results.getString("TotalMoves"));
                 assertEquals("30.5", results.getString("Time"));
-                assertEquals("easy", results.getString("Difficulty"));
+                assertEquals("easy", results.getString("UseCase.Difficulty"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -70,21 +70,6 @@ public class TileBoard {
             }
             result.append(Arrays.deepToString(row));
         }
-//        for (Tile[] row : getTilePositions()) {
-//            result.append("[");
-//            for (Tile tile : row) {
-//
-//                if (tile.getFlipped()) {
-//                    result.append(tile.getKey());
-//                }
-//                else {
-//                    result.append("-");
-//                }
-//            }
-//            result.append("]\n");
-//        }
-//        result.append("]");
-//        return Arrays.deepToString(getTilePositions());
         return result.toString();
     }
 }

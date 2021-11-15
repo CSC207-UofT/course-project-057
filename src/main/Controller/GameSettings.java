@@ -1,4 +1,7 @@
+package Controller;
+
 /**
+ * controller class
  * Options to pause game, exit current game, or reset game
  * Is a window which is large enough to cover the board
  * Timer stops when game is paused
@@ -6,5 +9,6 @@
  * When the game is exited, go back to main menu
  */
 
-public class InGameSettings {
+
+public class GameSettings {
 }
