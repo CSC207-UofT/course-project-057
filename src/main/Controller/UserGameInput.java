@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
@@ -51,7 +52,6 @@ public class UserGameInput {
     public static int getUserDifficulty() {
         int input = 0;
         Scanner scanner = new Scanner(System.in);
-        //TODO: Implement exception for invalid input
         boolean done = false;
         while (!done){
             System.out.println("Enter Difficulty (1-3): ");
@@ -73,8 +73,20 @@ public class UserGameInput {
     }
 
     public static String promptLoginOrSignup() {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Type 'login' or 'sign up':");
-        return s.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        String method = "";
+        boolean valid = false;
+        while (!valid) {
+            System.out.println("Type 'login' or 'sign up':");
+            try {
+                method = scanner.nextLine();
+                if (Objects.equals(method, "login") || Objects.equals(method, "sign up")) {
+                    valid = true;
+                }
+            } catch (InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+        return method;
     }
 }
