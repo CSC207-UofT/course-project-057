@@ -29,12 +29,12 @@ public class LeaderboardSQLDatabase  {
             ResultSet rs = stmt.executeQuery("SELECT DENSE_RANK AS rank, username, totalmoves, time FROM " +
                     "(SELECT *, DENSE_RANK() OVER(ORDER BY totalmoves, time) FROM gamehistory WHERE difficulty = '" +
                     Difficulty + "') AS t1 WHERE DENSE_RANK <= 10 ORDER BY DENSE_RANK;");
+            System.out.println("Leaderboard for difficulty " + Difficulty);
             while (rs.next()) {
                 String Rank = rs.getString("rank");
                 String Username = rs.getString("Username");
                 String TotalMoves = rs.getString("totalmoves");
                 String Time = rs.getString("Time");
-                System.out.println("Leaderboard for difficulty " + Difficulty);
                 System.out.println("Rank: " + Rank + ", Username: " + Username
                         + ", TotalMoves: " + TotalMoves + ", Time: " + Time);
             }
