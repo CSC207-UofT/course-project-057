@@ -26,6 +26,7 @@ public class Game {
         int rowMove;
         int colMove;
         do {
+
             //Get user's move input as an array [row number, column number] (starting index 1) using controller class
             int numRows = tileBoard.getNumRows();
             int numCols = tileBoard.getNumCols();
@@ -36,6 +37,7 @@ public class Game {
             //Check if move is valid based on row and column number, and if the tile is already flipped
             boolean validRow = (rowMove < tileBoard.getNumRows()) && (rowMove >= 0);
             boolean validCol = (colMove < tileBoard.getNumCols()) && (colMove >= 0);
+
             boolean Flipped = tileBoard.getTileAtIndex(rowMove, colMove).getFlipped();
             if (validRow && validCol && !Flipped) {
                 validMove = true;
@@ -110,6 +112,7 @@ public class Game {
     }
 
     public static void main (String [] args) {
+
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         LeaderboardSQLDatabase LeaderboardDatabase = new LeaderboardSQLDatabase();
         GameHistorySQLDatabase GameHistoryDatabase = new GameHistorySQLDatabase();
@@ -124,6 +127,8 @@ public class Game {
         long time = statistics[1];
         System.out.println(numMoves);
         System.out.println(time);
-//        LeaderboardSQLDatabase.generateLeaderboard();
+//        LeaderboardSQLDatabase.generateLeaderboard()
+        runGame();
+
     }
 }
