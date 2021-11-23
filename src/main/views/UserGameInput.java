@@ -1,16 +1,13 @@
-package Controller;
+package views;
 
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.InputMismatchException;
-
-/***
- * Controller class
- * Obtains user's input.
- */
-
-
+// TODO javadoc
 public class UserGameInput {
+    /**
+     * Obtains user's input.
+     */
 
     public static int[] getUserMove(int numRows, int numCols) {
         //Store move data in an array [row number, column number]

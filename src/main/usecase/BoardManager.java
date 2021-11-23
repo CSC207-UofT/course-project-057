@@ -1,15 +1,16 @@
-package UseCase;
+package usecase;
 
-import Entity.*;
+import entity.*;
 
+// TODO: javadoc methods for this class
+/**
+ * Checks board and tile status, as well as flipping tiles
+ */
 public class BoardManager {
 
-    public BoardManager() {}
+    public BoardManager() {} // delete?
 
-    /*
-    checks if the board has all the elements flipped
-     */
-    public static boolean AllFlipped(TileBoard board) {
+    public static boolean allFlipped(TileBoard board) {
         for(Tile[] row : board.getTilePositions()) {
             for(Tile tile : row) {
                 if(!tile.getFlipped()) {
@@ -19,6 +20,7 @@ public class BoardManager {
         }
         return true;
     }
+
 
     public static void flipTile(TileBoard board, int row, int col) {
         Tile tile = board.getTileAtIndex(row, col);

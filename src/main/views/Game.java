@@ -1,25 +1,33 @@
-package UI;
+package views;
 
-import Controller.UserGameInput;
-import Database.GameHistorySQLDatabase;
-import Database.LeaderboardSQLDatabase;
-import Database.UserSQLDatabase;
-import Entity.TileBoard;
-import UseCase.BoardGenerator;
-import UseCase.BoardManager;
+import gateways.database.GameHistorySQLDatabase;
+import gateways.database.LeaderboardSQLDatabase;
+import gateways.database.UserSQLDatabase;
+import entity.TileBoard;
+import usecase.BoardGenerator;
+import usecase.BoardManager;
 
 import java.util.Random;
 
 import java.sql.SQLException;
-
+// TODO javadoc
 /**
- * main method
- * login is called, runs its methods, and the player/user and difficulty chosen are returned
- * then, game is called from main, and user + difficulty are passed in
- * NOTE: the actual game calls leaderboard, not the main
+ * Try to separate the responsibility of output (displaying prompts) and game logic.
+ * This should not also be responsible for the login and signup.
+ * Should split this class up, your game logic should not be handles by a UI/view class.
+ * Think about making a main controller that can delegate tasks by coordinating with other controllers, presenters, use cases.
+ * One idea is to have a separate main menu controller and presenter, login controller and presenter
+ * (you do this now to an extent but Game still deals with user input for this),
+ * use cases and controllers for saving account data, game history and leaderboard history data.
  */
 
 public class Game {
+    /**
+     * main method
+     * login is called, runs its methods, and the player/user and difficulty chosen are returned
+     * then, game is called from main, and user + difficulty are passed in
+     * NOTE: the actual game calls leaderboard, not the main
+     */
     public static int[] Move(TileBoard tileBoard) {
         boolean validMove = false;
         int rowMove;
@@ -69,7 +77,7 @@ public class Game {
         long startTime = System.currentTimeMillis();
 
         // Game runs until all tiles are flipped
-        while(!BoardManager.AllFlipped(tileBoard)) {
+        while(!BoardManager.allFlipped(tileBoard)) {
             int[] move1 = Move(tileBoard);
             int[] move2 = Move(tileBoard);
             int move1Key = tileBoard.getTileKey(move1[0], move1[1]);

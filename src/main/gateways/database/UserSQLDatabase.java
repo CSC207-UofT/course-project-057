@@ -1,8 +1,11 @@
-package Database;
+package gateways.database;
 
 import java.sql.*;
 
 public class UserSQLDatabase {
+    /**
+     * Holds usernames and password of every User object
+     */
     private final String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
     private final String USER = "postgres";
     private final String PASS = "Password";
@@ -10,6 +13,10 @@ public class UserSQLDatabase {
     Connection conn = null;
     ResultSet rs = null;
 
+    /**
+     * Creates a table
+     * @throws SQLException
+     */
     public void createTable() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
@@ -18,7 +25,7 @@ public class UserSQLDatabase {
         }
         try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();) {
-            // Removes the table 'users' if it already exists in the database
+            // Removes the table 'users' if it already exists in the gateways.database
             stmt.executeUpdate("DROP TABLE IF EXISTS users");
             // Create a table called 'users' that stores user information
             stmt.executeUpdate("CREATE TABLE users (Username TEXT NOT NULL, Password TEXT, PRIMARY KEY (Username))");
@@ -30,7 +37,12 @@ public class UserSQLDatabase {
         }
     }
 
-    // This method inserts the username and password into the sql table.
+    /**
+     * This method inserts the username and password into the sql table.
+     * @param 'username'
+     * @param 'password'
+     * @throws SQLException
+     */
     public void addUser(String username, String password) throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
@@ -50,7 +62,12 @@ public class UserSQLDatabase {
         }
     }
 
-    // checks if there is no existing username in the database
+    /**
+     * checks if there is no existing username in the gateways.database
+     * @param 'new_username' username being passed in
+     * @return if username is available
+     */
+
     public boolean checkUsernameAvailable (String new_username) {
         try {
             Class.forName("org.postgresql.Driver");

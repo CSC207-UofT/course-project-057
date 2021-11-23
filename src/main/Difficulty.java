@@ -1,9 +1,7 @@
-package UseCase;
-
-/***
+/**
  * Decorator for tileboard
- * Use case?
- * ***/
-
+ * TA suggests move to entity
+ */
 public class Difficulty {
+
 }

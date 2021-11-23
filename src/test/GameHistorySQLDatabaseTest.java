@@ -1,5 +1,4 @@
-import Database.GameHistorySQLDatabase;
-import Database.UserSQLDatabase;
+import gateways.database.GameHistorySQLDatabase;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +20,7 @@ public class GameHistorySQLDatabaseTest {
 
     @Test(timeout = 500)
     public void AddGameHistoryTest() throws SQLException {
-        // Create a new table called 'GameHistory' in the database
+        // Create a new table called 'GameHistory' in the gateways.database
         db.createTable();
         db.addGameHistory(1, "Jun", 12, 30.5, "easy");
         try {

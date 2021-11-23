@@ -1,15 +1,14 @@
-package Database;
+package gateways.database;
 
 import java.sql.*;
-import java.util.ArrayList;
-
-/**
- * database class
- * displays leaderboards separated by difficulty, separated by buttons on top
- * buttons on the bottom to play again or exit game
- */
 
 public class LeaderboardSQLDatabase  {
+    /**
+     * gateways.database class
+     * displays leaderboards separated by difficulty, separated by buttons on top
+     * buttons on the bottom to play again or exit game
+     */
+
     private final String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
     private final String USER = "postgres";
     private final String PASS = "Password";
@@ -17,6 +16,10 @@ public class LeaderboardSQLDatabase  {
     Connection conn = null;
     ResultSet rs = null;
 
+    /**
+     * Generates a Leaderboard
+     * @throws SQLException
+     */
     public void generateLeaderboard(String Difficulty) throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");

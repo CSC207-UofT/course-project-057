@@ -1,12 +1,15 @@
-package Database;
+package gateways.database;
 
 import java.sql.*;
 
-/***
+// inheritance -> if it doesn't work, put in design doc
+
+/**
  * Database class
- *
-***/
+ * Holds all games played (Game ID, username, total moves, time, difficulty)
+ */
 public class GameHistorySQLDatabase {
+
     private final String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
     private final String USER = "postgres";
     private final String PASS = "Password";
@@ -15,7 +18,10 @@ public class GameHistorySQLDatabase {
     Statement stmt = null;
     ResultSet rs = null;
 
-    // This method creates a new table 'GameHistory'
+    /**
+     * This method creates a new table 'GameHistory'
+     * @throws 'SQLException'
+     */
     public void createTable() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
@@ -24,7 +30,7 @@ public class GameHistorySQLDatabase {
         }
         try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();) {
-            // Removes the table 'GameHistory' if it already exists in the database
+            // Removes the table 'GameHistory' if it already exists in the gateways.database
             stmt.executeUpdate("DROP TABLE IF EXISTS GameHistory");
             // Create a table called 'GameHistory' that stores user information
             stmt.executeUpdate("CREATE TABLE GameHistory (GID INT NOT NULL, Username TEXT, TotalMoves INT, " +
@@ -37,7 +43,10 @@ public class GameHistorySQLDatabase {
         }
     }
 
-    // This method adds a game record to the game history
+    /**
+     * This method adds a game record to the game history database
+     * @throws 'SQLException'
+     */
     public void addGameHistory(Integer GID, String Username, Integer TotalMoves, Double Time, String Difficulty)
             throws SQLException {
         try {

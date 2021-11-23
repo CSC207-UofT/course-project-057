@@ -1,21 +1,22 @@
-package UI;
+package views;
 
-import Database.UserSQLDatabase;
-import UseCase.UserManager;
+import gateways.database.UserSQLDatabase;
+import usecase.UserManager;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
- * UI Class
  * option to sign up for a new account
- * make sure the username isn't taken
- * add the username and password to the repository
- * Move Username taken check to InfoChecker
+ * make sure the username isn't taken (data from database)
+ * add the username and password to the database via addUser
  */
-
 public class SignUpPage {
 
+    /**
+     * the sign-up page
+     * @throws SQLException
+     */
     public static void signUp(UserSQLDatabase user_database) throws SQLException {
         Scanner s = new Scanner(System.in);
         String [] userInput = new String[2];

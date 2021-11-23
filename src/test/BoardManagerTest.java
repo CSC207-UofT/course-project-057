@@ -1,7 +1,7 @@
-import UseCase.BoardGenerator;
+import usecase.BoardGenerator;
 import org.junit.Test;
-import Entity.*;
-import UseCase.*;
+import entity.*;
+import usecase.*;
 
 import static org.junit.Assert.*;
 
@@ -16,13 +16,13 @@ public class BoardManagerTest {
     }
 
     @Test(timeout = 200)
-    public void AllFlippedTest() {
+    public void allFlippedTest() {
         TileBoard tb = BoardGenerator.generateBoard(1);
         for(Tile[] row : tb.getTilePositions()) {
             for (Tile tile : row) {
                 tile.setFlipped(true);
             }
         }
-        assertTrue(BoardManager.AllFlipped(tb));
+        assertTrue(BoardManager.allFlipped(tb));
     }
 }

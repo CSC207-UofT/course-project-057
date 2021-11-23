@@ -1,4 +1,4 @@
-import Database.UserSQLDatabase;
+import gateways.database.UserSQLDatabase;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ public class UserSQLDatabaseTest {
 
     @Test(timeout = 500)
     public void checkUserAvailableTest() throws SQLException {
-        // Create a new table called 'users' in the database
+        // Create a new table called 'users' in the gateways.database
         db.createTable();
         db.addUser("Jun", "1234");
         // username does not exist (is available)

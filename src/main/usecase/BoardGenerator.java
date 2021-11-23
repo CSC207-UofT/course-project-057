@@ -1,26 +1,25 @@
-package UseCase;
+package usecase;
 
-import Entity.*;
+import entity.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+// TODO: javadoc methods for this class
 
 /**
  * Use Case Class
  * Calls the Entity.Tile class to create Entity.Tile objects and puts them into a list
  * The list should be random
- *
- * TODO main is for testing, delete later
  */
-
 public class BoardGenerator {
+
 
     public BoardGenerator() {}
 
-    /*
-    Helper method for generateBoard
-
-    Creates a randomized ArrayList of Entity.Tile objects that are put into the tileBoard object.
+    /**
+     * Helper method for generateBoard
+     * Creates a randomized ArrayList of Entity.Tile objects that are put into the tileBoard object.
      */
     private static ArrayList<Tile> generateTileList(int numPairs) {
         ArrayList<Tile> tileList = new ArrayList<>();
@@ -66,14 +65,15 @@ public class BoardGenerator {
 
 
 
-    // for testing
+    /**
+     * for testing
     public static void main(String[] args) {
         TileBoard tileBoard = generateBoard(1);
         System.out.println(tileBoard.getTotalKeys());
         System.out.println(tileBoard);
         BoardManager.flipTile(tileBoard, 1, 1);
-//        System.out.println(tileBoard.getTileAtIndex(1, 1).getFlipped());
-//        System.out.println(tileBoard.getTileAtIndex(1, 2).getFlipped());
+        System.out.println(tileBoard.getTileAtIndex(1, 1).getFlipped());
+        System.out.println(tileBoard.getTileAtIndex(1, 2).getFlipped());
 
-    }
+    } */
 }
