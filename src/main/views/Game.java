@@ -53,6 +53,7 @@ public class Game {
             else {
                 System.out.println("Invalid Move, please input a row number from 1 to " + (tileBoard.getNumRows())
                         + " and a column from 1 to " + (tileBoard.getNumCols()) + ". Tile must not be revealed.");
+            // replace above print w DisplayPrompts.invalidMoveDisplay(tileBoard.getNumRows(), tileBoard.getNumCols())
             }
         }
         while (!validMove);
@@ -73,6 +74,8 @@ public class Game {
 
         System.out.println("Input a row number from 1 to " + (tileBoard.getNumRows())
                 + " and a column from 1 to " + (tileBoard.getNumCols()) + ". Tile must not be revealed.");
+        // replace above print w DisplayPrompts.enterMoveDisplay(tileBoard.getNumRows(), tileBoard.getNumCols())
+
         System.out.println(tileBoard);
         long startTime = System.currentTimeMillis();
 
@@ -83,13 +86,13 @@ public class Game {
             int move1Key = tileBoard.getTileKey(move1[0], move1[1]);
             int move2Key = tileBoard.getTileKey(move2[0], move2[1]);
             if (move1Key == move2Key)  {
-                System.out.println("Match");
+                System.out.println("Match"); // replace with DisplayPrompts.match(true)
             }
             else {
                 // If no match, flip them back
                 BoardManager.flipTile(tileBoard, move1[0], move1[1]);
                 BoardManager.flipTile(tileBoard, move2[0], move2[1]);
-                System.out.println("No Match!");
+                System.out.println("No Match!"); // replace with DisplayPrompts.match(false)
                 System.out.println(tileBoard);
             }
             numMoves++;
