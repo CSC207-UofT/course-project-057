@@ -13,6 +13,7 @@ public class Board {
     public final int totalTiles;
     public final int numRows;
     public final int numCols;
+    public final ArrayList<Tile> tileList;
     public final DifficultyStrategy difficulty;
 
     public Board(DifficultyStrategy difficulty) {
@@ -21,6 +22,7 @@ public class Board {
         this.numCols = difficulty.setDimension()[1];
         this.TilePositions = new Tile[numRows][numCols];
         this.totalTiles = numRows * numCols;
+        this.tileList = generateTileList();
     }
     /**
      * @return total number of tiles in the board
@@ -44,6 +46,13 @@ public class Board {
     public int getNumCols() {
 
         return numCols;
+    }
+
+    /**
+     * @return the randomized tilelist
+     */
+    public ArrayList<Tile> getTileList() {
+        return tileList;
     }
 
     /**

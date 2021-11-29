@@ -6,7 +6,7 @@ import usecase.*;
 import static org.junit.Assert.*;
 
 public class BoardManagerTest {
-    MatchingBoard tb;
+    Board tb;
 
     @Before
     public void setUp() {

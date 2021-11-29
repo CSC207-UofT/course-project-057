@@ -22,46 +22,6 @@ import java.sql.SQLException;
 
 public class MatchingGame {
     /**
-     * main method
-     * login is called, runs its methods, and the player/user and difficulty chosen are returned
-     * then, game is called from main, and user + difficulty are passed in
-     * NOTE: the actual game calls leaderboard, not the main
-     * @param matchingBoard a TileBoard object
-     */
-    public static int[] Move(MatchingBoard matchingBoard) {
-        boolean validMove = false;
-        int rowMove;
-        int colMove;
-        do {
-            //Get user's move input as an array [row number, column number] (starting index 1) using controller class
-            int numRows = matchingBoard.getNumRows();
-            int numCols = matchingBoard.getNumCols();
-            int[] input = UserGameInput.getUserMove(numRows, numCols);
-            //Subtract 1 to account for index starting at 1 for user
-            rowMove = input[0] - 1;
-            colMove = input[1] - 1;
-            //Check if move is valid based on row and column number, and if the tile is already flipped
-            boolean validRow = (rowMove < matchingBoard.getNumRows()) && (rowMove >= 0);
-            boolean validCol = (colMove < matchingBoard.getNumCols()) && (colMove >= 0);
-
-            boolean Flipped = matchingBoard.getTileAtIndex(rowMove, colMove).getFlipped();
-            if (validRow && validCol && !Flipped) {
-                validMove = true;
-            }
-            //
-            else {
-                System.out.println("Invalid Move, please input a row number from 1 to " + (matchingBoard.getNumRows())
-                        + " and a column from 1 to " + (matchingBoard.getNumCols()) + ". Tile must not be revealed.");
-            }
-        }
-        while (!validMove);
-
-        BoardManager.flipTile(matchingBoard, rowMove, colMove);
-        System.out.println(matchingBoard);
-        return new int[]{rowMove, colMove};
-    }
-
-    /**
      * runs a new game mode
      * @return number of moves, the time and difficulty of the finished game mode
      */
@@ -72,7 +32,7 @@ public class MatchingGame {
         String difficulty = UserGameInput.getUserDifficulty();
         int numMoves = 0;
 
-        MatchingBoard matchingBoard = DifficultyStrategy.valueOf(difficulty).generateBoard();
+        MatchingBoard matchingBoard = (MatchingBoard) DifficultyStrategy.valueOf(difficulty).generateBoard();
 
         System.out.println("Input a row number from 1 to " + (matchingBoard.getNumRows())
                 + " and a column from 1 to " + (matchingBoard.getNumCols()) + ". Tile must not be revealed.");
@@ -81,8 +41,8 @@ public class MatchingGame {
 
         // Game runs until all tiles are flipped
         while(!BoardManager.allFlipped(matchingBoard)) {
-            int[] move1 = Move(matchingBoard);
-            int[] move2 = Move(matchingBoard);
+            int[] move1 = BoardManager.Move(matchingBoard);
+            int[] move2 = BoardManager.Move(matchingBoard);
             int move1Key = matchingBoard.getTileKey(move1[0], move1[1]);
             int move2Key = matchingBoard.getTileKey(move2[0], move2[1]);
             if (move1Key == move2Key)  {

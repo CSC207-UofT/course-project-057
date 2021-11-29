@@ -19,7 +19,7 @@ public enum DifficultyStrategy {
             return dim;
         }
         @Override
-        public MatchingBoard generateBoard(){
+        public Board generateBoard(){
              return getTileBoard(DifficultyStrategy.Easy);
         }
     },
@@ -35,7 +35,7 @@ public enum DifficultyStrategy {
             return dim;
         }
         @Override
-        public MatchingBoard generateBoard(){
+        public Board generateBoard(){
             return getTileBoard(DifficultyStrategy.Medium);
         }
     },
@@ -50,7 +50,7 @@ public enum DifficultyStrategy {
             dim[1] = 6;
             return dim;
         }
-        public MatchingBoard generateBoard(){
+        public Board generateBoard(){
             return getTileBoard(DifficultyStrategy.Hard);
         }
     };
@@ -60,23 +60,23 @@ public enum DifficultyStrategy {
      * @param difficulty A DifficultyStrategy enum
      * @return a TileBoard object of randomized tiles
      */
-    public static MatchingBoard getTileBoard(DifficultyStrategy difficulty) {
-        MatchingBoard matchingBoard = new MatchingBoard(difficulty);
-        int numRows = matchingBoard.getNumRows();
-        int numCols = matchingBoard.getNumCols();
+    public static Board getTileBoard(DifficultyStrategy difficulty) {
+        Board board = new Board(difficulty);
+        int numRows = board.getNumRows();
+        int numCols = board.getNumCols();
         ArrayList<Tile> tileList;
-        tileList = matchingBoard.generateTileList();
+        tileList = board.generateTileList();
         int tileListIndex = 0; // counter for tileList's index
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) { // loop over each column position in the row
                 Tile newTile = tileList.get(tileListIndex);
-                matchingBoard.setTilePositions(i, j, newTile);
+                board.setTilePositions(i, j, newTile);
                 tileListIndex++; // increases ArrayList index by 1, goes up to tileBoard.totalKeys
             }
         }
-        return matchingBoard;
+        return board;
     }
 
-    public abstract MatchingBoard generateBoard();
+    public abstract Board generateBoard();
     public abstract int[] setDimension();
 }
