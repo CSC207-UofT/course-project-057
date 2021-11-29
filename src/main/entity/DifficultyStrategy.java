@@ -19,8 +19,12 @@ public enum DifficultyStrategy {
             return dim;
         }
         @Override
-        public Board generateBoard(){
-             return getTileBoard(DifficultyStrategy.Easy);
+        public PatternBoard generatePatternBoard(){
+             return (PatternBoard) getTileBoard(DifficultyStrategy.Easy, "Pattern");
+        }
+        @Override
+        public MatchingBoard generateMatchingBoard(){
+            return (MatchingBoard) getTileBoard(DifficultyStrategy.Easy, "Matching");
         }
     },
     /**
@@ -35,8 +39,12 @@ public enum DifficultyStrategy {
             return dim;
         }
         @Override
-        public Board generateBoard(){
-            return getTileBoard(DifficultyStrategy.Medium);
+        public PatternBoard generatePatternBoard(){
+            return (PatternBoard) getTileBoard(DifficultyStrategy.Easy, "Pattern");
+        }
+        @Override
+        public MatchingBoard generateMatchingBoard(){
+            return (MatchingBoard) getTileBoard(DifficultyStrategy.Easy, "Matching");
         }
     },
     /**
@@ -50,8 +58,13 @@ public enum DifficultyStrategy {
             dim[1] = 6;
             return dim;
         }
-        public Board generateBoard(){
-            return getTileBoard(DifficultyStrategy.Hard);
+        @Override
+        public PatternBoard generatePatternBoard(){
+            return (PatternBoard) getTileBoard(DifficultyStrategy.Easy, "Pattern");
+        }
+        @Override
+        public MatchingBoard generateMatchingBoard(){
+            return (MatchingBoard) getTileBoard(DifficultyStrategy.Easy, "Matching");
         }
     };
 
@@ -60,8 +73,19 @@ public enum DifficultyStrategy {
      * @param difficulty A DifficultyStrategy enum
      * @return a TileBoard object of randomized tiles
      */
-    public static Board getTileBoard(DifficultyStrategy difficulty) {
-        Board board = new Board(difficulty);
+    public static Board getTileBoard(DifficultyStrategy difficulty, String gameType) {
+        if (gameType.equals("Matching")) {
+            MatchingBoard board = new MatchingBoard(difficulty);
+            getTileBoardHelper(board);
+            return board;
+        } else {
+            PatternBoard board = new PatternBoard(difficulty);
+            getTileBoardHelper(board);
+            return board;
+        }
+    }
+
+    public static void getTileBoardHelper(Board board) {
         int numRows = board.getNumRows();
         int numCols = board.getNumCols();
         ArrayList<Tile> tileList;
@@ -74,9 +98,9 @@ public enum DifficultyStrategy {
                 tileListIndex++; // increases ArrayList index by 1, goes up to tileBoard.totalKeys
             }
         }
-        return board;
     }
 
-    public abstract Board generateBoard();
+    public abstract PatternBoard generatePatternBoard();
+    public abstract MatchingBoard generateMatchingBoard();
     public abstract int[] setDimension();
 }

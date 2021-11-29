@@ -10,7 +10,7 @@ public class BoardManagerTest {
 
     @Before
     public void setUp() {
-        tb = DifficultyStrategy.Easy.generateBoard();
+        tb = DifficultyStrategy.Easy.generateMatchingBoard();
     }
 
     @Test(timeout = 200)
