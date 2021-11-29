@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.Random;
 
 /**
- * runs the whole program.
+ * runs the whole program - add test here
  */
 public class Main {
     public static void main (String [] args) throws SQLException {
