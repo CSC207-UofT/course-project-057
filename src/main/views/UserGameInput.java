@@ -18,7 +18,7 @@ public class UserGameInput {
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
         while (!done){
-            if (gameType == "Matching") {
+            if (gameType.equals("Matching")) {
                 DisplayPrompts.userMatchMoveDisplay("row");
             } else {
                 DisplayPrompts.userPatternMoveDisplay("row", Integer.toString(counter));
@@ -36,7 +36,7 @@ public class UserGameInput {
         }
         boolean check = false;
         while (!check){
-            if (gameType == "Match") {
+            if (gameType.equals("Matching")) {
                 DisplayPrompts.userMatchMoveDisplay("column");
             } else {
                 DisplayPrompts.userPatternMoveDisplay("column", Integer.toString(counter));
