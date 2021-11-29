@@ -5,41 +5,29 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * Entity.TileBoard Entity Class
- * The main object that will be acted on by other use case classes for the game. Related to Entity.Tile class.
+ * Parent class of all boards.
+ *
  */
-public class TileBoard {
-    private final Tile[][] TilePositions;
-    private final int numPairs;
-    private final int totalKeys; // totalTiles ?
-    private final int numRows;
-    private final int numCols;
-    private final DifficultyStrategy difficulty;
+public class Board {
+    public final Tile[][] TilePositions;
+    public final int totalTiles;
+    public final int numRows;
+    public final int numCols;
+    public final DifficultyStrategy difficulty;
 
-    /**
-     * @param difficulty A DifficultyStrategy enum
-     */
-    public TileBoard(DifficultyStrategy difficulty) {
+    public Board(DifficultyStrategy difficulty) {
         this.difficulty = difficulty;
         this.numRows = difficulty.setDimension()[0];
         this.numCols = difficulty.setDimension()[1];
         this.TilePositions = new Tile[numRows][numCols];
-        this.numPairs = numRows * numCols / 2;
-        this.totalKeys = numRows * numCols;
+        this.totalTiles = numRows * numCols;
     }
     /**
      * @return total number of tiles in the board
      */
-    public int getTotalKeys() {
+    public int getTotalTiles() {
 
-        return this.totalKeys;
-    }
-    /**
-     * @return total number of pairs
-     */
-    public int getNumPairs() {
-
-        return this.numPairs;
+        return this.totalTiles;
     }
 
     /**
@@ -103,18 +91,11 @@ public class TileBoard {
         this.TilePositions[row][col] = tile;
     }
 
-    /**
-     * Creates a randomized ArrayList of Entity.Tile objects that are put into the tileBoard object.
-     * @return an arraylist of tiles
-     */
     public ArrayList<Tile> generateTileList() {
         ArrayList<Tile> tileList = new ArrayList<>();
-        int numPairs = this.numPairs;
-        for (int i = 0; i < numPairs; i++) {          // loops numPairs times, this value is used for keys
-            for (int j = 0; j < 2; j++) {      // adds 2 Tiles of same value to list, this is for creating pairs
-                Tile newTile = new Tile(i);
-                tileList.add(newTile);
-            }
+        for (int i = 0; i < totalTiles; i++) { // loops totalTiles times
+            Tile newTile = new Tile(i);
+            tileList.add(newTile);
         }
         Collections.shuffle(tileList); // randomizes order of Tiles in tileList
         return tileList;
@@ -140,5 +121,3 @@ public class TileBoard {
         return result.toString();
     }
 }
-
-

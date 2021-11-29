@@ -1,12 +1,4 @@
 package views;
-import gateways.database.GameHistorySQLDatabase;
-import gateways.database.LeaderboardSQLDatabase;
-import gateways.database.UserSQLDatabase;
-import entity.TileBoard;
-
-import java.util.Random;
-
-import java.sql.SQLException;
 
 /**
  * Displays prompts when playing a game

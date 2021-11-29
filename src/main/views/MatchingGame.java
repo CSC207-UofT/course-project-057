@@ -4,11 +4,9 @@ import entity.DifficultyStrategy;
 import gateways.database.GameHistorySQLDatabase;
 import gateways.database.LeaderboardSQLDatabase;
 import gateways.database.UserSQLDatabase;
-import entity.TileBoard;
+import entity.MatchingBoard;
 import usecase.BoardManager;
 
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Random;
 
 import java.sql.SQLException;
@@ -22,44 +20,44 @@ import java.sql.SQLException;
  * use cases and controllers for saving account data, game history and leaderboard history data.
  */
 
-public class Game {
+public class MatchingGame {
     /**
      * main method
      * login is called, runs its methods, and the player/user and difficulty chosen are returned
      * then, game is called from main, and user + difficulty are passed in
      * NOTE: the actual game calls leaderboard, not the main
-     * @param tileBoard a TileBoard object
+     * @param matchingBoard a TileBoard object
      */
-    public static int[] Move(TileBoard tileBoard) {
+    public static int[] Move(MatchingBoard matchingBoard) {
         boolean validMove = false;
         int rowMove;
         int colMove;
         do {
             //Get user's move input as an array [row number, column number] (starting index 1) using controller class
-            int numRows = tileBoard.getNumRows();
-            int numCols = tileBoard.getNumCols();
+            int numRows = matchingBoard.getNumRows();
+            int numCols = matchingBoard.getNumCols();
             int[] input = UserGameInput.getUserMove(numRows, numCols);
             //Subtract 1 to account for index starting at 1 for user
             rowMove = input[0] - 1;
             colMove = input[1] - 1;
             //Check if move is valid based on row and column number, and if the tile is already flipped
-            boolean validRow = (rowMove < tileBoard.getNumRows()) && (rowMove >= 0);
-            boolean validCol = (colMove < tileBoard.getNumCols()) && (colMove >= 0);
+            boolean validRow = (rowMove < matchingBoard.getNumRows()) && (rowMove >= 0);
+            boolean validCol = (colMove < matchingBoard.getNumCols()) && (colMove >= 0);
 
-            boolean Flipped = tileBoard.getTileAtIndex(rowMove, colMove).getFlipped();
+            boolean Flipped = matchingBoard.getTileAtIndex(rowMove, colMove).getFlipped();
             if (validRow && validCol && !Flipped) {
                 validMove = true;
             }
             //
             else {
-                System.out.println("Invalid Move, please input a row number from 1 to " + (tileBoard.getNumRows())
-                        + " and a column from 1 to " + (tileBoard.getNumCols()) + ". Tile must not be revealed.");
+                System.out.println("Invalid Move, please input a row number from 1 to " + (matchingBoard.getNumRows())
+                        + " and a column from 1 to " + (matchingBoard.getNumCols()) + ". Tile must not be revealed.");
             }
         }
         while (!validMove);
 
-        BoardManager.flipTile(tileBoard, rowMove, colMove);
-        System.out.println(tileBoard);
+        BoardManager.flipTile(matchingBoard, rowMove, colMove);
+        System.out.println(matchingBoard);
         return new int[]{rowMove, colMove};
     }
 
@@ -74,28 +72,28 @@ public class Game {
         String difficulty = UserGameInput.getUserDifficulty();
         int numMoves = 0;
 
-        TileBoard tileBoard = DifficultyStrategy.valueOf(difficulty).generateBoard();
+        MatchingBoard matchingBoard = DifficultyStrategy.valueOf(difficulty).generateBoard();
 
-        System.out.println("Input a row number from 1 to " + (tileBoard.getNumRows())
-                + " and a column from 1 to " + (tileBoard.getNumCols()) + ". Tile must not be revealed.");
-        System.out.println(tileBoard);
+        System.out.println("Input a row number from 1 to " + (matchingBoard.getNumRows())
+                + " and a column from 1 to " + (matchingBoard.getNumCols()) + ". Tile must not be revealed.");
+        System.out.println(matchingBoard);
         long startTime = System.currentTimeMillis();
 
         // Game runs until all tiles are flipped
-        while(!BoardManager.allFlipped(tileBoard)) {
-            int[] move1 = Move(tileBoard);
-            int[] move2 = Move(tileBoard);
-            int move1Key = tileBoard.getTileKey(move1[0], move1[1]);
-            int move2Key = tileBoard.getTileKey(move2[0], move2[1]);
+        while(!BoardManager.allFlipped(matchingBoard)) {
+            int[] move1 = Move(matchingBoard);
+            int[] move2 = Move(matchingBoard);
+            int move1Key = matchingBoard.getTileKey(move1[0], move1[1]);
+            int move2Key = matchingBoard.getTileKey(move2[0], move2[1]);
             if (move1Key == move2Key)  {
                 System.out.println("Match");
             }
             else {
                 // If no match, flip them back
-                BoardManager.flipTile(tileBoard, move1[0], move1[1]);
-                BoardManager.flipTile(tileBoard, move2[0], move2[1]);
+                BoardManager.flipTile(matchingBoard, move1[0], move1[1]);
+                BoardManager.flipTile(matchingBoard, move2[0], move2[1]);
                 System.out.println("No Match!");
-                System.out.println(tileBoard);
+                System.out.println(matchingBoard);
             }
             numMoves++;
         }

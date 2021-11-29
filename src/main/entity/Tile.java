@@ -24,7 +24,6 @@ public class Tile {
      * @return key attribute from Tile object
      */
     public int getKey() {
-
         return this.key;
     }
 

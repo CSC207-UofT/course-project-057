@@ -1,4 +1,3 @@
-import gateways.database.GameHistorySQLDatabase;
 import org.junit.Before;
 import org.junit.Test;
 import entity.*;
@@ -7,7 +6,7 @@ import usecase.*;
 import static org.junit.Assert.*;
 
 public class BoardManagerTest {
-    TileBoard tb;
+    MatchingBoard tb;
 
     @Before
     public void setUp() {
