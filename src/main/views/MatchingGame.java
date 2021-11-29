@@ -104,24 +104,6 @@ public class MatchingGame {
         return statistics;
     }
 
-    /**
-     * @param UserDatabase the SQL database
-     * @return string list of username and password
-     * @throws SQLException provides information on a database access error
-     */
-    public static String[] loginOrSignup(UserSQLDatabase UserDatabase) throws SQLException {
-        String input = UserGameInput.promptLoginOrSignup();
-        String[] userData = new String[]{};
-        if (input.equals("login")) {
-            userData = UserLogin.login(UserDatabase);
-        }
-        else if (input.equals("sign up")) {
-            SignUpPage.signUp(UserDatabase);
-            System.out.println("Please log in with your username and password");
-            userData = UserLogin.login(UserDatabase);
-        }
-        return userData;
-    }
 
     public static void main (String [] args) throws SQLException {
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
@@ -129,7 +111,7 @@ public class MatchingGame {
         GameHistorySQLDatabase GameHistoryDatabase = new GameHistorySQLDatabase();
 
         //login
-        String[] userData = loginOrSignup(UserDatabase);
+        String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
         String username = userData[0];
 
         //run the game mode

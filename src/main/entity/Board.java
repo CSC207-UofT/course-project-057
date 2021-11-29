@@ -102,7 +102,7 @@ public class Board {
     }
 
     /**
-     * String form of Entity.TileBoard object
+     * String form of Entity.Board object
      * Useful for testing in UseCase.BoardGenerator
      * @return the key values of each Entity.Tile in their respective TilePositions
      */
