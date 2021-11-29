@@ -3,12 +3,14 @@ package views;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.InputMismatchException;
-// TODO javadoc
+
 public class UserGameInput {
     /**
      * Obtains user's input.
+     * @param numRows the number of rows in the tileboard
+     * @param numCols the number of columns in the tileboard
+     * @return integer list of user input of row and col number
      */
-
     public static int[] getUserMove(int numRows, int numCols) {
         //Store move data in an array [row number, column number]
         int[] input = new int[2];
@@ -46,6 +48,10 @@ public class UserGameInput {
         return input;
     }
 
+    /**
+     * obtains user input of difficulty
+     * @return integer of difficulty
+     */
     public static int getUserDifficulty() {
         int input = 0;
         Scanner scanner = new Scanner(System.in);
@@ -66,9 +72,12 @@ public class UserGameInput {
         }
         return input;
 
-
     }
 
+    /**
+     * obtains either 'login' or 'sign up' from user input
+     * @return string of either 'login' or 'sign up'
+     */
     public static String promptLoginOrSignup() {
         Scanner scanner = new Scanner(System.in);
         String method = "";

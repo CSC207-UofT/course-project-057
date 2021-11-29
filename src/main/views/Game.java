@@ -10,7 +10,6 @@ import usecase.BoardManager;
 import java.util.Random;
 
 import java.sql.SQLException;
-// TODO javadoc
 /**
  * Try to separate the responsibility of output (displaying prompts) and game logic.
  * This should not also be responsible for the login and signup.
@@ -27,6 +26,7 @@ public class Game {
      * login is called, runs its methods, and the player/user and difficulty chosen are returned
      * then, game is called from main, and user + difficulty are passed in
      * NOTE: the actual game calls leaderboard, not the main
+     * @param tileBoard a TileBoard object
      */
     public static int[] Move(TileBoard tileBoard) {
         boolean validMove = false;
@@ -62,6 +62,10 @@ public class Game {
         return new int[]{rowMove, colMove};
     }
 
+    /**
+     * runs a new game mode
+     * @return number of moves, the time and difficulty of the finished game mode
+     */
     public static long[] runGame() {
         //get user difficulty
 
@@ -101,6 +105,11 @@ public class Game {
         return statistics;
     }
 
+    /**
+     * @param UserDatabase the SQL database
+     * @return string list of username and password
+     * @throws SQLException provides information on a database access error
+     */
     public static String[] loginOrSignup(UserSQLDatabase UserDatabase) throws SQLException {
         String input = UserGameInput.promptLoginOrSignup();
         String[] userData = new String[]{};
@@ -116,7 +125,6 @@ public class Game {
     }
 
     public static void main (String [] args) throws SQLException {
-
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         LeaderboardSQLDatabase LeaderboardDatabase = new LeaderboardSQLDatabase();
         GameHistorySQLDatabase GameHistoryDatabase = new GameHistorySQLDatabase();

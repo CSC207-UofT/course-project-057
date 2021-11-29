@@ -4,7 +4,6 @@ import gateways.database.UserSQLDatabase;
 
 import java.sql.SQLException;
 
-<<<<<<< HEAD
 /**
  * options to log in or sign up
  */
@@ -15,10 +14,6 @@ public class LoginOrSignup {
      * @return string list of username and password
      * @throws SQLException provides information on a database access error
      */
-=======
-public class LoginOrSignup {
-
->>>>>>> origin/junlynli
     public static String[] loginOrSignup(UserSQLDatabase UserDatabase) throws SQLException {
         String input = UserGameInput.promptLoginOrSignup();
         String[] userData = new String[]{};
@@ -32,9 +27,5 @@ public class LoginOrSignup {
         }
         return userData;
     }
-
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/junlynli
