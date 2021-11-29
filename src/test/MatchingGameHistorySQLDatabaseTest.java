@@ -1,4 +1,4 @@
-import gateways.database.GameHistorySQLDatabase;
+import gateways.database.MatchingGameHistorySQLDatabase;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -6,8 +6,8 @@ import java.sql.*;
 
 import static org.junit.Assert.*;
 
-public class GameHistorySQLDatabaseTest {
-    GameHistorySQLDatabase db;
+public class MatchingGameHistorySQLDatabaseTest {
+    MatchingGameHistorySQLDatabase db;
 
     String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
     String USER = "postgres";
@@ -15,7 +15,7 @@ public class GameHistorySQLDatabaseTest {
 
     @Before
     public void setUp() {
-        db = new GameHistorySQLDatabase();
+        db = new MatchingGameHistorySQLDatabase();
     }
 
     @Test(timeout = 500)

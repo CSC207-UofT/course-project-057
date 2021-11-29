@@ -2,7 +2,7 @@ package gateways.database;
 
 import java.sql.*;
 
-public class LeaderboardSQLDatabase  {
+public class PatternLeaderboardSQLDatabase {
     /**
      * gateways.database class
      * displays leaderboards separated by difficulty, separated by buttons on top
@@ -29,17 +29,16 @@ public class LeaderboardSQLDatabase  {
         try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement()) {
             // updates a leaderboard according to the given difficulty
-            ResultSet rs = stmt.executeQuery("SELECT DENSE_RANK AS rank, username, totalmoves, time FROM " +
-                    "(SELECT *, DENSE_RANK() OVER(ORDER BY totalmoves, time) FROM gamehistory WHERE difficulty = '" +
-                    Difficulty + "') AS t1 WHERE DENSE_RANK <= 10 ORDER BY DENSE_RANK;");
+            ResultSet rs = stmt.executeQuery("SELECT DENSE_RANK AS rank, username, time FROM " +
+                    "(SELECT *, DENSE_RANK() OVER(ORDER BY time) FROM PatternGameHistory WHERE " +
+                    "difficulty = '" + Difficulty + "') AS t1 WHERE DENSE_RANK <= 10 ORDER BY DENSE_RANK;");
             System.out.println("Leaderboard for difficulty " + Difficulty);
             while (rs.next()) {
                 String Rank = rs.getString("rank");
                 String Username = rs.getString("Username");
-                String TotalMoves = rs.getString("totalmoves");
                 String Time = rs.getString("Time");
                 System.out.println("Rank: " + Rank + ", Username: " + Username
-                        + ", TotalMoves: " + TotalMoves + ", Time: " + Time);
+                        + ", Time: " + Time);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,20 +55,20 @@ public class LeaderboardSQLDatabase  {
         String PASS = "Password";
 
 
-        GameHistorySQLDatabase db = new GameHistorySQLDatabase();
+        PatternGameHistorySQLDatabase db = new PatternGameHistorySQLDatabase();
         db.createTable();
-        db.addGameHistory(1, "Jun", 12, 30.5, "easy");
-        db.addGameHistory(2, "Akansha", 20, 50.0, "medium");
-        db.addGameHistory(3, "Jun", 10, 29.0, "easy");
-        db.addGameHistory(4, "Akansha", 10, 29.0, "easy");
-        db.addGameHistory(5, "Chris", 12, 60.4, "hard");
-        db.addGameHistory(6, "Chris", 16, 62.4, "hard");
-        db.addGameHistory(7, "Jun", 26, 29.4, "hard");
-        db.addGameHistory(8, "Akansha", 9, 30.2, "easy");
-        db.addGameHistory(9, "Iris", 30, 20.2, "medium");
-        db.addGameHistory(10, "Koji", 30, 30.2, "medium");
+        db.addGameHistory(1, "Jun", 30.5, "easy");
+        db.addGameHistory(2, "Akansha", 50.0, "medium");
+        db.addGameHistory(3, "Jun",  29.0, "easy");
+        db.addGameHistory(4, "Akansha", 29.0, "easy");
+        db.addGameHistory(5, "Chris", 60.4, "hard");
+        db.addGameHistory(6, "Chris", 62.4, "hard");
+        db.addGameHistory(7, "Jun", 29.4, "hard");
+        db.addGameHistory(8, "Akansha", 30.2, "easy");
+        db.addGameHistory(9, "Iris", 20.2, "medium");
+        db.addGameHistory(10, "Koji", 30.2, "medium");
 
-        LeaderboardSQLDatabase lb = new LeaderboardSQLDatabase();
+        PatternLeaderboardSQLDatabase lb = new PatternLeaderboardSQLDatabase();
         System.out.println("easy");
         lb.generateLeaderboard("easy");
         System.out.println("medium");

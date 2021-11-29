@@ -98,8 +98,10 @@ public class BoardManager {
         while (!validMove);
 
         BoardManager.flipTile(board, rowMove, colMove);
-        // prints out the board with the flipped tile
-        System.out.println(board);
+        if (gameType.equals("Matching")) {
+            // prints out the board with the flipped tile
+            System.out.println(board);
+        }
         return new int[]{rowMove, colMove};
     }
 }

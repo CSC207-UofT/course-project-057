@@ -1,9 +1,8 @@
 package views;
 
-import entity.Board;
 import entity.DifficultyStrategy;
-import gateways.database.GameHistorySQLDatabase;
-import gateways.database.LeaderboardSQLDatabase;
+import gateways.database.MatchingGameHistorySQLDatabase;
+import gateways.database.MatchingLeaderboardSQLDatabase;
 import gateways.database.UserSQLDatabase;
 import entity.MatchingBoard;
 import usecase.BoardManager;
@@ -67,8 +66,8 @@ public class MatchingGame {
 
     public static void main (String [] args) throws SQLException {
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
-        LeaderboardSQLDatabase LeaderboardDatabase = new LeaderboardSQLDatabase();
-        GameHistorySQLDatabase GameHistoryDatabase = new GameHistorySQLDatabase();
+        MatchingLeaderboardSQLDatabase LeaderboardDatabase = new MatchingLeaderboardSQLDatabase();
+        MatchingGameHistorySQLDatabase GameHistoryDatabase = new MatchingGameHistorySQLDatabase();
 
         //login
         String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
