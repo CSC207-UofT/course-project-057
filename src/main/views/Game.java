@@ -97,13 +97,16 @@ public class Game {
             }
             numMoves++;
         }
-        System.out.println("Congratulations! You matched all the tiles.");
+        System.out.println("Congratulations! You matched all the tiles."); // replace w DisplayPrompts.endGameDisplay()
         statistics[0] = numMoves;
         statistics[1] = System.currentTimeMillis() - startTime;
         statistics[2] = difficulty;
         return statistics;
     }
 
+    /**
+     * duplicated to LoginOrSignup usecase
+     */
     public static String[] loginOrSignup(UserSQLDatabase UserDatabase) throws SQLException {
         String input = UserGameInput.promptLoginOrSignup();
         String[] userData = new String[]{};
@@ -126,6 +129,7 @@ public class Game {
 
         //login
         String[] userData = loginOrSignup(UserDatabase);
+        // replace with String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
         String username = userData[0];
 
         //run the game mode

@@ -16,7 +16,7 @@ public class UserGameInput {
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
         while (!done){
-            System.out.println("Enter row number: ");
+            System.out.println("Enter row number: "); // replace with DisplayPrompts.userMoveDisplay("row")
             try {
                 int n = scanner.nextInt();
                 if (n <= numRows && n > 0){
@@ -30,7 +30,7 @@ public class UserGameInput {
         }
         boolean check = false;
         while (!check){
-            System.out.println("Enter column number: ");
+            System.out.println("Enter column number: "); // replace with DisplayPrompts.userMoveDisplay("column")
             try {
                 int n = scanner.nextInt();
                 if (n <= numCols && n > 0){
@@ -51,7 +51,7 @@ public class UserGameInput {
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
         while (!done){
-            System.out.println("Enter Difficulty (1-3): ");
+            System.out.println("Enter Difficulty (1-3): "); // replace with DisplayPrompts.getDifficultyDisplay()
             try {
                 int n = scanner.nextInt();
                 if (n <= 3 && n>0){
@@ -74,7 +74,7 @@ public class UserGameInput {
         String method = "";
         boolean valid = false;
         while (!valid) {
-            System.out.println("Type 'login' or 'sign up':");
+            System.out.println("Type 'login' or 'sign up':"); // replace with DisplayPrompts.loginOrSignupDisplay()
             try {
                 method = scanner.nextLine();
                 if (Objects.equals(method, "login") || Objects.equals(method, "sign up")) {
