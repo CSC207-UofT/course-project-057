@@ -52,25 +52,24 @@ public class UserGameInput {
      * obtains user input of difficulty
      * @return integer of difficulty
      */
-    public static int getUserDifficulty() {
-        int input = 0;
+    public static String getUserDifficulty() {
+        String difficulty = "";
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
         while (!done){
-            System.out.println("Enter Difficulty (1-3): ");
+            System.out.println("Enter Difficulty (Easy, Medium or Hard): ");
             try {
-                int n = scanner.nextInt();
-                if (n <= 3 && n>0){
+                difficulty = scanner.nextLine();
+                if (Objects.equals(difficulty, "Easy") || Objects.equals(difficulty, "Medium")
+                        || Objects.equals(difficulty, "Hard")){
                     done = true;
-                    input = input + n;
                 }
             }
             catch (InputMismatchException e){
                 scanner.nextLine();
             }
-
         }
-        return input;
+        return difficulty;
 
     }
 

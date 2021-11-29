@@ -1,9 +1,5 @@
 package entity;
 
-import java.util.Scanner;
-
-// write tests for this
-
 /**
  * Entity Class
  * returns an Entity.Tile with a numerical key and image based on the theme

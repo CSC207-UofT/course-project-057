@@ -1,12 +1,14 @@
 package views;
 
+import entity.DifficultyStrategy;
 import gateways.database.GameHistorySQLDatabase;
 import gateways.database.LeaderboardSQLDatabase;
 import gateways.database.UserSQLDatabase;
 import entity.TileBoard;
-import usecase.BoardGenerator;
 import usecase.BoardManager;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 import java.sql.SQLException;
@@ -33,7 +35,6 @@ public class Game {
         int rowMove;
         int colMove;
         do {
-
             //Get user's move input as an array [row number, column number] (starting index 1) using controller class
             int numRows = tileBoard.getNumRows();
             int numCols = tileBoard.getNumCols();
@@ -66,14 +67,14 @@ public class Game {
      * runs a new game mode
      * @return number of moves, the time and difficulty of the finished game mode
      */
-    public static long[] runGame() {
+    public static String[] runGame() {
         //get user difficulty
 
-        long[] statistics = new long[3];
-        int difficulty = UserGameInput.getUserDifficulty();
+        String[] statistics = new String[3];
+        String difficulty = UserGameInput.getUserDifficulty();
         int numMoves = 0;
 
-        TileBoard tileBoard = BoardGenerator.generateBoard(difficulty);
+        TileBoard tileBoard = DifficultyStrategy.valueOf(difficulty).generateBoard();
 
         System.out.println("Input a row number from 1 to " + (tileBoard.getNumRows())
                 + " and a column from 1 to " + (tileBoard.getNumCols()) + ". Tile must not be revealed.");
@@ -99,8 +100,8 @@ public class Game {
             numMoves++;
         }
         System.out.println("Congratulations! You matched all the tiles.");
-        statistics[0] = numMoves;
-        statistics[1] = System.currentTimeMillis() - startTime;
+        statistics[0] = Integer.toString(numMoves);
+        statistics[1] = Long.toString(System.currentTimeMillis() - startTime);
         statistics[2] = difficulty;
         return statistics;
     }
@@ -134,18 +135,10 @@ public class Game {
         String username = userData[0];
 
         //run the game mode
-        long[] statistics = runGame();
-        int numMoves = (int) statistics[0];
-        long time = statistics[1];
-        long difficulty_num = statistics[2];
-        String difficulty;
-        if (difficulty_num == 1) {
-            difficulty = "easy";
-        } else if (difficulty_num == 2) {
-            difficulty = "medium";
-        } else {
-            difficulty = "hard";
-        }
+        String[] statistics = runGame();
+        int numMoves = Integer.parseInt(statistics[0]);
+        long time = Long.parseLong(statistics[1]);
+        String difficulty = statistics[2];
 
         Random rand = new Random();
         Integer GID = rand.nextInt();
