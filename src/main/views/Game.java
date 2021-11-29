@@ -53,6 +53,7 @@ public class Game {
             else {
                 System.out.println("Invalid Move, please input a row number from 1 to " + (tileBoard.getNumRows())
                         + " and a column from 1 to " + (tileBoard.getNumCols()) + ". Tile must not be revealed.");
+                // replace above print w DisplayPrompts.invalidMoveDisplay(tileBoard.getNumRows(), tileBoard.getNumCols())
             }
         }
         while (!validMove);
@@ -73,6 +74,8 @@ public class Game {
 
         System.out.println("Input a row number from 1 to " + (tileBoard.getNumRows())
                 + " and a column from 1 to " + (tileBoard.getNumCols()) + ". Tile must not be revealed.");
+        // replace above print w DisplayPrompts.enterMoveDisplay(tileBoard.getNumRows(), tileBoard.getNumCols())
+
         System.out.println(tileBoard);
         long startTime = System.currentTimeMillis();
 
@@ -83,24 +86,27 @@ public class Game {
             int move1Key = tileBoard.getTileKey(move1[0], move1[1]);
             int move2Key = tileBoard.getTileKey(move2[0], move2[1]);
             if (move1Key == move2Key)  {
-                System.out.println("Match");
+                System.out.println("Match"); // replace with DisplayPrompts.match(true)
             }
             else {
                 // If no match, flip them back
                 BoardManager.flipTile(tileBoard, move1[0], move1[1]);
                 BoardManager.flipTile(tileBoard, move2[0], move2[1]);
-                System.out.println("No Match!");
+                System.out.println("No Match!"); // replace with DisplayPrompts.match(false)
                 System.out.println(tileBoard);
             }
             numMoves++;
         }
-        System.out.println("Congratulations! You matched all the tiles.");
+        System.out.println("Congratulations! You matched all the tiles."); // replace w DisplayPrompts.endGameDisplay()
         statistics[0] = numMoves;
         statistics[1] = System.currentTimeMillis() - startTime;
         statistics[2] = difficulty;
         return statistics;
     }
 
+    /**
+     * duplicated to LoginOrSignup usecase
+     */
     public static String[] loginOrSignup(UserSQLDatabase UserDatabase) throws SQLException {
         String input = UserGameInput.promptLoginOrSignup();
         String[] userData = new String[]{};
@@ -123,6 +129,7 @@ public class Game {
 
         //login
         String[] userData = loginOrSignup(UserDatabase);
+        // replace with String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
         String username = userData[0];
 
         //run the game mode
@@ -146,3 +153,4 @@ public class Game {
         LeaderboardDatabase.generateLeaderboard(difficulty);
     }
 }
+
