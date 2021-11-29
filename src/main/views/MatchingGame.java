@@ -64,7 +64,6 @@ public class MatchingGame {
         return statistics;
     }
 
-
     public static void main (String [] args) throws SQLException {
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         LeaderboardSQLDatabase LeaderboardDatabase = new LeaderboardSQLDatabase();
