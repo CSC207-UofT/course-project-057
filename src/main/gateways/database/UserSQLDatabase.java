@@ -14,8 +14,8 @@ public class UserSQLDatabase {
     ResultSet rs = null;
 
     /**
-     * Creates a table
-     * @throws SQLException
+     * Creates a table named 'users' in the local database
+     * @throws SQLException provides information on a database access error
      */
     public void createTable() throws SQLException {
         try {
@@ -38,10 +38,10 @@ public class UserSQLDatabase {
     }
 
     /**
-     * This method inserts the username and password into the sql table.
-     * @param 'username'
-     * @param 'password'
-     * @throws SQLException
+     * This method inserts the username and password into the table 'users'.
+     * @param username the username of the user to be added
+     * @param password the password of the user to be added
+     * @throws SQLException provides information on a database access error
      */
     public void addUser(String username, String password) throws SQLException {
         try {
@@ -64,7 +64,7 @@ public class UserSQLDatabase {
 
     /**
      * checks if there is no existing username in the gateways.database
-     * @param 'new_username' username being passed in
+     * @param new_username username being passed in
      * @return if username is available
      */
 
@@ -88,7 +88,11 @@ public class UserSQLDatabase {
         return false;
     }
 
-    // checks if user's credentials are correct
+    /** checks if user's credentials are correct
+     * @param username the username of the user
+     * @param password the password of the password
+     * @return boolean that indicates if the credentials are correct
+     */
     public boolean checkPassword (String username, String password) {
         try {
             Class.forName("org.postgresql.Driver");
@@ -100,7 +104,7 @@ public class UserSQLDatabase {
             // Check for new_username in table 'users'
             ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username +
                     "' AND password = '" + password + "'" );
-            // if the resultset is empty:
+            // if the result set is empty:
             return rs.isBeforeFirst();
         } catch (SQLException e) {
             e.printStackTrace();

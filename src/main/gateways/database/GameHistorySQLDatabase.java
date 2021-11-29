@@ -20,7 +20,7 @@ public class GameHistorySQLDatabase {
 
     /**
      * This method creates a new table 'GameHistory'
-     * @throws 'SQLException'
+     * @throws SQLException provides information on a database access error
      */
     public void createTable() throws SQLException {
         try {
@@ -45,7 +45,7 @@ public class GameHistorySQLDatabase {
 
     /**
      * This method adds a game record to the game history database
-     * @throws 'SQLException'
+     * @throws SQLException provides information on a database access error
      */
     public void addGameHistory(Integer GID, String Username, Integer TotalMoves, Double Time, String Difficulty)
             throws SQLException {

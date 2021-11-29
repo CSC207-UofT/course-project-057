@@ -8,7 +8,6 @@ public class LeaderboardSQLDatabase  {
      * displays leaderboards separated by difficulty, separated by buttons on top
      * buttons on the bottom to play again or exit game
      */
-
     private final String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
     private final String USER = "postgres";
     private final String PASS = "Password";
@@ -18,7 +17,8 @@ public class LeaderboardSQLDatabase  {
 
     /**
      * Generates a Leaderboard
-     * @throws SQLException
+     * @param Difficulty the difficulty of game mode that leaderboard should display
+     * @throws SQLException provides information on a database access error
      */
     public void generateLeaderboard(String Difficulty) throws SQLException {
         try {

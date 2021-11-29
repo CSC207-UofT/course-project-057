@@ -1,16 +1,17 @@
 package views;
 
+import entity.DifficultyStrategy;
 import gateways.database.GameHistorySQLDatabase;
 import gateways.database.LeaderboardSQLDatabase;
 import gateways.database.UserSQLDatabase;
 import entity.TileBoard;
-import usecase.BoardGenerator;
 import usecase.BoardManager;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 import java.sql.SQLException;
-// TODO javadoc
 /**
  * Try to separate the responsibility of output (displaying prompts) and game logic.
  * This should not also be responsible for the login and signup.
@@ -27,13 +28,13 @@ public class Game {
      * login is called, runs its methods, and the player/user and difficulty chosen are returned
      * then, game is called from main, and user + difficulty are passed in
      * NOTE: the actual game calls leaderboard, not the main
+     * @param tileBoard a TileBoard object
      */
     public static int[] Move(TileBoard tileBoard) {
         boolean validMove = false;
         int rowMove;
         int colMove;
         do {
-
             //Get user's move input as an array [row number, column number] (starting index 1) using controller class
             int numRows = tileBoard.getNumRows();
             int numCols = tileBoard.getNumCols();
@@ -53,7 +54,6 @@ public class Game {
             else {
                 System.out.println("Invalid Move, please input a row number from 1 to " + (tileBoard.getNumRows())
                         + " and a column from 1 to " + (tileBoard.getNumCols()) + ". Tile must not be revealed.");
-            // replace above print w DisplayPrompts.invalidMoveDisplay(tileBoard.getNumRows(), tileBoard.getNumCols())
             }
         }
         while (!validMove);
@@ -63,19 +63,21 @@ public class Game {
         return new int[]{rowMove, colMove};
     }
 
-    public static long[] runGame() {
+    /**
+     * runs a new game mode
+     * @return number of moves, the time and difficulty of the finished game mode
+     */
+    public static String[] runGame() {
         //get user difficulty
 
-        long[] statistics = new long[3];
-        int difficulty = UserGameInput.getUserDifficulty();
+        String[] statistics = new String[3];
+        String difficulty = UserGameInput.getUserDifficulty();
         int numMoves = 0;
 
-        TileBoard tileBoard = BoardGenerator.generateBoard(difficulty);
+        TileBoard tileBoard = DifficultyStrategy.valueOf(difficulty).generateBoard();
 
         System.out.println("Input a row number from 1 to " + (tileBoard.getNumRows())
                 + " and a column from 1 to " + (tileBoard.getNumCols()) + ". Tile must not be revealed.");
-        // replace above print w DisplayPrompts.enterMoveDisplay(tileBoard.getNumRows(), tileBoard.getNumCols())
-
         System.out.println(tileBoard);
         long startTime = System.currentTimeMillis();
 
@@ -86,26 +88,28 @@ public class Game {
             int move1Key = tileBoard.getTileKey(move1[0], move1[1]);
             int move2Key = tileBoard.getTileKey(move2[0], move2[1]);
             if (move1Key == move2Key)  {
-                System.out.println("Match"); // replace with DisplayPrompts.match(true)
+                System.out.println("Match");
             }
             else {
                 // If no match, flip them back
                 BoardManager.flipTile(tileBoard, move1[0], move1[1]);
                 BoardManager.flipTile(tileBoard, move2[0], move2[1]);
-                System.out.println("No Match!"); // replace with DisplayPrompts.match(false)
+                System.out.println("No Match!");
                 System.out.println(tileBoard);
             }
             numMoves++;
         }
-        System.out.println("Congratulations! You matched all the tiles."); // replace w DisplayPrompts.endGameDisplay()
-        statistics[0] = numMoves;
-        statistics[1] = System.currentTimeMillis() - startTime;
+        System.out.println("Congratulations! You matched all the tiles.");
+        statistics[0] = Integer.toString(numMoves);
+        statistics[1] = Long.toString(System.currentTimeMillis() - startTime);
         statistics[2] = difficulty;
         return statistics;
     }
 
     /**
-     * duplicated to LoginOrSignup usecase
+     * @param UserDatabase the SQL database
+     * @return string list of username and password
+     * @throws SQLException provides information on a database access error
      */
     public static String[] loginOrSignup(UserSQLDatabase UserDatabase) throws SQLException {
         String input = UserGameInput.promptLoginOrSignup();
@@ -122,29 +126,19 @@ public class Game {
     }
 
     public static void main (String [] args) throws SQLException {
-
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         LeaderboardSQLDatabase LeaderboardDatabase = new LeaderboardSQLDatabase();
         GameHistorySQLDatabase GameHistoryDatabase = new GameHistorySQLDatabase();
 
         //login
         String[] userData = loginOrSignup(UserDatabase);
-        // replace with String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
         String username = userData[0];
 
         //run the game mode
-        long[] statistics = runGame();
-        int numMoves = (int) statistics[0];
-        long time = statistics[1];
-        long difficulty_num = statistics[2];
-        String difficulty;
-        if (difficulty_num == 1) {
-            difficulty = "easy";
-        } else if (difficulty_num == 2) {
-            difficulty = "medium";
-        } else {
-            difficulty = "hard";
-        }
+        String[] statistics = runGame();
+        int numMoves = Integer.parseInt(statistics[0]);
+        long time = Long.parseLong(statistics[1]);
+        String difficulty = statistics[2];
 
         Random rand = new Random();
         Integer GID = rand.nextInt();
@@ -153,4 +147,3 @@ public class Game {
         LeaderboardDatabase.generateLeaderboard(difficulty);
     }
 }
-
