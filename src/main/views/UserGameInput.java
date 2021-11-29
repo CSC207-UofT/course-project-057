@@ -3,17 +3,12 @@ package views;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.InputMismatchException;
-
-/**
- * Obtains user's input.
- */
+// TODO javadoc
 public class UserGameInput {
     /**
-     * a method that gets the row and column number of the tile that the user wants to flip
-     * @param numRows number of the row
-     * @param numCols number of the column
-     * @return row number and column number
+     * Obtains user's input.
      */
+
     public static int[] getUserMove(int numRows, int numCols) {
         //Store move data in an array [row number, column number]
         int[] input = new int[2];
@@ -51,10 +46,6 @@ public class UserGameInput {
         return input;
     }
 
-    /**
-     * a method that gets the difficulty from user input
-     * @return int of difficulty
-     */
     public static int getUserDifficulty() {
         int input = 0;
         Scanner scanner = new Scanner(System.in);
@@ -75,12 +66,9 @@ public class UserGameInput {
         }
         return input;
 
+
     }
 
-    /**
-     * a method that gets either 'login' or 'sign up' from user input
-     * @return either log in or sign up
-     */
     public static String promptLoginOrSignup() {
         Scanner scanner = new Scanner(System.in);
         String method = "";
