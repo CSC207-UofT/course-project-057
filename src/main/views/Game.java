@@ -153,3 +153,4 @@ public class Game {
         LeaderboardDatabase.generateLeaderboard(difficulty);
     }
 }
+
