@@ -69,7 +69,7 @@ public class BoardManager {
      * methods that tracks the tile the user wants to move
      * @param board a Board object
      */
-    public static int[] Move(Board board) {
+    public static int[] Move(Board board, String gameType, int counter) {
         boolean validMove = false;
         int rowMove;
         int colMove;
@@ -77,7 +77,7 @@ public class BoardManager {
             //Get user's move input as an array [row number, column number] (starting index 1) using controller class
             int numRows = board.getNumRows();
             int numCols = board.getNumCols();
-            int[] input = UserGameInput.getUserMove(numRows, numCols);
+            int[] input = UserGameInput.getUserMove(numRows, numCols, gameType, counter);
             //Subtract 1 to account for index starting at 1 for user
             rowMove = input[0] - 1;
             colMove = input[1] - 1;

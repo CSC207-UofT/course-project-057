@@ -10,7 +10,7 @@ public class PatternGame {
         String[] statistics = new String[2];
         String difficulty = UserGameInput.getUserDifficulty();
 
-        PatternBoard patternBoard = (PatternBoard) DifficultyStrategy.valueOf(difficulty).generateBoard();
+        PatternBoard patternBoard = (PatternBoard) DifficultyStrategy.valueOf(difficulty).generatePatternBoard();
         ArrayList<Tile> tileList = patternBoard.getTileList();
 
         // shows the pattern one tile at a time
@@ -20,7 +20,10 @@ public class PatternGame {
             tileList.get(counter).setFlipped(true);
             System.out.println(patternBoard);
 
-
+            for (int i = 1; i <= counter; i++) {
+                DisplayPrompts.userPatternMoveDisplay("row", Integer.toString(i));
+                DisplayPrompts.userPatternMoveDisplay("column", Integer.toString(i));
+            }
             BoardManager.unflipAll(patternBoard);
             System.out.println(patternBoard);
             counter++;

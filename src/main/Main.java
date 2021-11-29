@@ -2,6 +2,7 @@ import gateways.database.GameHistorySQLDatabase;
 import gateways.database.LeaderboardSQLDatabase;
 import gateways.database.UserSQLDatabase;
 import views.LoginOrSignup;
+import views.MatchingGame;
 
 import java.sql.SQLException;
 import java.util.Random;
@@ -20,7 +21,7 @@ public class Main {
         String username = userData[0];
 
         //run the game mode
-        String[] statistics = runGame();
+        String[] statistics = MatchingGame.runGame();
         int numMoves = Integer.parseInt(statistics[0]);
         long time = Long.parseLong(statistics[1]);
         String difficulty = statistics[2];

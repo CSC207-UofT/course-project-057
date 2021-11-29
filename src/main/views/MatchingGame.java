@@ -1,5 +1,6 @@
 package views;
 
+import entity.Board;
 import entity.DifficultyStrategy;
 import gateways.database.GameHistorySQLDatabase;
 import gateways.database.LeaderboardSQLDatabase;
@@ -32,28 +33,28 @@ public class MatchingGame {
         String difficulty = UserGameInput.getUserDifficulty();
         int numMoves = 0;
 
-        MatchingBoard matchingBoard = (MatchingBoard) DifficultyStrategy.valueOf(difficulty).generateBoard();
+        MatchingBoard board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
 
-        System.out.println("Input a row number from 1 to " + (matchingBoard.getNumRows())
-                + " and a column from 1 to " + (matchingBoard.getNumCols()) + ". Tile must not be revealed.");
-        System.out.println(matchingBoard);
+        System.out.println("Input a row number from 1 to " + board.getNumRows()
+                + " and a column from 1 to " + (board.getNumCols()) + ". Tile must not be revealed.");
+        System.out.println(board);
         long startTime = System.currentTimeMillis();
 
         // Game runs until all tiles are flipped
-        while(!BoardManager.allFlipped(matchingBoard)) {
-            int[] move1 = BoardManager.Move(matchingBoard);
-            int[] move2 = BoardManager.Move(matchingBoard);
-            int move1Key = matchingBoard.getTileKey(move1[0], move1[1]);
-            int move2Key = matchingBoard.getTileKey(move2[0], move2[1]);
+        while(!BoardManager.allFlipped(board)) {
+            int[] move1 = BoardManager.Move(board, "Matching", 0);
+            int[] move2 = BoardManager.Move(board, "Matching", 0);
+            int move1Key = board.getTileKey(move1[0], move1[1]);
+            int move2Key = board.getTileKey(move2[0], move2[1]);
             if (move1Key == move2Key)  {
                 System.out.println("Match");
             }
             else {
                 // If no match, flip them back
-                BoardManager.flipTile(matchingBoard, move1[0], move1[1]);
-                BoardManager.flipTile(matchingBoard, move2[0], move2[1]);
+                BoardManager.flipTile(board, move1[0], move1[1]);
+                BoardManager.flipTile(board, move2[0], move2[1]);
                 System.out.println("No Match!");
-                System.out.println(matchingBoard);
+                System.out.println(board);
             }
             numMoves++;
         }
