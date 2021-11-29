@@ -3,23 +3,26 @@ package views;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.InputMismatchException;
-// TODO javadoc
-public class UserGameInput {
 
+public class UserGameInput {
     /**
-     * Obtains and analyzes user's input when the user inputs a move
-     * @param 'number of rows in the board'
-     * @param 'number of columns in the board'
-     * @return 'array which containts the user's valid move choices'
+     * Obtains user's input.
+     * @param numRows the number of rows in the tileboard
+     * @param numCols the number of columns in the tileboard
+     * @return integer list of user input of row and col number
      */
-    public static int[] getUserMove(int numRows, int numCols) {
+    public static int[] getUserMove(int numRows, int numCols, String gameType, int counter) {
         //Store move data in an array [row number, column number]
         int[] input = new int[2];
         //Get user's move and store in input
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
         while (!done){
-            System.out.println("Enter row number: "); // replace with DisplayPrompts.userMoveDisplay("row")
+            if (gameType.equals("Matching")) {
+                DisplayPrompts.userMatchMoveDisplay("row");
+            } else {
+                DisplayPrompts.userPatternMoveDisplay("row", Integer.toString(counter));
+            }
             try {
                 int n = scanner.nextInt();
                 if (n <= numRows && n > 0){
@@ -33,7 +36,11 @@ public class UserGameInput {
         }
         boolean check = false;
         while (!check){
-            System.out.println("Enter column number: "); // replace with DisplayPrompts.userMoveDisplay("column")
+            if (gameType.equals("Matching")) {
+                DisplayPrompts.userMatchMoveDisplay("column");
+            } else {
+                DisplayPrompts.userPatternMoveDisplay("column", Integer.toString(counter));
+            }
             try {
                 int n = scanner.nextInt();
                 if (n <= numCols && n > 0){
@@ -49,35 +56,41 @@ public class UserGameInput {
         return input;
     }
 
-    public static int getUserDifficulty() {
-        int input = 0;
+    /**
+     * obtains user input of difficulty
+     * @return integer of difficulty
+     */
+    public static String getUserDifficulty() {
+        String difficulty = "";
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
         while (!done){
-            System.out.println("Enter Difficulty (1-3): "); // replace with DisplayPrompts.getDifficultyDisplay()
+            System.out.println("Enter Difficulty (Easy, Medium or Hard): ");
             try {
-                int n = scanner.nextInt();
-                if (n <= 3 && n>0){
+                difficulty = scanner.nextLine();
+                if (Objects.equals(difficulty, "Easy") || Objects.equals(difficulty, "Medium")
+                        || Objects.equals(difficulty, "Hard")){
                     done = true;
-                    input = input + n;
                 }
             }
             catch (InputMismatchException e){
                 scanner.nextLine();
             }
-
         }
-        return input;
-
+        return difficulty;
 
     }
 
+    /**
+     * obtains either 'login' or 'sign up' from user input
+     * @return string of either 'login' or 'sign up'
+     */
     public static String promptLoginOrSignup() {
         Scanner scanner = new Scanner(System.in);
         String method = "";
         boolean valid = false;
         while (!valid) {
-            System.out.println("Type 'login' or 'sign up':"); // replace with DisplayPrompts.loginOrSignupDisplay()
+            System.out.println("Type 'login' or 'sign up':");
             try {
                 method = scanner.nextLine();
                 if (Objects.equals(method, "login") || Objects.equals(method, "sign up")) {

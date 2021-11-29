@@ -6,4 +6,13 @@ package controller;
  */
 
 public class MainMenu {
+    public void start_game() {
+
+    }
+    public void leaderboard() {
+
+    }
+    public void exit_program() {
+
+    }
 }

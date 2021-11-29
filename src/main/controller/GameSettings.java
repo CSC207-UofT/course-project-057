@@ -11,4 +11,13 @@ package controller;
 
 
 public class GameSettings {
+    public void pause() {
+
+    }
+    public void resume() {
+
+    }
+    public void exit() {
+        //TODO: needs GUI code (?) since it goes back to the main menu
+    }
 }
