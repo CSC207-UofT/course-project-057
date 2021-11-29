@@ -5,8 +5,6 @@ import entity.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-// TODO: javadoc methods for this class
-
 /**
  * Use Case Class
  * Calls the Entity.Tile class to create Entity.Tile objects and puts them into a list
@@ -14,12 +12,12 @@ import java.util.Collections;
  */
 public class BoardGenerator {
 
-
     public BoardGenerator() {}
-
     /**
      * Helper method for generateBoard
      * Creates a randomized ArrayList of Entity.Tile objects that are put into the tileBoard object.
+     * @param numPairs number of pairs of tiles that the board should contain
+     * @return an arraylist of tiles
      */
     private static ArrayList<Tile> generateTileList(int numPairs) {
         ArrayList<Tile> tileList = new ArrayList<>();
@@ -33,6 +31,11 @@ public class BoardGenerator {
         return tileList;
     }
 
+    /**
+     *
+     * @param difficulty the difficulty of the game mode
+     * @return a TileBoard object of the assigned difficulty
+     */
     public static TileBoard generateBoard(int difficulty) {
         int numRows;
         int numCols;

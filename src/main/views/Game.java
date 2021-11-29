@@ -27,6 +27,7 @@ public class Game {
      * login is called, runs its methods, and the player/user and difficulty chosen are returned
      * then, game is called from main, and user + difficulty are passed in
      * NOTE: the actual game calls leaderboard, not the main
+     * @param tileBoard  a TileBoard object
      */
     public static int[] Move(TileBoard tileBoard) {
         boolean validMove = false;
@@ -63,6 +64,9 @@ public class Game {
         return new int[]{rowMove, colMove};
     }
 
+    /**
+     * @return number of moves, the time and difficulty of the finished game
+     */
     public static long[] runGame() {
         //get user difficulty
 
@@ -106,6 +110,8 @@ public class Game {
 
     /**
      * duplicated to LoginOrSignup usecase
+     * @param UserDatabase the local SQL database
+     * @throws SQLException provides information on a database access error
      */
     public static String[] loginOrSignup(UserSQLDatabase UserDatabase) throws SQLException {
         String input = UserGameInput.promptLoginOrSignup();
@@ -122,7 +128,6 @@ public class Game {
     }
 
     public static void main (String [] args) throws SQLException {
-
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         LeaderboardSQLDatabase LeaderboardDatabase = new LeaderboardSQLDatabase();
         GameHistorySQLDatabase GameHistoryDatabase = new GameHistorySQLDatabase();

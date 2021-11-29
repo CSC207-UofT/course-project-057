@@ -16,8 +16,8 @@ public class TileBoard {
 
     /**
      *
-     * @param 'number of rows'
-     * @param 'number of columns'
+     * @param numRows number of rows
+     * @param numCols number of columns
      */
     public TileBoard(int numRows, int numCols) {
         this.TilePositions = new Tile[numRows][numCols];
@@ -58,6 +58,8 @@ public class TileBoard {
     }
 
     /**
+     * @param row the row number of the tile
+     * @param col the column number of the tile
      * @return the key of the tile at the specified location
      */
     public int getTileKey(int row, int col) {
@@ -66,6 +68,8 @@ public class TileBoard {
     }
 
     /**
+     * @param row the row number of the tile
+     * @param col the column number of the tile
      * @return the Tile object at the specified location
      */
     public Tile getTileAtIndex(int row, int col) {
@@ -82,6 +86,9 @@ public class TileBoard {
     }
 
     /**
+     * @param row the row number of the tile
+     * @param col the column number of the tile
+     * @param tile the tile object
      * assigns a Tile object to the specified location on TileBoard
      */
     public void setTilePositions(int row, int col, Tile tile) {
@@ -89,8 +96,11 @@ public class TileBoard {
         this.TilePositions[row][col] = tile;
     }
 
-    // String form of Entity.TileBoard object returns the key values of each Entity.Tile in their respective TilePositions
-    // Useful for testing in UseCase.BoardGenerator
+    /**
+     * String form of Entity.TileBoard object
+     * Useful for testing in UseCase.BoardGenerator
+     * @return the key values of each Entity.Tile in their respective TilePositions
+     */
     @Override
     public String toString() {
         boolean first = true;

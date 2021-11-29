@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * Entity Class
- * returns a Entity.Tile with a numerical key and image based on the theme
+ * returns an Entity.Tile with a numerical key and image based on the theme
  */
 public class Tile {
     private final int key;
@@ -16,6 +16,7 @@ public class Tile {
 
     /**
      * constructor for Entity.Tile object
+     * @param key the key of the tile object
      */
     public Tile(int key) {         // add String "theme" as a parameter for phase 1/2
 
@@ -33,6 +34,7 @@ public class Tile {
 
     /**
      * sets a tile's status of flipped or un-flipped
+     * @param flipped the boolean that indicates if the tile object is flipped (true) or un-flipped (false).
      */
     public void setFlipped(boolean flipped) {
 

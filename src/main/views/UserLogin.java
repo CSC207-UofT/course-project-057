@@ -12,6 +12,8 @@ public class UserLogin {
 
     /**
      * login page
+     * @param user_database the SQL database
+     * @return a string list of username and password
      */
     public static String[] login(UserSQLDatabase user_database) {
         Scanner s = new Scanner(System.in);

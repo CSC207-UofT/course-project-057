@@ -15,7 +15,8 @@ public class SignUpPage {
 
     /**
      * the sign-up page
-     * @throws SQLException
+     * @param user_database the SQL database
+     * @throws SQLException provides information on a database access error
      */
     public static void signUp(UserSQLDatabase user_database) throws SQLException {
         Scanner s = new Scanner(System.in);
