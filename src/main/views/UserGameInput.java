@@ -5,10 +5,13 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 // TODO javadoc
 public class UserGameInput {
-    /**
-     * Obtains user's input.
-     */
 
+    /**
+     * Obtains and analyzes user's input when the user inputs a move
+     * @param 'number of rows in the board'
+     * @param 'number of columns in the board'
+     * @return 'array which containts the user's valid move choices'
+     */
     public static int[] getUserMove(int numRows, int numCols) {
         //Store move data in an array [row number, column number]
         int[] input = new int[2];
