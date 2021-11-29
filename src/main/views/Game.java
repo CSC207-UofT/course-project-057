@@ -53,7 +53,7 @@ public class Game {
             else {
                 System.out.println("Invalid Move, please input a row number from 1 to " + (tileBoard.getNumRows())
                         + " and a column from 1 to " + (tileBoard.getNumCols()) + ". Tile must not be revealed.");
-                // replace above print w DisplayPrompts.invalidMoveDisplay(tileBoard.getNumRows(), tileBoard.getNumCols())
+            // replace above print w DisplayPrompts.invalidMoveDisplay(tileBoard.getNumRows(), tileBoard.getNumCols())
             }
         }
         while (!validMove);
