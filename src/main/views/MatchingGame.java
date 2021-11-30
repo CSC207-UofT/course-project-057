@@ -21,11 +21,11 @@ public class MatchingGame {
      * runs a new game mode
      * @return number of moves, the time and difficulty of the finished game mode
      */
-    public static String[] runGame() {
+    public static String[] runGame(String difficulty) {
         //get user difficulty
 
         String[] statistics = new String[3];
-        String difficulty = UserGameInput.getUserDifficulty();
+        // String difficulty = UserGameInput.getUserDifficulty(); // delete, this is moved to StartPage
         int numMoves = 0;
 
         MatchingBoard board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
@@ -68,8 +68,9 @@ public class MatchingGame {
         //login
         String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
         String username = userData[0];
-        //run the game mode
-        String[] statistics = runGame();
+        //run the game mode including start page
+        String[] gameType = StartPage.startPage();
+        String[] statistics = runGame(gameType[1]);
         int numMoves = Integer.parseInt(statistics[0]);
         long time = Long.parseLong(statistics[1]);
         String difficulty = statistics[2];

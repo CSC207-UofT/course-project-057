@@ -56,7 +56,7 @@ public class DisplayPrompts {
     }
 
     public static void getDifficultyDisplay() {
-        System.out.println("Please enter difficulty (1-3), where 1 is easy, 2 is medium, and 3 is difficult: ");
+        System.out.println("Please enter difficulty (Easy, Medium, or Hard)");
     }
 
     public static void getGameTypeDisplay() {

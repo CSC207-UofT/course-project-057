@@ -15,9 +15,9 @@ import java.util.Random;
  */
 
 public class PatternGame {
-    public static String[] runPatternGame() {
+    public static String[] runPatternGame(String difficulty) {
         String[] statistics = new String[3];
-        String difficulty = UserGameInput.getUserDifficulty();
+       // String difficulty = UserGameInput.getUserDifficulty(); // delete, this is moved to StartGame
 
         PatternBoard patternBoard = DifficultyStrategy.valueOf(difficulty).generatePatternBoard();
         ArrayList<Tile> tileList = patternBoard.getTileList();
@@ -64,8 +64,9 @@ public class PatternGame {
         String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
         String username = userData[0];
 
-        //run the game mode
-        String[] statistics = runPatternGame();
+        //run the game mode including start page
+        String[] gameType = StartPage.startPage();
+        String[] statistics = runPatternGame(gameType[1]); // test
         long time = Long.parseLong(statistics[0]);
         String difficulty = statistics[1];
         if (statistics[2].equals("true")) {
