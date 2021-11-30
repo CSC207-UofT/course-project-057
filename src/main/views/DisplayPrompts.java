@@ -43,8 +43,12 @@ public class DisplayPrompts {
         System.out.println("Congratulations! You matched all the tiles.");
     }
 
-    public static void userMoveDisplay(String rowOrCol) {
+    public static void userMatchMoveDisplay(String rowOrCol) {
         System.out.println("Please enter " + rowOrCol + " number: ");
+    }
+
+    public static void userPatternMoveDisplay(String rowOrCol, String moveNumber) {
+        System.out.println("Please enter " + rowOrCol + " number for tile #" + moveNumber);
     }
 
     public static void loginOrSignupDisplay() {

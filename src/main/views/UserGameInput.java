@@ -11,14 +11,18 @@ public class UserGameInput {
      * @param numCols the number of columns in the tileboard
      * @return integer list of user input of row and col number
      */
-    public static int[] getUserMove(int numRows, int numCols) {
+    public static int[] getUserMove(int numRows, int numCols, String gameType, int counter) {
         //Store move data in an array [row number, column number]
         int[] input = new int[2];
         //Get user's move and store in input
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
         while (!done){
-            System.out.println("Enter row number: ");
+            if (gameType.equals("Matching")) {
+                DisplayPrompts.userMatchMoveDisplay("row");
+            } else {
+                DisplayPrompts.userPatternMoveDisplay("row", Integer.toString(counter));
+            }
             try {
                 int n = scanner.nextInt();
                 if (n <= numRows && n > 0){
@@ -32,7 +36,11 @@ public class UserGameInput {
         }
         boolean check = false;
         while (!check){
-            System.out.println("Enter column number: ");
+            if (gameType.equals("Matching")) {
+                DisplayPrompts.userMatchMoveDisplay("column");
+            } else {
+                DisplayPrompts.userPatternMoveDisplay("column", Integer.toString(counter));
+            }
             try {
                 int n = scanner.nextInt();
                 if (n <= numCols && n > 0){

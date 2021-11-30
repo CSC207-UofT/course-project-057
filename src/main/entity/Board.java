@@ -83,6 +83,21 @@ public class Board {
     }
 
     /**
+     *
+     */
+    public int[] getIndexOfTile(Tile tile) {
+        for (int i = 0 ; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                if (getTileKey(i, j) == tile.getKey()) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[]{100, 100};
+    }
+
+
+    /**
      * no idea what this means Koji pls help :(
      */
     public Tile[][] getTilePositions() {
