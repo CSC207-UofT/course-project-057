@@ -10,6 +10,8 @@ import usecase.BoardManager;
 import java.util.Random;
 
 import java.sql.SQLException;
+import java.util.Scanner;
+
 /**
  * Try to separate the responsibility of output (displaying prompts) and game logic.
  * This should not also be responsible for the login and signup.
@@ -72,7 +74,6 @@ public class MatchingGame {
         //login
         String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
         String username = userData[0];
-
         //run the game mode
         String[] statistics = runGame();
         int numMoves = Integer.parseInt(statistics[0]);

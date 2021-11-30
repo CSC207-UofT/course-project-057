@@ -6,6 +6,7 @@ import views.MatchingGame;
 
 import java.sql.SQLException;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * runs the whole program - add test here
@@ -16,9 +17,24 @@ public class Main {
         MatchingLeaderboardSQLDatabase LeaderboardDatabase = new MatchingLeaderboardSQLDatabase();
         MatchingGameHistorySQLDatabase GameHistoryDatabase = new MatchingGameHistorySQLDatabase();
 
-        //login
-        String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
-        String username = userData[0];
+        //guest mode?
+        Scanner sc =new Scanner(System.in);
+        System.out.println("Guest mode? (Y/N)");
+        String mode = sc.next();
+        boolean signed = false;
+        String username = "";
+        while (!signed){
+            if (mode.equals("N")) {
+                //login
+                String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
+                 username = userData[0];
+                signed = true;
+            } else if(mode.equals("Y")) {
+                signed = true;
+            } else {
+                System.out.println("Please enter 'Y'(yes) or 'N'(no)");
+            }
+        }
 
         //run the game mode
         String[] statistics = MatchingGame.runGame();
@@ -28,8 +44,10 @@ public class Main {
 
         Random rand = new Random();
         Integer GID = rand.nextInt();
-        // Updates the leaderboard
-        GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time/1000), difficulty);
-        LeaderboardDatabase.generateLeaderboard(difficulty);
+        if (mode.equals("N")){
+            // Updates the leaderboard
+            GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time / 1000), difficulty);
+            LeaderboardDatabase.generateLeaderboard(difficulty);
+        }
     }
 }
