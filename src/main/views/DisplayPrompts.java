@@ -52,18 +52,12 @@ public class DisplayPrompts {
     }
 
     public static void loginOrSignupDisplay() {
-        System.out.println ("Please enter 'login' to log into an existing account or 'sign up' to create a new account.");
+        System.out.println ("Please enter 'login' to log into an existing account or 'signup' to create a new account.");
     }
 
     public static void getDifficultyDisplay() {
-        System.out.println("Please enter difficulty (Easy, Medium, Hard): ");
+        System.out.println("Please enter difficulty (1-3), where 1 is easy, 2 is medium, and 3 is difficult: ");
     }
-
-    public static void getGameTypeDisplay() {
-        System.out.println("Enter Game Type (Matching or Pattern): ");
-    }
-
-
 
     public static void welcomeMessage() {
         System.out.println ("Hello! Welcome to Group 57's Memory Game");
