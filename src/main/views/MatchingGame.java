@@ -13,13 +13,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
- * Try to separate the responsibility of output (displaying prompts) and game logic.
- * This should not also be responsible for the login and signup.
- * Should split this class up, your game logic should not be handles by a UI/view class.
- * Think about making a main controller that can delegate tasks by coordinating with other controllers, presenters, use cases.
- * One idea is to have a separate main menu controller and presenter, login controller and presenter
- * (you do this now to an extent but Game still deals with user input for this),
- * use cases and controllers for saving account data, game history and leaderboard history data.
+ * move to controller
  */
 
 public class MatchingGame {
