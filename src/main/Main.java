@@ -47,7 +47,8 @@ public class Main {
         if (mode.equals("N")){
             // Updates the leaderboard
             GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time / 1000), difficulty);
-            LeaderboardDatabase.generateLeaderboard(difficulty);
         }
+        LeaderboardDatabase.generateLeaderboard(difficulty);
+
     }
 }
