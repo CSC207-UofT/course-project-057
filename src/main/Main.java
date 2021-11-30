@@ -1,13 +1,9 @@
 import gateways.database.MatchingGameHistorySQLDatabase;
 import gateways.database.MatchingLeaderboardSQLDatabase;
 import gateways.database.UserSQLDatabase;
-import views.LoginOrSignup;
-import views.MatchingGame;
-import views.PatternGame;
-import views.StartPage;
+import views.*;
 
 import java.sql.SQLException;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -21,7 +17,7 @@ public class Main {
 
         //guest mode?
         Scanner sc =new Scanner(System.in);
-        System.out.println("Guest mode? (Y/N)");
+        DisplayPrompts.guestMessage();
         String mode = sc.next();
         boolean signed = false;
         String username = "";
@@ -34,14 +30,14 @@ public class Main {
             } else if(mode.equals("Y")) {
                 signed = true;
             } else {
-                System.out.println("Please enter 'Y'(yes) or 'N'(no)");
+                DisplayPrompts.guestMessage();
             }
         }
 
         //run the game mode, testing only
         String [] gameType = StartPage.startPage();
         if (gameType[0].equals("Matching")) {
-            String[] statistics = MatchingGame.runGame(gameType[1]);
+            String[] statistics = MatchingGame.runMatchingGame(gameType[1]);
             int numMoves = Integer.parseInt(statistics[0]);
             long time = Long.parseLong(statistics[1]);
             String difficulty = statistics[2];
