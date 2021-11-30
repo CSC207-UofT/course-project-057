@@ -10,6 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * move to controller
+ */
+
 public class PatternGame {
     public static String[] runPatternGame() {
         String[] statistics = new String[3];
