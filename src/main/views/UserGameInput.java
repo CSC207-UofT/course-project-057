@@ -52,7 +52,6 @@ public class UserGameInput {
                 scanner.nextLine();
             }
         }
-
         return input;
     }
 
@@ -65,7 +64,7 @@ public class UserGameInput {
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
         while (!done){
-            System.out.println("Enter Difficulty (Easy, Medium or Hard): ");
+            DisplayPrompts.getDifficultyDisplay();
             try {
                 difficulty = scanner.nextLine();
                 if (Objects.equals(difficulty, "Easy") || Objects.equals(difficulty, "Medium")
@@ -85,7 +84,7 @@ public class UserGameInput {
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
         while (!done){
-            System.out.println("Enter Game Type (Matching or Pattern): ");
+            DisplayPrompts.getGameTypeDisplay();
             try {
                 type = scanner.nextLine();
                 if (Objects.equals(type, "Matching") || Objects.equals(type, "Pattern")){
@@ -108,7 +107,7 @@ public class UserGameInput {
         String method = "";
         boolean valid = false;
         while (!valid) {
-            System.out.println("Type 'login' or 'sign up':");
+            DisplayPrompts.loginOrSignupDisplay();
             try {
                 method = scanner.nextLine();
                 if (Objects.equals(method, "login") || Objects.equals(method, "sign up")) {
