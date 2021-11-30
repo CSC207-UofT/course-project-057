@@ -3,6 +3,8 @@ import gateways.database.MatchingLeaderboardSQLDatabase;
 import gateways.database.UserSQLDatabase;
 import views.LoginOrSignup;
 import views.MatchingGame;
+import views.PatternGame;
+import views.StartPage;
 
 import java.sql.SQLException;
 import java.util.Random;
@@ -37,10 +39,17 @@ public class Main {
         }
 
         //run the game mode
-        String[] statistics = MatchingGame.runGame();
-        int numMoves = Integer.parseInt(statistics[0]);
-        long time = Long.parseLong(statistics[1]);
-        String difficulty = statistics[2];
+        String [] gameType = StartPage.startPage();
+        if (gameType[0].equals("Matching")) {
+            String[] statistics = MatchingGame.runGame();
+            int numMoves = Integer.parseInt(statistics[0]);
+            long time = Long.parseLong(statistics[1]);
+            String difficulty = statistics[2];
+        } else {
+            String[] statistics = PatternGame.runPatternGame();
+            long time = Long.parseLong(statistics[0]);
+            String difficulty = statistics[1];
+        }
 
         Random rand = new Random();
         Integer GID = rand.nextInt();
