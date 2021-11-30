@@ -8,6 +8,7 @@ import entity.MatchingBoard;
 import usecase.BoardManager;
 
 import java.util.Random;
+import java.util.Scanner;
 
 import java.sql.SQLException;
 
@@ -20,7 +21,7 @@ public class MatchingGame {
      * runs a new game mode
      * @return number of moves, the time and difficulty of the finished game mode
      */
-    public static String[] runMatchingGame(String difficulty) {
+    public static String[] runMatchingGame(String difficulty, String guest) {
         //get user difficulty
 
         String[] statistics = new String[3];
@@ -48,7 +49,7 @@ public class MatchingGame {
                 System.out.println(board);
             }
 
-            /*
+            /* done in above if statement and display prompt
             if (move1Key == move2Key)  {
                System.out.println("Match");
             }
@@ -67,6 +68,15 @@ public class MatchingGame {
         statistics[0] = Integer.toString(numMoves);
         statistics[1] = Long.toString(System.currentTimeMillis() - startTime);
         statistics[2] = difficulty;
+        /* add to leaderboard in this method
+        if (guest.equals("N")) {
+            Random rand = new Random();
+            Integer GID = rand.nextInt();
+            // Updates the leaderboard
+            GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time / 1000), difficulty);
+            LeaderboardDatabase.generateLeaderboard(difficulty);
+        }
+         */
         return statistics;
     }
 
@@ -74,21 +84,32 @@ public class MatchingGame {
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         MatchingLeaderboardSQLDatabase LeaderboardDatabase = new MatchingLeaderboardSQLDatabase();
         MatchingGameHistorySQLDatabase GameHistoryDatabase = new MatchingGameHistorySQLDatabase();
-
-        //login
-        String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
-        String username = userData[0];
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Running the Matching Game from inside the MatchingGame class.");
+        System.out.println("Would you like to play as a guest? (Y/N)");
+        String guest = sc.nextLine();
+        String username = "";
+        if (guest.equals("N")) {
+            String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
+            username = userData[0];
+        }
         //run the game mode including start page
-        String[] gameType = StartPage.startPage();
-        String[] statistics = runMatchingGame(gameType[1]);
+        // String[] gameType = StartPage.startPage();
+        String[] statistics = runMatchingGame("Easy", guest);
         int numMoves = Integer.parseInt(statistics[0]);
         long time = Long.parseLong(statistics[1]);
         String difficulty = statistics[2];
-
-        Random rand = new Random();
-        Integer GID = rand.nextInt();
-        // Updates the leaderboard
-        GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time/1000), difficulty);
-        LeaderboardDatabase.generateLeaderboard(difficulty);
+        if (guest.equals("N")) {
+            Random rand = new Random();
+            Integer GID = rand.nextInt();
+            // Updates the leaderboard
+            GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time / 1000), difficulty);
+            LeaderboardDatabase.generateLeaderboard(difficulty);
+        } else {
+            System.out.println("Memory Matching Game Guest Statistics: ");
+            System.out.println("Number of Moves: " + numMoves);
+            System.out.println("Time: " + time);
+            System.out.println("Difficulty: " + difficulty);
+        }
     }
 }
