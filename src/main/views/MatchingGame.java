@@ -13,13 +13,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
- * Try to separate the responsibility of output (displaying prompts) and game logic.
- * This should not also be responsible for the login and signup.
- * Should split this class up, your game logic should not be handles by a UI/view class.
- * Think about making a main controller that can delegate tasks by coordinating with other controllers, presenters, use cases.
- * One idea is to have a separate main menu controller and presenter, login controller and presenter
- * (you do this now to an extent but Game still deals with user input for this),
- * use cases and controllers for saving account data, game history and leaderboard history data.
+ * move to controller
  */
 
 public class MatchingGame {
@@ -27,11 +21,11 @@ public class MatchingGame {
      * runs a new game mode
      * @return number of moves, the time and difficulty of the finished game mode
      */
-    public static String[] runGame() {
+    public static String[] runGame(String difficulty) {
         //get user difficulty
 
         String[] statistics = new String[3];
-        String difficulty = UserGameInput.getUserDifficulty();
+        // String difficulty = UserGameInput.getUserDifficulty(); // delete, this is moved to StartPage
         int numMoves = 0;
 
         MatchingBoard board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
@@ -74,8 +68,9 @@ public class MatchingGame {
         //login
         String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
         String username = userData[0];
-        //run the game mode
-        String[] statistics = runGame();
+        //run the game mode including start page
+        String[] gameType = StartPage.startPage();
+        String[] statistics = runGame(gameType[1]);
         int numMoves = Integer.parseInt(statistics[0]);
         long time = Long.parseLong(statistics[1]);
         String difficulty = statistics[2];

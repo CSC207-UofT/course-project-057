@@ -5,6 +5,7 @@ package views;
  */
 public class DisplayPrompts {
     /**
+     * display for match vs no match
      * @param match boolean for if a match was made or not
      */
     public static void matchDisplay (boolean match) {
@@ -16,7 +17,7 @@ public class DisplayPrompts {
     }
 
     /**
-     *
+     * display for entering a move
      * @param getNumRows pass in tileboard.getNumRows()
      * @param getNumCols pass in tileboard.getNumColumns()
      */
@@ -26,7 +27,7 @@ public class DisplayPrompts {
     }
 
     /**
-     *
+     * display if a move is invalid
      * @param getNumRows pass in tileboard.getNumRows()
      * @param getNumCols pass in tileboard.getNumColumns()
      */
@@ -35,27 +36,63 @@ public class DisplayPrompts {
         enterMoveDisplay(getNumRows, getNumCols);
     }
 
+    /**
+     * display for the user to log in
+     */
     public static void loginDisplay () {
         System.out.println("Please log in with your username and password");
     }
 
+    /**
+     * display when the game ends
+     */
     public static void endGameDisplay() {
         System.out.println("Congratulations! You matched all the tiles.");
     }
 
+    /**
+     * display for the user to make a match
+     * @param 'if the user is entering a row number or column number'
+     */
     public static void userMatchMoveDisplay(String rowOrCol) {
         System.out.println("Please enter " + rowOrCol + " number: ");
     }
 
+    /**
+     * prompting the user to make a move with a specified number
+     * @param 'if the user is entering a row number or column number'
+     * @param 'the number of moves made'
+     */
     public static void userPatternMoveDisplay(String rowOrCol, String moveNumber) {
         System.out.println("Please enter " + rowOrCol + " number for tile #" + moveNumber);
     }
 
+    /**
+     * Login or Sign Up prompt message
+     */
     public static void loginOrSignupDisplay() {
         System.out.println ("Please enter 'login' to log into an existing account or 'signup' to create a new account.");
     }
 
+    /**
+     * prompt to get the user's difficulty
+     */
     public static void getDifficultyDisplay() {
-        System.out.println("Please enter difficulty (1-3), where 1 is easy, 2 is medium, and 3 is difficult: ");
+        System.out.println("Please enter difficulty (Easy, Medium, or Hard)");
     }
+
+    /**
+     * prompt to get the user's game type
+     */
+    public static void getGameTypeDisplay() {
+        System.out.println("Please enter game type (Matching or Pattern): ");
+    }
+
+    /**
+     * welcomes the user to the game
+     */
+    public static void welcomeMessage() {
+        System.out.println ("Hello! Welcome to Group 57's Memory Game");
+    }
+
 }
