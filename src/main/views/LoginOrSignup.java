@@ -35,16 +35,16 @@ public class LoginOrSignup {
 
         //set panel
         panel.setLayout(null);
-        panel.setBounds(0,0,740,740);
-        panel.setBackground(Color.WHITE);
+        panel.setBounds(0,0,540,540);
+        panel.setBackground(Color.GRAY);
 
         //set label
-        title.setBounds(260,118,250,55);
+        title.setBounds(180,88,250,55);
         title.setFont(f);
 
 
         //set buttons
-        login.setBounds(277,241,180,55);
+        login.setBounds(180,180,180,55);
         login.setFont(f);
         login.setBackground(Color.CYAN);
         login.setOpaque(true);
@@ -55,14 +55,14 @@ public class LoginOrSignup {
             new UserLogin();
         });
 
-        signup.setBounds(277,369,180,55);
+        signup.setBounds(180,280,180,55);
         signup.setFont(f);
         signup.setBackground(Color.CYAN);
         signup.setOpaque(true);
         signup.setBorderPainted(false);
         signup.addActionListener(e -> new SignUpPage());
 
-        guest.setBounds(277,497,180,55);
+        guest.setBounds(180,380,180,55);
         guest.setFont(f);
         guest.setBackground(Color.CYAN);
         guest.setOpaque(true);
@@ -74,7 +74,7 @@ public class LoginOrSignup {
         });
 
         //add all JComponents to frame and set frame visible
-        frame.setSize(740,740);
+        frame.setSize(540,540);
         frame.setResizable(false);
         panel.add(title);
         //panel.add(test);

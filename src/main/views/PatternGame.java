@@ -19,20 +19,44 @@ import java.util.Random;
 public class PatternGame {
     JFrame frame;
     JPanel panel;
+    JLabel title, time;
+    JButton setting;
+    JLabel[] Board;
+    Font f1, f2;
 
     /**
      * default constructor
      * generates PatternGame window
      */
     public PatternGame(){
+        //initialize variables
         frame = new JFrame("Memory Game");
         panel = new JPanel();
+        title = new JLabel("PATTERN MEMORY");
+        time = new JLabel("Time: 00:00");
+        f1 = new Font(title.getFont().getName(), Font.PLAIN, 25);//title font
+        f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
 
-        panel.setBorder(BorderFactory.createEmptyBorder(0,0,960,740));
-        panel.setLayout(new GridLayout());
-        frame.add(panel, BorderLayout.CENTER);
+        //setup panel
+        panel.setLayout(null);
+        panel.setBounds(0,0,960,540);
+        panel.setBackground(Color.GRAY);
+
+        //setup labels
+        title.setBounds(320,30,300,50);
+        title.setFont(f1);
+
+        time.setBounds(780,440,100,50);
+        time.setForeground(Color.green);
+        //time.setBorder(BorderFactory.createBevelBorder(0,Color.green,Color.green));
+        time.setFont(f2);
+
+        //add components and setup frame
+        frame.setBounds(0,0,960,540);
+        panel.add(title);
+        panel.add(time);
+        frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(0,0,960,740);
         frame.setVisible(true);
     }
 
@@ -52,7 +76,7 @@ public class PatternGame {
             int[] index = patternBoard.getIndexOfTile(tileList.get(counter-1));
             BoardManager.flipTile(patternBoard, index[0], index[1]);
             System.out.println(patternBoard);
-            System.out.println("");
+            System.out.println();
             BoardManager.unflipAll(patternBoard);
             System.out.println(patternBoard);
             // gets user input
