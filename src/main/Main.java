@@ -17,6 +17,7 @@ public class Main {
         PatternLeaderboardSQLDatabase PatternLeaderboardSQLDatabase = new PatternLeaderboardSQLDatabase();
         PatternGameHistorySQLDatabase PatternHistorySQLDatabase = new PatternGameHistorySQLDatabase();
 
+        new LoginOrSignup();
         //guest mode?
         Scanner sc =new Scanner(System.in);
         DisplayPrompts.guestMessage();

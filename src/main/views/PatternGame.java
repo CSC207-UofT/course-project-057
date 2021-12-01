@@ -28,11 +28,11 @@ public class PatternGame {
         frame = new JFrame("Memory Game");
         panel = new JPanel();
 
-        panel.setBorder(BorderFactory.createEmptyBorder(10,10,800,1000));
+        panel.setBorder(BorderFactory.createEmptyBorder(0,0,960,740));
         panel.setLayout(new GridLayout());
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
+        frame.setBounds(0,0,960,740);
         frame.setVisible(true);
     }
 
