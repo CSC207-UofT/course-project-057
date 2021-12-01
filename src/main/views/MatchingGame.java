@@ -7,6 +7,8 @@ import gateways.database.UserSQLDatabase;
 import entity.MatchingBoard;
 import usecase.BoardManager;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,6 +19,24 @@ import java.sql.SQLException;
  */
 
 public class MatchingGame {
+    JFrame frame;
+    JPanel panel;
+
+    /**
+     * default constructor
+     * generates MatchingGame window
+     */
+    public MatchingGame(){
+        frame = new JFrame("Memory Game");
+        panel = new JPanel();
+
+        panel.setBorder(BorderFactory.createEmptyBorder(0,0,960,740));
+        panel.setLayout(new GridLayout());
+        frame.add(panel, BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(0,0,960,740);
+        frame.setVisible(true);
+    }
     /**
      * runs a new game mode
      * @return number of moves, the time and difficulty of the finished game mode

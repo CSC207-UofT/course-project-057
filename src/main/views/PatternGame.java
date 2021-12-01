@@ -6,6 +6,8 @@ import gateways.database.PatternLeaderboardSQLDatabase;
 import gateways.database.UserSQLDatabase;
 import usecase.BoardManager;
 
+import javax.swing.*;
+import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -15,6 +17,25 @@ import java.util.Random;
  */
 
 public class PatternGame {
+    JFrame frame;
+    JPanel panel;
+
+    /**
+     * default constructor
+     * generates PatternGame window
+     */
+    public PatternGame(){
+        frame = new JFrame("Memory Game");
+        panel = new JPanel();
+
+        panel.setBorder(BorderFactory.createEmptyBorder(0,0,960,740));
+        panel.setLayout(new GridLayout());
+        frame.add(panel, BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(0,0,960,740);
+        frame.setVisible(true);
+    }
+
     public static String[] runPatternGame(String difficulty) {
         String[] statistics = new String[3];
        // String difficulty = UserGameInput.getUserDifficulty(); // delete, this is moved to StartGame
