@@ -45,25 +45,25 @@ public class SignUpPage {
 
         //setup panel
         panel.setLayout(null);
-        panel.setBounds(0, 0, 740, 740);
-        panel.setBackground(Color.WHITE);
+        panel.setBounds(0,0,540,540);
+        panel.setBackground(Color.GRAY);
 
         //setup labels
-        title.setBounds(260, 118, 250, 55);
+        title.setBounds(180,88,250,55);
         title.setFont(f);
 
-        usernameLabel.setBounds(57, 209, 150, 45);
+        usernameLabel.setBounds(57,180,150,45);
         usernameLabel.setFont(f);
 
-        passwordLabel.setBounds(57, 360, 150, 45);
+        passwordLabel.setBounds(57,270,150,45);
         passwordLabel.setFont(f);
 
         //setup textfields
-        username.setBounds(300, 209, 250, 45);
-        password.setBounds(300, 360, 250, 45);
+        username.setBounds(250,180,200,45);
+        password.setBounds(250,270,200,45);
 
         //setup buttons
-        signup.setBounds(277, 541, 180, 55);
+        signup.setBounds(200, 360, 180, 55);
         signup.setBackground(Color.CYAN);
         signup.setOpaque(true);
         signup.setBorderPainted(false);
@@ -77,7 +77,7 @@ public class SignUpPage {
 
 
         //add all JComponents to frame and set frame visible
-        frame.setSize(740, 740);
+        frame.setSize(540, 540);
         frame.setResizable(false);
         panel.add(signup);
         panel.add(title);

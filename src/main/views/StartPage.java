@@ -43,100 +43,108 @@ public class StartPage {
 
         //setup panel
         panel.setLayout(null);
-        panel.setSize(960,740);
-        panel.setBackground(Color.WHITE);
+        panel.setSize(960,540);
+        panel.setBackground(Color.GRAY);
 
         //setup labels
-        title.setBounds(420,50,200,55);
+        title.setBounds(420,30,200,50);
         title.setFont(f);
 
-        mode.setBounds(84, 170, 200,55);
+        mode.setBounds(40, 100, 200,50);
         mode.setFont(f);
         mode.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        difficulty.setBounds(84, 320, 200,55);
+        difficulty.setBounds(40, 200, 200,50);
         difficulty.setFont(f);
         difficulty.setHorizontalAlignment(SwingConstants.RIGHT);
 
 
-        theme.setBounds(84, 470, 200,55);
+        theme.setBounds(40, 300, 200,50);
         theme.setFont(f);
         theme.setHorizontalAlignment(SwingConstants.RIGHT);
 
         //setup buttons
-        pattern.setBounds(320,170,250,55);
+        pattern.setBounds(290,100,250,50);
         pattern.setBackground(Color.YELLOW);
         pattern.setOpaque(true);
+        pattern.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         pattern.setBorderPainted(false);
         pattern.addActionListener(e -> {
             modeInput = 1;
             highLightButton(modeArray, pattern);
         });
 
-        matching.setBounds(620,170,250,55);
+        matching.setBounds(590,100,250,50);
         matching.setBackground(Color.MAGENTA);
         matching.setOpaque(true);
+        matching.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         matching.setBorderPainted(false);
         matching.addActionListener(e -> {
             modeInput = 2;
             highLightButton(modeArray, matching);
         });
 
-        easy.setBounds(320,320,150,55);
+        easy.setBounds(290,200,150,50);
         easy.setBackground(Color.GREEN);
         easy.setOpaque(true);
+        easy.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         easy.setBorderPainted(false);
         easy.addActionListener(e -> {
             difficultyInput = 1;
             highLightButton(difficultyArray, easy);
         });
 
-        medium.setBounds(520,320,150,55);
+        medium.setBounds(490,200,150,50);
         medium.setBackground(Color.ORANGE);
         medium.setOpaque(true);
+        medium.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         medium.setBorderPainted(false);
         medium.addActionListener(e -> {
             difficultyInput = 2;
             highLightButton(difficultyArray, medium);
         });
 
-        hard.setBounds(720,320,150,55);
+        hard.setBounds(690,200,150,50);
         hard.setBackground(Color.RED);
         hard.setOpaque(true);
+        hard.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         hard.setBorderPainted(false);
         hard.addActionListener(e -> {
             difficultyInput = 3;
             highLightButton(difficultyArray, hard);
         });
 
-        theme1.setBounds(320,470,150,55);
+        theme1.setBounds(290,300,150,50);
         theme1.setBackground(Color.PINK);
         theme1.setOpaque(true);
+        theme1.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         theme1.setBorderPainted(false);
         theme1.addActionListener(e -> {
             themeInput = 1;
             highLightButton(themeArray, theme1);
         });
 
-        theme2.setBounds(520,470,150,55);
+        theme2.setBounds(490,300,150,50);
         theme2.setBackground(Color.cyan);
         theme2.setOpaque(true);
+        theme2.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         theme2.setBorderPainted(false);
         theme2.addActionListener(e -> {
             themeInput = 2;
             highLightButton(themeArray, theme2);
         });
 
-        theme3.setBounds(720,470,150,55);
+        theme3.setBounds(690,300,150,50);
         theme3.setBackground(Color.green);
         theme3.setOpaque(true);
+        theme3.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         theme3.setBorderPainted(false);
         theme3.addActionListener(e -> {
             themeInput = 3;
             highLightButton(themeArray, theme3);
         });
 
-        play.setBounds(300,600,350,100);
+        play.setBounds(300,400,350,80);
         play.setBackground(Color.pink);
         play.setOpaque(true);
         play.setBorderPainted(false);
@@ -144,10 +152,10 @@ public class StartPage {
             if (isAllSelected()){
                 if (difficultyInput == 1){
                     frame.setVisible(false);
-                    new MatchingGame();
+                    new PatternGame();
                 }else {
                     frame.setVisible(false);
-                    new PatternGame();
+                    new MatchingGame();
                 }
             }
         });
@@ -166,11 +174,77 @@ public class StartPage {
         panel.add(theme2);
         panel.add(theme3);
         panel.add(play);
-        frame.setSize(960,740);
+        frame.setSize(960,540);
         frame.setResizable(false);
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+    }
+
+    /**
+     * change value of modeInput. Value of modeInput should be restricted by 1 or 2.
+     * @param i 1 for pattern game, 2 for matching game
+     * @return true if modeInput is set properly
+     */
+    public boolean setModeInput(int i){
+        if (i == 1 || i == 2) {
+            this.modeInput = i;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * change value of difficultyInput. Value of difficultyInput should be restricted by 1, 2 or 3.
+     * @param i 1 for easy, 2 for medium, 3 for hard
+     * @return true if difficultyInput is set properly
+     */
+    public boolean setDifficultyInput(int i){
+        if (i == 1 || i == 2 || i == 3) {
+            this.difficultyInput = i;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * change value of themeInput. Value of themeInput should be restricted by 1, 2 or 3.
+     * @param i 1 for theme 1, 2 for theme 2, 3 for theme 3
+     * @return true if themeInput is set properly
+     */
+    public boolean setThemeInput(int i){
+        if (i == 1 || i == 2 || i ==3) {
+            this.themeInput = i;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * modeInput getter
+     * @return value of modeInput
+     */
+    public int getModeInput(){
+        return this.modeInput;
+    }
+
+    /**
+     * difficultyInput getter
+     * @return value of difficultyInput
+     */
+    public int getDifficultyInput(){
+        return this.difficultyInput;
+    }
+
+    /**
+     * themeInput getter
+     * @return value of themeInput
+     */
+    public int getThemeInput(){
+        return this.themeInput;
     }
 
     /**
@@ -186,6 +260,11 @@ public class StartPage {
         b.setBorderPainted(true);
     }
 
+    /**
+     * check if every parameter is selected
+     * @return true if mode, difficulty and theme are all selected.
+     *         Otherwise return false
+     */
     private boolean isAllSelected(){
         if (modeInput == 0){
             JOptionPane.showMessageDialog(new JFrame(), "Please select mode!");
@@ -202,6 +281,7 @@ public class StartPage {
     }
 
 
+    //old
     public static String[] startPage() {
         DisplayPrompts.welcomeMessage();
         String[] gameType = new String[3];
