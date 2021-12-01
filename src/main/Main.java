@@ -18,7 +18,7 @@ public class Main {
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         MatchingLeaderboardSQLDatabase LeaderboardDatabase = new MatchingLeaderboardSQLDatabase();
         MatchingGameHistorySQLDatabase GameHistoryDatabase = new MatchingGameHistorySQLDatabase();
-
+        new LoginOrSignup();
         //guest mode?
         Scanner sc =new Scanner(System.in);
         System.out.println("Guest mode? (Y/N)");

@@ -3,6 +3,10 @@ package views;
 import gateways.database.UserSQLDatabase;
 import usecase.UserManager;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -12,6 +16,79 @@ import java.util.Scanner;
  * add the username and password to the database via addUser
  */
 public class SignUpPage {
+    private JFrame frame;
+    private JPanel panel;
+    private JButton signup;
+    private JTextField username, password;
+    private JLabel title, usernameLabel, passwordLabel;
+    private Font f;
+    private static String usernameInput, passwordInput;
+
+    /**
+     * default constructor
+     * generates SignUpPage window
+     */
+    public SignUpPage(){
+        //initialize the variables
+        usernameInput = "";
+        passwordInput = "";
+
+        frame = new JFrame("Memory Game");
+        panel = new JPanel();
+        signup = new JButton("Sign Up");
+        username = new JTextField();
+        password = new JTextField();
+        title = new JLabel("Memory Game");
+        usernameLabel = new JLabel("username: ");
+        passwordLabel = new JLabel("password: ");
+        f = new Font(title.getFont().getName(), Font.PLAIN, 25);
+
+        //setup panel
+        panel.setLayout(null);
+        panel.setBounds(0, 0, 740, 740);
+        panel.setBackground(Color.WHITE);
+
+        //setup labels
+        title.setBounds(260, 118, 250, 55);
+        title.setFont(f);
+
+        usernameLabel.setBounds(57, 209, 150, 45);
+        usernameLabel.setFont(f);
+
+        passwordLabel.setBounds(57, 360, 150, 45);
+        passwordLabel.setFont(f);
+
+        //setup textfields
+        username.setBounds(300, 209, 250, 45);
+        password.setBounds(300, 360, 250, 45);
+
+        //setup buttons
+        signup.setBounds(277, 541, 180, 55);
+        signup.setBackground(Color.CYAN);
+        signup.setOpaque(true);
+        signup.setBorderPainted(false);
+        signup.addActionListener(e -> {
+            usernameInput = username.getText();
+            passwordInput = password.getText();
+            //#TODO: signup
+            new StartPage();
+            frame.setVisible(false);
+        });
+
+
+        //add all JComponents to frame and set frame visible
+        frame.setSize(740, 740);
+        frame.setResizable(false);
+        panel.add(signup);
+        panel.add(title);
+        panel.add(usernameLabel);
+        panel.add(passwordLabel);
+        panel.add(username);
+        panel.add(password);
+        frame.add(panel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
 
     /**
      * the sign-up page

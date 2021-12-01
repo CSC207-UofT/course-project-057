@@ -7,7 +7,10 @@ import gateways.database.UserSQLDatabase;
 import entity.MatchingBoard;
 import usecase.BoardManager;
 
+import java.awt.*;
 import java.util.Random;
+
+import javax.swing.*;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -17,6 +20,23 @@ import java.util.Scanner;
  */
 
 public class MatchingGame {
+
+    private JFrame matchingGame;
+    private JPanel gamePanel;
+    private JButton button1;
+
+    public MatchingGame(){
+        matchingGame = new JFrame("Memory Game");
+        gamePanel = new JPanel();
+
+
+        gamePanel.setBorder(BorderFactory.createEmptyBorder(10,10,800,1000));
+        gamePanel.setLayout(new GridLayout());
+        matchingGame.add(gamePanel, BorderLayout.CENTER);
+        matchingGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        matchingGame.pack();
+        matchingGame.setVisible(true);
+    }
     /**
      * runs a new game mode
      * @return number of moves, the time and difficulty of the finished game mode
@@ -61,6 +81,7 @@ public class MatchingGame {
     }
 
     public static void main (String [] args) throws SQLException {
+        new MatchingGame();
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         MatchingLeaderboardSQLDatabase LeaderboardDatabase = new MatchingLeaderboardSQLDatabase();
         MatchingGameHistorySQLDatabase GameHistoryDatabase = new MatchingGameHistorySQLDatabase();
