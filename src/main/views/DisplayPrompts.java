@@ -46,8 +46,8 @@ public class DisplayPrompts {
     /**
      * display when the game ends
      */
-    public static void endGameDisplay() {
-        System.out.println("Congratulations! You matched all the tiles.");
+    public static void winGameDisplay() {
+        System.out.println("Congratulations! You won the game!");
     }
 
     /**
@@ -94,5 +94,21 @@ public class DisplayPrompts {
     public static void welcomeMessage() {
         System.out.println ("Hello! Welcome to Group 57's Memory Game");
     }
+
+    /**
+     * Asks if the user wants to play as a guest
+     */
+    public static void guestMessage() {
+        System.out.println("Would you like to play as a guest? (Y/N)");
+    }
+
+    /**
+     * Informs the user that they have made the wrong choice
+     */
+    public static void incorrectDisplay() {
+        System.out.println("Your move was incorrect.");
+    }
+
+
 
 }

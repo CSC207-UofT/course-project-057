@@ -62,7 +62,7 @@ public class PatternGame {
                 int correctKey = tileList.get(i-1).getKey();
                 if (!(moveKey == correctKey)) {
                     allCorrect = false;
-                    System.out.println("Incorrect.");
+                    DisplayPrompts.incorrectDisplay();
                     break;
                 }
             }
@@ -70,13 +70,14 @@ public class PatternGame {
                 counter++;
             }
         }
+        DisplayPrompts.winGameDisplay();
         statistics[0] = Long.toString(System.currentTimeMillis() - startTime);
         statistics[1] = difficulty;
         statistics[2] = Boolean.toString(allCorrect);
         return statistics;
     }
 
-    public static void main (String [] args) throws SQLException {
+    public static void main (String [] args) throws SQLException { // more for testing, can delete
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         PatternLeaderboardSQLDatabase PatternLeaderboardDatabase = new PatternLeaderboardSQLDatabase();
         PatternGameHistorySQLDatabase PatternHistoryDatabase = new PatternGameHistorySQLDatabase();

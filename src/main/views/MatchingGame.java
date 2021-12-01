@@ -7,41 +7,21 @@ import gateways.database.UserSQLDatabase;
 import entity.MatchingBoard;
 import usecase.BoardManager;
 
-import java.awt.*;
 import java.util.Random;
-
-import javax.swing.*;
+import java.util.Scanner;
 
 import java.sql.SQLException;
-import java.util.Scanner;
 
 /**
  * move to controller
  */
 
 public class MatchingGame {
-
-    private JFrame matchingGame;
-    private JPanel gamePanel;
-    private JButton button1;
-
-    public MatchingGame(){
-        matchingGame = new JFrame("Memory Game");
-        gamePanel = new JPanel();
-
-
-        gamePanel.setBorder(BorderFactory.createEmptyBorder(10,10,800,1000));
-        gamePanel.setLayout(new GridLayout());
-        matchingGame.add(gamePanel, BorderLayout.CENTER);
-        matchingGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        matchingGame.pack();
-        matchingGame.setVisible(true);
-    }
     /**
      * runs a new game mode
      * @return number of moves, the time and difficulty of the finished game mode
      */
-    public static String[] runGame(String difficulty) {
+    public static String[] runMatchingGame(String difficulty, String guest) {
         //get user difficulty
 
         String[] statistics = new String[3];
@@ -50,8 +30,9 @@ public class MatchingGame {
 
         MatchingBoard board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
 
-        System.out.println("Input a row number from 1 to " + board.getNumRows()
-                + " and a column from 1 to " + (board.getNumCols()) + ". Tile must not be revealed.");
+        // System.out.println("Input a row number from 1 to " + board.getNumRows()
+        //        + " and a column from 1 to " + (board.getNumCols()) + ". Tile must not be revealed.");
+        DisplayPrompts.enterMoveDisplay(board.getNumRows(), board.getNumCols());
         System.out.println(board);
         long startTime = System.currentTimeMillis();
 
@@ -61,8 +42,16 @@ public class MatchingGame {
             int[] move2 = BoardManager.Move(board, "Matching", 0);
             int move1Key = board.getTileKey(move1[0], move1[1]);
             int move2Key = board.getTileKey(move2[0], move2[1]);
+            DisplayPrompts.matchDisplay(move1Key == move2Key);
+            if (!(move1Key == move2Key)) {
+                BoardManager.flipTile(board, move1[0], move1[1]);
+                BoardManager.flipTile(board, move2[0], move2[1]);
+                System.out.println(board);
+            }
+
+            /* done in above if statement and display prompt
             if (move1Key == move2Key)  {
-                System.out.println("Match");
+               System.out.println("Match");
             }
             else {
                 // If no match, flip them back
@@ -71,35 +60,56 @@ public class MatchingGame {
                 System.out.println("No Match!");
                 System.out.println(board);
             }
+            */
             numMoves++;
         }
-        System.out.println("Congratulations! You matched all the tiles.");
+        DisplayPrompts.winGameDisplay();
+        // System.out.println("Congratulations! You matched all the tiles.");
         statistics[0] = Integer.toString(numMoves);
         statistics[1] = Long.toString(System.currentTimeMillis() - startTime);
         statistics[2] = difficulty;
+        /* add to leaderboard in this method
+        if (guest.equals("N")) {
+            Random rand = new Random();
+            Integer GID = rand.nextInt();
+            // Updates the leaderboard
+            GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time / 1000), difficulty);
+            LeaderboardDatabase.generateLeaderboard(difficulty);
+        }
+         */
         return statistics;
     }
 
-    public static void main (String [] args) throws SQLException {
-        new MatchingGame();
+    public static void main (String [] args) throws SQLException { // more for testing, can delete
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         MatchingLeaderboardSQLDatabase LeaderboardDatabase = new MatchingLeaderboardSQLDatabase();
         MatchingGameHistorySQLDatabase GameHistoryDatabase = new MatchingGameHistorySQLDatabase();
-
-        //login
-        String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
-        String username = userData[0];
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Running the Matching Game from inside the MatchingGame class.");
+        System.out.println("Would you like to play as a guest? (Y/N)");
+        String guest = sc.nextLine();
+        String username = "";
+        if (guest.equals("N")) {
+            String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
+            username = userData[0];
+        }
         //run the game mode including start page
-        String[] gameType = StartPage.startPage();
-        String[] statistics = runGame(gameType[1]);
+        // String[] gameType = StartPage.startPage();
+        String[] statistics = runMatchingGame("Easy", guest);
         int numMoves = Integer.parseInt(statistics[0]);
         long time = Long.parseLong(statistics[1]);
         String difficulty = statistics[2];
-
-        Random rand = new Random();
-        Integer GID = rand.nextInt();
-        // Updates the leaderboard
-        GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time/1000), difficulty);
-        LeaderboardDatabase.generateLeaderboard(difficulty);
+        if (guest.equals("N")) {
+            Random rand = new Random();
+            Integer GID = rand.nextInt();
+            // Updates the leaderboard
+            GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time / 1000), difficulty);
+            LeaderboardDatabase.generateLeaderboard(difficulty);
+        } else {
+            System.out.println("Memory Matching Game Guest Statistics: ");
+            System.out.println("Number of Moves: " + numMoves);
+            System.out.println("Time: " + time);
+            System.out.println("Difficulty: " + difficulty);
+        }
     }
 }
