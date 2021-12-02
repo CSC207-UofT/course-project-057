@@ -43,6 +43,7 @@ public class LoginOrSignup {
 
         //set label
         title.setBounds(180,88,250,55);
+        title.setForeground(Color.WHITE);
         title.setFont(f);
 
         background.setIcon(backgroundImg);
