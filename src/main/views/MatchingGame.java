@@ -23,13 +23,17 @@ public class MatchingGame {
     JPanel panel;
     JLabel title, time, totalMove;
     JButton setting;
+    JLabel[][] tiles;
     Font f1, f2;
 
     /**
-     * default constructor
-     * generates MatchingGame window
+     *
+     * constructor
+     * generates MatchingGame window by selected difficulty and theme
+     * @param difficulty difficultyInput from StartPage
+     * @param theme themeInput from StartPage
      */
-    public MatchingGame(){
+    public MatchingGame(String difficulty, int theme){
         //initialize variables
         frame = new JFrame("Memory Game");
         panel = new JPanel();
@@ -37,6 +41,9 @@ public class MatchingGame {
         time = new JLabel("Time: 00:00");
         f1 = new Font(title.getFont().getName(), Font.PLAIN, 25);//title font
         f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
+        tiles = new JLabel[ DifficultyStrategy.valueOf(difficulty).setDimension()[0]]
+                [ DifficultyStrategy.valueOf(difficulty).setDimension()[1]];
+
 
         //setup panel
         panel.setLayout(null);
@@ -49,8 +56,18 @@ public class MatchingGame {
 
         time.setBounds(780,440,100,50);
         time.setForeground(Color.green);
-        //time.setBorder(BorderFactory.createBevelBorder(0,Color.green,Color.green));
         time.setFont(f2);
+
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                tiles[i][j] = new JLabel("label " + i + "-"+ j);
+                tiles[i][j].setBounds(40+100*i,100+60*j,100,60);
+                tiles[i][j].setFont(f2);
+                panel.add(tiles[i][j]);
+            }
+        }
+
+
 
         //add components and setup frame
         frame.setBounds(0,0,960,540);
