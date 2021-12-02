@@ -199,12 +199,6 @@ public class StartPage {
 
     /**
      * change value of difficultyInput. Value of difficultyInput should be restricted by 1, 2 or 3.
-     * @param input 1 for easy, 2 for medium, 3 for hard
-     * @return true if difficultyInput is set properly
-     */
-    public boolean setDifficultyInput(String input){
-        if (input.equals("Easy") || input.equals("Medium") || input.equals("Hard")) {
-            this.difficultyInput = input;
             return true;
         } else {
             return false;
@@ -237,7 +231,6 @@ public class StartPage {
      * difficultyInput getter
      * @return value of difficultyInput
      */
-    public String getDifficultyInput(){
         return this.difficultyInput;
     }
 

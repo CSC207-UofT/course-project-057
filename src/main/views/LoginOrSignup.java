@@ -40,7 +40,6 @@ public class LoginOrSignup {
         //set panel
         panel.setLayout(null);
         panel.setBounds(0,0,540,540);
-        //panel.paintComponents(new G);
 
         //set label
         title.setBounds(180,88,250,55);
