@@ -23,7 +23,7 @@ public class MatchingGame {
     JPanel panel;
     JLabel title, time, totalMove;
     JButton setting;
-    JLabel[] Board;
+    JLabel[][] tiles;
     Font f1, f2;
 
     /**
@@ -52,6 +52,8 @@ public class MatchingGame {
         time.setForeground(Color.green);
         //time.setBorder(BorderFactory.createBevelBorder(0,Color.green,Color.green));
         time.setFont(f2);
+
+
 
         //add components and setup frame
         frame.setBounds(0,0,960,540);
