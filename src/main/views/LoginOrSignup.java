@@ -16,7 +16,8 @@ public class LoginOrSignup {
     private JFrame frame;
     private JPanel panel;
     private JButton login, signup, guest;
-    private JLabel title;
+    private JLabel title, background;
+    private Icon backgroundImg;
     private Font f;
     /**
      * Default constructor
@@ -31,17 +32,21 @@ public class LoginOrSignup {
         signup = new JButton("Sign Up");
         guest = new JButton("Guest");
         title = new JLabel("Memory Game");
+        background = new JLabel();
+        backgroundImg = new ImageIcon(new ImageIcon("src/main/views/pictures/rainbowCat.gif").getImage()
+                .getScaledInstance(540,540,Image.SCALE_DEFAULT));
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
 
         //set panel
         panel.setLayout(null);
         panel.setBounds(0,0,540,540);
-        panel.setBackground(Color.GRAY);
 
         //set label
         title.setBounds(180,88,250,55);
         title.setFont(f);
 
+        background.setIcon(backgroundImg);
+        background.setBounds(0,0,540,540);
 
         //set buttons
         login.setBounds(180,180,180,55);
@@ -81,6 +86,7 @@ public class LoginOrSignup {
         panel.add(login);
         panel.add(signup);
         panel.add(guest);
+        panel.add(background);
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

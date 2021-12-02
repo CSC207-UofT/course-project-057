@@ -12,7 +12,8 @@ public class StartPage {
     private JButton pattern, matching, easy, medium, hard, theme1, theme2, theme3, play;
     private JLabel mode, difficulty, theme;
     private JButton[] modeArray, difficultyArray, themeArray;
-    private int modeInput, difficultyInput, themeInput;
+    private int modeInput, themeInput;
+    private String difficultyInput;
 
     private Font f;
     /**
@@ -40,6 +41,7 @@ public class StartPage {
         difficultyArray = new JButton[]{easy, medium, hard};
         themeArray = new JButton[]{theme1, theme2, theme3};
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
+        difficultyInput = "";
 
         //setup panel
         panel.setLayout(null);
@@ -90,7 +92,7 @@ public class StartPage {
         easy.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         easy.setBorderPainted(false);
         easy.addActionListener(e -> {
-            difficultyInput = 1;
+            difficultyInput = "easy";
             highLightButton(difficultyArray, easy);
         });
 
@@ -100,7 +102,7 @@ public class StartPage {
         medium.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         medium.setBorderPainted(false);
         medium.addActionListener(e -> {
-            difficultyInput = 2;
+            difficultyInput = "medium";
             highLightButton(difficultyArray, medium);
         });
 
@@ -110,7 +112,7 @@ public class StartPage {
         hard.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         hard.setBorderPainted(false);
         hard.addActionListener(e -> {
-            difficultyInput = 3;
+            difficultyInput = "hard";
             highLightButton(difficultyArray, hard);
         });
 
@@ -150,7 +152,7 @@ public class StartPage {
         play.setBorderPainted(false);
         play.addActionListener(e -> {
             if (isAllSelected()){
-                if (difficultyInput == 1){
+                if (difficultyInput.equals("Easy")){
                     frame.setVisible(false);
                     new PatternGame();
                 }else {
@@ -197,12 +199,6 @@ public class StartPage {
 
     /**
      * change value of difficultyInput. Value of difficultyInput should be restricted by 1, 2 or 3.
-     * @param i 1 for easy, 2 for medium, 3 for hard
-     * @return true if difficultyInput is set properly
-     */
-    public boolean setDifficultyInput(int i){
-        if (i == 1 || i == 2 || i == 3) {
-            this.difficultyInput = i;
             return true;
         } else {
             return false;
@@ -235,7 +231,6 @@ public class StartPage {
      * difficultyInput getter
      * @return value of difficultyInput
      */
-    public int getDifficultyInput(){
         return this.difficultyInput;
     }
 
@@ -269,7 +264,7 @@ public class StartPage {
         if (modeInput == 0){
             JOptionPane.showMessageDialog(new JFrame(), "Please select mode!");
             return false;
-        } else if (difficultyInput == 0){
+        } else if (difficultyInput.equals("")){
             JOptionPane.showMessageDialog(new JFrame(), "Please select difficulty!");
             return false;
         } else if (themeInput == 0){

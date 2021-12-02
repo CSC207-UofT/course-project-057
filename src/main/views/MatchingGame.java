@@ -23,7 +23,6 @@ public class MatchingGame {
     JPanel panel;
     JLabel title, time, totalMove;
     JButton setting;
-    JLabel[] Board;
     Font f1, f2;
 
     /**
