@@ -231,6 +231,7 @@ public class StartPage {
      * difficultyInput getter
      * @return value of difficultyInput
      */
+    public String getDifficultyInput(){
         return this.difficultyInput;
     }
 
