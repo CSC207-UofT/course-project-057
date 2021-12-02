@@ -33,7 +33,7 @@ public class MatchingBoard extends Board {
     @Override
     public ArrayList<Tile> generateTileList() {
         ArrayList<Tile> tileList = new ArrayList<>();
-        int numPairs = this.numPairs;
+        int numPairs = this.getNumPairs();
         for (int i = 0; i < numPairs; i++) {          // loops numPairs times, this value is used for keys
             for (int j = 0; j < 2; j++) {      // adds 2 Tiles of same value to list, this is for creating pairs
                 Tile newTile = new Tile(i);
