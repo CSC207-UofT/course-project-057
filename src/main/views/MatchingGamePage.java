@@ -9,6 +9,8 @@ import usecase.BoardManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -18,13 +20,16 @@ import java.sql.SQLException;
  * move to controller
  */
 
-public class MatchingGame {
-    JFrame frame;
-    JPanel panel;
-    JLabel title, time, totalMove;
-    JButton setting;
-    JLabel[][] tiles;
-    Font f1, f2;
+public class MatchingGamePage {
+    private JFrame frame;
+    private JPanel panel;
+    private JLabel title, time, totalMove;
+    private JButton setting;
+    private JLabel[][] tiles;
+    private Font f1, f2;
+    private static MatchingBoard board;
+    private int rowNum, colNum, boardX, boardY;
+    UserGameInput UGP;
 
     /**
      *
@@ -33,7 +38,7 @@ public class MatchingGame {
      * @param difficulty difficultyInput from StartPage
      * @param theme themeInput from StartPage
      */
-    public MatchingGame(String difficulty, int theme){
+    public MatchingGamePage(String difficulty, int theme){
         //initialize variables
         frame = new JFrame("Memory Game");
         panel = new JPanel();
@@ -43,12 +48,42 @@ public class MatchingGame {
         f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
         tiles = new JLabel[ DifficultyStrategy.valueOf(difficulty).setDimension()[0]]
                 [ DifficultyStrategy.valueOf(difficulty).setDimension()[1]];
-
+        board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
 
         //setup panel
         panel.setLayout(null);
         panel.setBounds(0,0,960,540);
         panel.setBackground(Color.GRAY);
+        panel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                colNum = (int) Math.floor((e.getX()-40)/100.0);
+                rowNum = (int) Math.floor((e.getY()-100)/60.0);
+                if ((colNum >= 0 && colNum <= tiles.length)&&(rowNum >= 0 && rowNum <= tiles[0].length)) {
+                    BoardManager.flipTile(board, rowNum, colNum);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         //setup labels
         title.setBounds(320,30,300,50);
@@ -63,6 +98,7 @@ public class MatchingGame {
                 tiles[i][j] = new JLabel("label " + i + "-"+ j);
                 tiles[i][j].setBounds(40+100*i,100+60*j,100,60);
                 tiles[i][j].setFont(f2);
+                tiles[i][j].setBorder(BorderFactory.createLineBorder(Color.green, 2));
                 panel.add(tiles[i][j]);
             }
         }
@@ -76,6 +112,7 @@ public class MatchingGame {
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
     }
     /**
      * runs a new game mode
@@ -88,8 +125,8 @@ public class MatchingGame {
         // String difficulty = UserGameInput.getUserDifficulty(); // delete, this is moved to StartPage
         int numMoves = 0;
 
-        MatchingBoard board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
 
+        //MatchingBoard board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
         // System.out.println("Input a row number from 1 to " + board.getNumRows()
         //        + " and a column from 1 to " + (board.getNumCols()) + ". Tile must not be revealed.");
         DisplayPrompts.enterMoveDisplay(board.getNumRows(), board.getNumCols());
@@ -102,6 +139,7 @@ public class MatchingGame {
             int[] move2 = BoardManager.Move(board, "Matching", 0);
             int move1Key = board.getTileKey(move1[0], move1[1]);
             int move2Key = board.getTileKey(move2[0], move2[1]);
+
             DisplayPrompts.matchDisplay(move1Key == move2Key);
             if (!(move1Key == move2Key)) {
                 BoardManager.flipTile(board, move1[0], move1[1]);
@@ -150,7 +188,7 @@ public class MatchingGame {
         String guest = sc.nextLine();
         String username = "";
         if (guest.equals("N")) {
-            String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
+            String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
             username = userData[0];
         }
         //run the game mode including start page
@@ -171,5 +209,21 @@ public class MatchingGame {
             System.out.println("Time: " + time);
             System.out.println("Difficulty: " + difficulty);
         }
+    }
+
+    /**
+     * rowNum Getter
+     * @return rowNum
+     */
+    public int getRowNum(){
+        return rowNum;
+    }
+
+    /**
+     * colNum Getter
+     * @return colNum
+     */
+    public int getColNum(){
+      return colNum;
     }
 }

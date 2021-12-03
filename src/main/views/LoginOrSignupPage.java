@@ -4,15 +4,13 @@ import gateways.database.UserSQLDatabase;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 
 /**
  * options to log in or sign up
  */
-public class LoginOrSignup {
+public class LoginOrSignupPage {
     private JFrame frame;
     private JPanel panel;
     private JButton login, signup, guest;
@@ -23,7 +21,7 @@ public class LoginOrSignup {
      * Default constructor
      * setting the GUI patterns
      */
-    public LoginOrSignup() {
+    public LoginOrSignupPage() {
 
         //initialize JComponent
         frame = new JFrame("Memory Game");
@@ -34,22 +32,23 @@ public class LoginOrSignup {
         title = new JLabel("Memory Game");
         background = new JLabel();
         backgroundImg = new ImageIcon(new ImageIcon("src/main/views/pictures/rainbowCat.gif").getImage()
-                .getScaledInstance(540,540,Image.SCALE_DEFAULT));
-        f = new Font(title.getFont().getName(), Font.PLAIN, 25);
+                .getScaledInstance(700,540,Image.SCALE_DEFAULT));
+        f = new Font(title.getFont().getName(), Font.PLAIN, 18);
 
         //set panel
         panel.setLayout(null);
-        panel.setBounds(0,0,540,540);
+        panel.setBounds(0,0,700,540);
 
         //set label
         title.setBounds(180,88,250,55);
-        title.setFont(f);
+        title.setFont(new Font(title.getFont().getName(), Font.BOLD, 32));
+        title.setForeground(Color.WHITE);
 
         background.setIcon(backgroundImg);
         background.setBounds(0,0,540,540);
 
         //set buttons
-        login.setBounds(180,180,180,55);
+        login.setBounds(180,340,150,40);
         login.setFont(f);
         login.setBackground(Color.CYAN);
         login.setOpaque(true);
@@ -57,17 +56,17 @@ public class LoginOrSignup {
         //login method, close current frame and open login window
         login.addActionListener(e -> {
             frame.setVisible(false);
-            new UserLogin();
+            new LoginPage();
         });
 
-        signup.setBounds(180,280,180,55);
+        signup.setBounds(180,390,150,40);
         signup.setFont(f);
         signup.setBackground(Color.CYAN);
         signup.setOpaque(true);
         signup.setBorderPainted(false);
         signup.addActionListener(e -> new SignUpPage());
 
-        guest.setBounds(180,380,180,55);
+        guest.setBounds(180,440,150,40);
         guest.setFont(f);
         guest.setBackground(Color.CYAN);
         guest.setOpaque(true);
@@ -101,12 +100,12 @@ public class LoginOrSignup {
         String input = UserGameInput.promptLoginOrSignup();
         String[] userData = new String[]{};
         if (input.equals("login")) {
-            userData = UserLogin.login(UserDatabase);
+            userData = LoginPage.login(UserDatabase);
         }
         else if (input.equals("sign up")) {
             SignUpPage.signUp(UserDatabase);
             DisplayPrompts.loginDisplay();
-            userData = UserLogin.login(UserDatabase);
+            userData = LoginPage.login(UserDatabase);
         }
         return userData;
     }

@@ -2,8 +2,6 @@ package views;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class StartPage {
     private JFrame frame;
@@ -92,7 +90,7 @@ public class StartPage {
         easy.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         easy.setBorderPainted(false);
         easy.addActionListener(e -> {
-            difficultyInput = "easy";
+            difficultyInput = "Easy";
             highLightButton(difficultyArray, easy);
         });
 
@@ -102,7 +100,7 @@ public class StartPage {
         medium.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         medium.setBorderPainted(false);
         medium.addActionListener(e -> {
-            difficultyInput = "medium";
+            difficultyInput = "Medium";
             highLightButton(difficultyArray, medium);
         });
 
@@ -112,7 +110,7 @@ public class StartPage {
         hard.setBorder(BorderFactory.createLineBorder(Color.WHITE,3));
         hard.setBorderPainted(false);
         hard.addActionListener(e -> {
-            difficultyInput = "hard";
+            difficultyInput = "Hard";
             highLightButton(difficultyArray, hard);
         });
 
@@ -154,10 +152,10 @@ public class StartPage {
             if (isAllSelected()){
                 if (difficultyInput.equals("Easy")){
                     frame.setVisible(false);
-                    new PatternGame();
+                    new PatternGamePage();
                 }else {
                     frame.setVisible(false);
-                    new MatchingGame();
+                    new MatchingGamePage(difficultyInput,themeInput);
                 }
             }
         });
@@ -231,8 +229,7 @@ public class StartPage {
      * difficultyInput getter
      * @return value of difficultyInput
      */
-        return this.difficultyInput;
-    }
+    public String getDifficultyInput() { return this.difficultyInput; }
 
     /**
      * themeInput getter

@@ -16,7 +16,7 @@ import java.util.Random;
  * move to controller
  */
 
-public class PatternGame {
+public class PatternGamePage {
     JFrame frame;
     JPanel panel;
     JLabel title, time;
@@ -28,7 +28,7 @@ public class PatternGame {
      * default constructor
      * generates PatternGame window
      */
-    public PatternGame(){
+    public PatternGamePage(){
         //initialize variables
         frame = new JFrame("Memory Game");
         panel = new JPanel();
@@ -76,7 +76,15 @@ public class PatternGame {
             int[] index = patternBoard.getIndexOfTile(tileList.get(counter-1));
             BoardManager.flipTile(patternBoard, index[0], index[1]);
             System.out.println(patternBoard);
-            System.out.println();
+            try
+            {
+                Thread.sleep(1000);
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+            DisplayPrompts.printSpace();
             BoardManager.unflipAll(patternBoard);
             System.out.println(patternBoard);
             // gets user input
@@ -86,7 +94,7 @@ public class PatternGame {
                 int correctKey = tileList.get(i-1).getKey();
                 if (!(moveKey == correctKey)) {
                     allCorrect = false;
-                    DisplayPrompts.incorrectDisplay();
+//                    DisplayPrompts.incorrectDisplay();
                     break;
                 }
             }
@@ -94,8 +102,14 @@ public class PatternGame {
                 counter++;
             }
         }
-        DisplayPrompts.winGameDisplay();
-        statistics[0] = Long.toString(System.currentTimeMillis() - startTime);
+        if (allCorrect) {
+            DisplayPrompts.winGameDisplay();
+        }
+        else {
+            DisplayPrompts.loseGameDisplay();
+        }
+
+        statistics[0] = Long.toString((System.currentTimeMillis() - startTime)/ 1000);
         statistics[1] = difficulty;
         statistics[2] = Boolean.toString(allCorrect);
         return statistics;
@@ -107,7 +121,7 @@ public class PatternGame {
         PatternGameHistorySQLDatabase PatternHistoryDatabase = new PatternGameHistorySQLDatabase();
 
         //login
-        String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
+        String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
         String username = userData[0];
 
         //run the game mode including start page

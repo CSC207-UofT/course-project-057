@@ -12,7 +12,7 @@ import java.util.Scanner;
  * User can log in with correct combination of username and password
  * Checks if username and password matches from database
  */
-public class UserLogin {
+public class LoginPage {
     private JFrame frame;
     private JPanel panel;
     private JButton login;
@@ -25,7 +25,7 @@ public class UserLogin {
      * default constructor
      * generates userLogin window
      */
-    public UserLogin(){
+    public LoginPage(){
         //initialize the variables
         usernameInput = "";
         passwordInput = "";

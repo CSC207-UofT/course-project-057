@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class UserGameInput {
+    int counter;
     /**
      * Obtains user's input.
      * @param numRows the number of rows in the tileboard
@@ -78,7 +79,7 @@ public class UserGameInput {
         }
         return difficulty;
     }
-
+    // old
     public static String getGameType() {
         String type = "";
         Scanner scanner = new Scanner(System.in);
