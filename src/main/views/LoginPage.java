@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class LoginPage {
     private JFrame frame;
     private JPanel panel;
-    private JButton login;
+    private JButton login, home;
     private JTextField username, password;
     private JLabel title, usernameLabel, passwordLabel;
     private Font f;
@@ -33,6 +33,7 @@ public class LoginPage {
         frame = new JFrame("Memory Game");
         panel = new JPanel();
         login = new JButton("Login");
+        home = new JButton("Home");
         username = new JTextField();
         password = new JTextField();
         title = new JLabel("Memory Game");
@@ -59,6 +60,12 @@ public class LoginPage {
         username.setBounds(250,180,200,45);
         password.setBounds(250,270,200,45);
 
+        //setup home button
+        home.setBounds(30,430, 60,60);
+        home.setBackground(Color.PINK);
+        home.setOpaque(true);
+        home.addActionListener(e -> {new LoginOrSignupPage();});
+
         //setup buttons
         login.setBounds(200,360,180,55);
         login.setBackground(Color.CYAN);
@@ -81,6 +88,7 @@ public class LoginPage {
         panel.add(passwordLabel);
         panel.add(username);
         panel.add(password);
+        panel.add(home);
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
