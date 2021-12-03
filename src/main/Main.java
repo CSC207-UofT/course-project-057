@@ -3,7 +3,6 @@ import gateways.database.UserSQLDatabase;
 import views.*;
 
 import java.sql.SQLException;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -17,7 +16,7 @@ public class Main {
         PatternLeaderboardSQLDatabase PatternLeaderboardSQLDatabase = new PatternLeaderboardSQLDatabase();
         PatternGameHistorySQLDatabase PatternHistorySQLDatabase = new PatternGameHistorySQLDatabase();
 
-        new LoginOrSignup();
+        new LoginOrSignupPage();
         //guest mode?
         Scanner sc =new Scanner(System.in);
         DisplayPrompts.guestMessage();
@@ -27,7 +26,7 @@ public class Main {
         while (!signed){
             if (mode.equals("N")) {
                 //login
-                String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
+                String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
                  username = userData[0];
                 signed = true;
             } else if(mode.equals("Y")) {
@@ -40,7 +39,7 @@ public class Main {
         //run the game mode, testing only
         String [] gameType = StartPage.startPage();
         if (gameType[0].equals("Matching")) {
-            String[] statistics = MatchingGame.runMatchingGame(gameType[1], mode);
+            String[] statistics = MatchingGamePage.runMatchingGame(gameType[1], mode);
             int numMoves = Integer.parseInt(statistics[0]);
             long time = Long.parseLong(statistics[1]);
             String difficulty = statistics[2];
@@ -53,7 +52,7 @@ public class Main {
                 System.out.println("Difficulty: " + difficulty);
             }
         } else {
-            String[] statistics = PatternGame.runPatternGame(gameType[1]);
+            String[] statistics = PatternGamePage.runPatternGame(gameType[1]);
             long time = Long.parseLong(statistics[0]);
             String difficulty = statistics[1];
             if (mode.equals("N")){

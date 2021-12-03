@@ -20,7 +20,7 @@ import java.sql.SQLException;
  * move to controller
  */
 
-public class MatchingGame {
+public class MatchingGamePage {
     private JFrame frame;
     private JPanel panel;
     private JLabel title, time, totalMove;
@@ -28,7 +28,8 @@ public class MatchingGame {
     private JLabel[][] tiles;
     private Font f1, f2;
     private static MatchingBoard board;
-    int rowNum,colNum;
+    private int rowNum, colNum, boardX, boardY;
+    UserGameInput UGP;
 
     /**
      *
@@ -37,7 +38,7 @@ public class MatchingGame {
      * @param difficulty difficultyInput from StartPage
      * @param theme themeInput from StartPage
      */
-    public MatchingGame(String difficulty, int theme){
+    public MatchingGamePage(String difficulty, int theme){
         //initialize variables
         frame = new JFrame("Memory Game");
         panel = new JPanel();
@@ -59,7 +60,7 @@ public class MatchingGame {
                 colNum = (int) Math.floor((e.getX()-40)/100.0);
                 rowNum = (int) Math.floor((e.getY()-100)/60.0);
                 if ((colNum >= 0 && colNum <= tiles.length)&&(rowNum >= 0 && rowNum <= tiles[0].length)) {
-                    JOptionPane.showMessageDialog(new JFrame(), colNum + ", " + rowNum);
+                    BoardManager.flipTile(board, rowNum, colNum);
                 }
             }
 
@@ -187,7 +188,7 @@ public class MatchingGame {
         String guest = sc.nextLine();
         String username = "";
         if (guest.equals("N")) {
-            String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
+            String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
             username = userData[0];
         }
         //run the game mode including start page

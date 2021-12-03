@@ -16,7 +16,7 @@ import java.util.Random;
  * move to controller
  */
 
-public class PatternGame {
+public class PatternGamePage {
     JFrame frame;
     JPanel panel;
     JLabel title, time;
@@ -28,7 +28,7 @@ public class PatternGame {
      * default constructor
      * generates PatternGame window
      */
-    public PatternGame(){
+    public PatternGamePage(){
         //initialize variables
         frame = new JFrame("Memory Game");
         panel = new JPanel();
@@ -121,7 +121,7 @@ public class PatternGame {
         PatternGameHistorySQLDatabase PatternHistoryDatabase = new PatternGameHistorySQLDatabase();
 
         //login
-        String[] userData = LoginOrSignup.loginOrSignup(UserDatabase);
+        String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
         String username = userData[0];
 
         //run the game mode including start page

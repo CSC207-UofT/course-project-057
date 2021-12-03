@@ -6,7 +6,7 @@ import java.sql.*;
 
 import static org.junit.Assert.*;
 
-public class MatchingGameHistorySQLDatabaseTest {
+public class MatchingGamePageHistorySQLDatabaseTest {
     MatchingGameHistorySQLDatabase db;
 
     String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
@@ -30,7 +30,7 @@ public class MatchingGameHistorySQLDatabaseTest {
         }
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement()) {
-            ResultSet results = stmt.executeQuery("SELECT * FROM GameHistory");
+            ResultSet results = stmt.executeQuery("SELECT * FROM MatchingGameHistory");
             while (results.next()) {
                 assertEquals("1", results.getString("GID"));
                 assertEquals("Jun", results.getString("Username"));
