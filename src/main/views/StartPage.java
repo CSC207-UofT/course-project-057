@@ -150,9 +150,9 @@ public class StartPage {
         play.setBorderPainted(false);
         play.addActionListener(e -> {
             if (isAllSelected()){
-                if (difficultyInput.equals("Easy")){
+                if (modeInput == 1){
                     frame.setVisible(false);
-                    new PatternGamePage();
+                    new PatternGamePage(difficultyInput, themeInput);
                 }else {
                     frame.setVisible(false);
                     new MatchingGamePage(difficultyInput,themeInput);

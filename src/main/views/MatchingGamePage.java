@@ -1,5 +1,6 @@
 package views;
 
+import controller.MatchingGame;
 import entity.DifficultyStrategy;
 import gateways.database.MatchingGameHistorySQLDatabase;
 import gateways.database.MatchingLeaderboardSQLDatabase;
@@ -29,7 +30,8 @@ public class MatchingGamePage {
     private Font f1, f2;
     private static MatchingBoard board;
     private int rowNum, colNum, boardX, boardY;
-    UserGameInput UGP;
+    private int counter;
+    private int[] move1, move2;
 
     /**
      *
@@ -44,6 +46,7 @@ public class MatchingGamePage {
         panel = new JPanel();
         title = new JLabel("MEMORY MATCHING");
         time = new JLabel("Time: 00:00");
+        totalMove = new JLabel("");
         f1 = new Font(title.getFont().getName(), Font.PLAIN, 25);//title font
         f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
         tiles = new JLabel[ DifficultyStrategy.valueOf(difficulty).setDimension()[0]]
@@ -57,10 +60,28 @@ public class MatchingGamePage {
         panel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                colNum = (int) Math.floor((e.getX()-40)/100.0);
-                rowNum = (int) Math.floor((e.getY()-100)/60.0);
-                if ((colNum >= 0 && colNum <= tiles.length)&&(rowNum >= 0 && rowNum <= tiles[0].length)) {
-                    BoardManager.flipTile(board, rowNum, colNum);
+                rowNum = (int) Math.floor((e.getX()-40)/100.0);
+                colNum = (int) Math.floor((e.getY()-100)/60.0);
+                if ((rowNum >= 0 && rowNum <= tiles.length)&&(colNum >= 0 && colNum <= tiles[0].length)) {
+                    if(counter%2==0) {
+                        move1 = new int[]{rowNum, colNum};
+                        tiles[rowNum][colNum].setText("Flipped" + board.getTileKey(rowNum, colNum));//#TODO: change this to images later
+                        counter++;
+
+                    }else {
+                        move2 = new int[]{rowNum, colNum};
+                        tiles[rowNum][colNum].setText("Flipped"+ board.getTileKey(rowNum, colNum));//#TODO: change this to images later
+                        if (board.getTileAtIndex(rowNum,colNum).getFlipped()){
+                            tiles[move1[0]][move1[1]].setText("label" + move1[0] + "-"+ move1[1]);
+                            tiles[move2[0]][move2[1]].setText("label" + move2[0] + "-"+ move2[1]);
+                        }else if(MatchingGame.checkMatch(board, move1, move2)){
+                            counter++;
+                        }else {
+                            tiles[move1[0]][move1[1]].setText("label" + move1[0] + "-"+ move1[1]);
+                            tiles[move2[0]][move2[1]].setText("label" + move2[0] + "-"+ move2[1]);
+                            counter++;
+                        }
+                    }
                 }
             }
 
