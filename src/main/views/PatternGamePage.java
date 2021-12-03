@@ -8,6 +8,8 @@ import usecase.BoardManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,30 +19,69 @@ import java.util.Random;
  */
 
 public class PatternGamePage {
-    JFrame frame;
-    JPanel panel;
-    JLabel title, time;
-    JButton setting;
-    JLabel[] Board;
-    Font f1, f2;
+    private JFrame frame;
+    private JPanel panel;
+    private JLabel title, time, totalMove;
+    private JButton setting;
+    private JLabel[][] tiles;
+    private Font f1, f2;
+    private static MatchingBoard board;
+    private int rowNum, colNum, boardX, boardY;
+    UserGameInput UGP;
 
     /**
-     * default constructor
-     * generates PatternGame window
+     *
+     * constructor
+     * generates PatternGame window by selected difficulty and theme
+     * @param difficulty difficultyInput from StartPage
+     * @param theme themeInput from StartPage
      */
-    public PatternGamePage(){
+    public PatternGamePage(String difficulty, int theme){
         //initialize variables
         frame = new JFrame("Memory Game");
         panel = new JPanel();
-        title = new JLabel("PATTERN MEMORY");
+        title = new JLabel("Pattern MEMORY");
         time = new JLabel("Time: 00:00");
         f1 = new Font(title.getFont().getName(), Font.PLAIN, 25);//title font
         f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
+        tiles = new JLabel[ DifficultyStrategy.valueOf(difficulty).setDimension()[0]]
+                [ DifficultyStrategy.valueOf(difficulty).setDimension()[1]];
+        board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
 
         //setup panel
         panel.setLayout(null);
         panel.setBounds(0,0,960,540);
         panel.setBackground(Color.GRAY);
+        panel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                colNum = (int) Math.floor((e.getX()-40)/100.0);
+                rowNum = (int) Math.floor((e.getY()-100)/60.0);
+                if ((colNum >= 0 && colNum <= tiles.length)&&(rowNum >= 0 && rowNum <= tiles[0].length)) {
+                    BoardManager.flipTile(board, rowNum, colNum);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         //setup labels
         title.setBounds(320,30,300,50);
@@ -48,8 +89,17 @@ public class PatternGamePage {
 
         time.setBounds(780,440,100,50);
         time.setForeground(Color.green);
-        //time.setBorder(BorderFactory.createBevelBorder(0,Color.green,Color.green));
         time.setFont(f2);
+
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                tiles[i][j] = new JLabel("label " + i + "-"+ j);
+                tiles[i][j].setBounds(40+100*i,100+60*j,100,60);
+                tiles[i][j].setFont(f2);
+                tiles[i][j].setBorder(BorderFactory.createLineBorder(Color.green, 2));
+                panel.add(tiles[i][j]);
+            }
+        }
 
         //add components and setup frame
         frame.setBounds(0,0,960,540);

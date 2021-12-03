@@ -40,11 +40,11 @@ public enum DifficultyStrategy {
         }
         @Override
         public PatternBoard generatePatternBoard(){
-            return (PatternBoard) getTileBoard(DifficultyStrategy.Easy, "Pattern");
+            return (PatternBoard) getTileBoard(DifficultyStrategy.Medium, "Pattern");
         }
         @Override
         public MatchingBoard generateMatchingBoard(){
-            return (MatchingBoard) getTileBoard(DifficultyStrategy.Easy, "Matching");
+            return (MatchingBoard) getTileBoard(DifficultyStrategy.Medium, "Matching");
         }
     },
     /**
@@ -60,11 +60,11 @@ public enum DifficultyStrategy {
         }
         @Override
         public PatternBoard generatePatternBoard(){
-            return (PatternBoard) getTileBoard(DifficultyStrategy.Easy, "Pattern");
+            return (PatternBoard) getTileBoard(DifficultyStrategy.Hard, "Pattern");
         }
         @Override
         public MatchingBoard generateMatchingBoard(){
-            return (MatchingBoard) getTileBoard(DifficultyStrategy.Easy, "Matching");
+            return (MatchingBoard) getTileBoard(DifficultyStrategy.Hard, "Matching");
         }
     };
 
