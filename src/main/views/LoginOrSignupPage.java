@@ -4,15 +4,13 @@ import gateways.database.UserSQLDatabase;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 
 /**
  * options to log in or sign up
  */
-public class LoginOrSignup {
+public class LoginOrSignupPage {
     private JFrame frame;
     private JPanel panel;
     private JButton login, signup, guest;
@@ -23,7 +21,7 @@ public class LoginOrSignup {
      * Default constructor
      * setting the GUI patterns
      */
-    public LoginOrSignup() {
+    public LoginOrSignupPage() {
 
         //initialize JComponent
         frame = new JFrame("Memory Game");
@@ -58,7 +56,7 @@ public class LoginOrSignup {
         //login method, close current frame and open login window
         login.addActionListener(e -> {
             frame.setVisible(false);
-            new UserLogin();
+            new LoginPage();
         });
 
         signup.setBounds(180,390,150,40);
@@ -102,12 +100,12 @@ public class LoginOrSignup {
         String input = UserGameInput.promptLoginOrSignup();
         String[] userData = new String[]{};
         if (input.equals("login")) {
-            userData = UserLogin.login(UserDatabase);
+            userData = LoginPage.login(UserDatabase);
         }
         else if (input.equals("sign up")) {
             SignUpPage.signUp(UserDatabase);
             DisplayPrompts.loginDisplay();
-            userData = UserLogin.login(UserDatabase);
+            userData = LoginPage.login(UserDatabase);
         }
         return userData;
     }

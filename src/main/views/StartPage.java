@@ -2,8 +2,6 @@ package views;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class StartPage {
     private JFrame frame;
@@ -154,10 +152,10 @@ public class StartPage {
             if (isAllSelected()){
                 if (difficultyInput.equals("Easy")){
                     frame.setVisible(false);
-                    new PatternGame();
+                    new PatternGamePage();
                 }else {
                     frame.setVisible(false);
-                    new MatchingGame(difficultyInput,themeInput);
+                    new MatchingGamePage(difficultyInput,themeInput);
                 }
             }
         });
