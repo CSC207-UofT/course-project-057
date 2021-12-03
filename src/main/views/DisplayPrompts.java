@@ -28,8 +28,8 @@ public class DisplayPrompts {
 
     /**
      * display if a move is invalid
-     * @param getNumRows pass in tileboard.getNumRows()
-     * @param getNumCols pass in tileboard.getNumColumns()
+     * @param getNumRows pass in Board.getNumRows()
+     * @param getNumCols pass in Board.getNumColumns()
      */
     public static void invalidMoveDisplay(int getNumRows, int getNumCols) {
         System.out.println ("Your move is invalid.");
@@ -44,15 +44,29 @@ public class DisplayPrompts {
     }
 
     /**
-     * display when the game ends
+     * display when the user wins
      */
     public static void winGameDisplay() {
         System.out.println("Congratulations! You won the game!");
     }
 
     /**
+     * display when the user loses
+     */
+    public static void loseGameDisplay() {
+        System.out.println("Mistake, too bad! Better luck next time...");
+    }
+
+    /**
+     * prints a large space
+     */
+    public static void printSpace() {
+        System.out.println("\n\n\n\n\n\n");
+    }
+
+    /**
      * display for the user to make a match
-     * @param 'if the user is entering a row number or column number'
+     * @param rowOrCol: if the user is entering a row number or column number
      */
     public static void userMatchMoveDisplay(String rowOrCol) {
         System.out.println("Please enter " + rowOrCol + " number: ");
@@ -60,8 +74,8 @@ public class DisplayPrompts {
 
     /**
      * prompting the user to make a move with a specified number
-     * @param 'if the user is entering a row number or column number'
-     * @param 'the number of moves made'
+     * @param rowOrCol: if the user is entering a row number or column number
+     * @param moveNumber: the number of moves made
      */
     public static void userPatternMoveDisplay(String rowOrCol, String moveNumber) {
         System.out.println("Please enter " + rowOrCol + " number for tile #" + moveNumber);
@@ -101,14 +115,5 @@ public class DisplayPrompts {
     public static void guestMessage() {
         System.out.println("Would you like to play as a guest? (Y/N)");
     }
-
-    /**
-     * Informs the user that they have made the wrong choice
-     */
-    public static void incorrectDisplay() {
-        System.out.println("Your move was incorrect.");
-    }
-
-
 
 }

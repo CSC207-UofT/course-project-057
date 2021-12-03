@@ -76,7 +76,15 @@ public class PatternGamePage {
             int[] index = patternBoard.getIndexOfTile(tileList.get(counter-1));
             BoardManager.flipTile(patternBoard, index[0], index[1]);
             System.out.println(patternBoard);
-            System.out.println();
+            try
+            {
+                Thread.sleep(1000);
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+            DisplayPrompts.printSpace();
             BoardManager.unflipAll(patternBoard);
             System.out.println(patternBoard);
             // gets user input
@@ -86,7 +94,7 @@ public class PatternGamePage {
                 int correctKey = tileList.get(i-1).getKey();
                 if (!(moveKey == correctKey)) {
                     allCorrect = false;
-                    DisplayPrompts.incorrectDisplay();
+//                    DisplayPrompts.incorrectDisplay();
                     break;
                 }
             }
@@ -94,8 +102,14 @@ public class PatternGamePage {
                 counter++;
             }
         }
-        DisplayPrompts.winGameDisplay();
-        statistics[0] = Long.toString(System.currentTimeMillis() - startTime);
+        if (allCorrect) {
+            DisplayPrompts.winGameDisplay();
+        }
+        else {
+            DisplayPrompts.loseGameDisplay();
+        }
+
+        statistics[0] = Long.toString((System.currentTimeMillis() - startTime)/ 1000);
         statistics[1] = difficulty;
         statistics[2] = Boolean.toString(allCorrect);
         return statistics;
