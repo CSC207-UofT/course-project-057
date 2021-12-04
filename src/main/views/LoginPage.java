@@ -65,6 +65,10 @@ public class LoginPage {
         home.setBackground(Color.PINK);
         home.setOpaque(true);
         home.addActionListener(e -> {new LoginOrSignupPage();});
+        /*//Might have to add something here (getter and setter to output the changes)
+        home.addActionListener(e -> {new LoginOrSignupPage();
+            frame.setVisible(false);});
+        */
 
         //setup buttons
         login.setBounds(200,360,180,55);
