@@ -23,9 +23,9 @@ public class UserGameInput {
         boolean done = false;
         while (!done){
             if (gameType.equals("Matching")) {
-                DisplayPrompts.userMatchMoveDisplay("row");
+                System.out.println(DisplayPrompts.userMatchMoveDisplay("row"));
             } else {
-                DisplayPrompts.userPatternMoveDisplay("row", Integer.toString(counter));
+                System.out.println(DisplayPrompts.userPatternMoveDisplay("row", Integer.toString(counter)));
             }
             try {
                 int n = scanner.nextInt();
@@ -41,9 +41,9 @@ public class UserGameInput {
         boolean check = false;
         while (!check){
             if (gameType.equals("Matching")) {
-                DisplayPrompts.userMatchMoveDisplay("column");
+                System.out.println(DisplayPrompts.userMatchMoveDisplay("column"));
             } else {
-                DisplayPrompts.userPatternMoveDisplay("column", Integer.toString(counter));
+                System.out.println(DisplayPrompts.userPatternMoveDisplay("column", Integer.toString(counter)));
             }
             try {
                 int n = scanner.nextInt();
@@ -68,7 +68,7 @@ public class UserGameInput {
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
         while (!done){
-            DisplayPrompts.getDifficultyDisplay();
+            System.out.println(DisplayPrompts.getDifficultyDisplay());
             try {
                 difficulty = scanner.nextLine();
                 if (Objects.equals(difficulty, "Easy") || Objects.equals(difficulty, "Medium")
@@ -88,7 +88,7 @@ public class UserGameInput {
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
         while (!done){
-            DisplayPrompts.getGameTypeDisplay();
+            System.out.println(DisplayPrompts.getGameTypeDisplay());
             try {
                 type = scanner.nextLine();
                 if (Objects.equals(type, "Matching") || Objects.equals(type, "Pattern")){
@@ -111,7 +111,7 @@ public class UserGameInput {
         String method = "";
         boolean valid = false;
         while (!valid) {
-            DisplayPrompts.loginOrSignupDisplay();
+            System.out.println(DisplayPrompts.loginOrSignupDisplay());
             try {
                 method = scanner.nextLine();
                 if (Objects.equals(method, "login") || Objects.equals(method, "sign up")) {

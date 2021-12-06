@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class GameSettingsPage {
     private JFrame frame;
     private JPanel panel;
-    private JButton resume, home;
+    private JButton resume, home, matchingRules, patternRules;
     private JLabel title;
     private Font f;
     private static String usernameInput, passwordInput;
@@ -24,6 +24,8 @@ public class GameSettingsPage {
         panel = new JPanel();
         resume = new JButton("Resume");
         home = new JButton("Home");
+        matchingRules = new JButton("Matching Rules");
+        patternRules = new JButton("Pattern Rules");
         title = new JLabel("Settings");
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
 
@@ -64,6 +66,15 @@ public class GameSettingsPage {
         resume.setBorderPainted(false);
         resume.addActionListener(e ->{frame.setVisible(false);});
 
+        matchingRules.setBounds(180,340,180,55);
+        matchingRules.setBackground(Color.ORANGE);
+        matchingRules.setOpaque(true);
+        matchingRules.setBorderPainted(false);
+
+        patternRules.setBounds(180,340,180,55);
+        patternRules.setBackground(Color.ORANGE);
+        patternRules.setOpaque(true);
+        patternRules.setBorderPainted(false);
         //command for what happens when you click login
         /*
         resume.addActionListener(e -> {
@@ -81,6 +92,8 @@ public class GameSettingsPage {
         panel.add(resume);
         panel.add(title);
         panel.add(home);
+        panel.add(matchingRules);
+        panel.add(patternRules);
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

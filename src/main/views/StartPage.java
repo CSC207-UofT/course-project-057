@@ -275,11 +275,18 @@ public class StartPage {
 
     //old
     public static String[] startPage() {
-        DisplayPrompts.welcomeMessage();
+        System.out.println(DisplayPrompts.welcomeMessage());
         String[] gameType = new String[3];
         gameType[0] = UserGameInput.getGameType();
         gameType[1] = UserGameInput.getUserDifficulty();
         return gameType;
+
+        /**
+         * Matching Game Rules:
+         * 1. Your goal is to match all the tiles!
+         * 2.
+         * Pattern Game Rules:
+         */
     }
 
 }

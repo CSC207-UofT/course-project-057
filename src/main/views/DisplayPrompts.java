@@ -8,11 +8,11 @@ public class DisplayPrompts {
      * display for match vs no match
      * @param match boolean for if a match was made or not
      */
-    public static void matchDisplay (boolean match) {
+    public static String matchDisplay (boolean match) {
         if (match) {
-            System.out.println("Match!");
+            return("Match!");
         } else {
-            System.out.println("No Match");
+            return("No Match");
         }
     }
 
@@ -21,8 +21,8 @@ public class DisplayPrompts {
      * @param getNumRows pass in tileboard.getNumRows()
      * @param getNumCols pass in tileboard.getNumColumns()
      */
-    public static void enterMoveDisplay (int getNumRows, int getNumCols) {
-        System.out.println("Please input a row number from 1 to " + (getNumRows)
+    public static String enterMoveDisplay (int getNumRows, int getNumCols) {
+        return("Please input a row number from 1 to " + (getNumRows)
                 + " and a column from 1 to " + (getNumCols) + ". Tile must not be revealed.");
     }
 
@@ -31,45 +31,44 @@ public class DisplayPrompts {
      * @param getNumRows pass in Board.getNumRows()
      * @param getNumCols pass in Board.getNumColumns()
      */
-    public static void invalidMoveDisplay(int getNumRows, int getNumCols) {
-        System.out.println ("Your move is invalid.");
-        enterMoveDisplay(getNumRows, getNumCols);
+    public static String invalidMoveDisplay(int getNumRows, int getNumCols) {
+        return ("Your move is invalid." + enterMoveDisplay(getNumRows, getNumCols));
     }
 
     /**
      * display for the user to log in
      */
-    public static void loginDisplay () {
-        System.out.println("Please log in with your username and password");
+    public static String loginDisplay () {
+        return("Please log in with your username and password");
     }
 
     /**
      * display when the user wins
      */
-    public static void winGameDisplay() {
-        System.out.println("Congratulations! You won the game!");
+    public static String winGameDisplay() {
+        return("Congratulations! You won the game!");
     }
 
     /**
      * display when the user loses
      */
-    public static void loseGameDisplay() {
-        System.out.println("Mistake, too bad! Better luck next time...");
+    public static String loseGameDisplay() {
+        return("Mistake, too bad! Better luck next time...");
     }
 
     /**
      * prints a large space
      */
-    public static void printSpace() {
-        System.out.println("\n\n\n\n\n\n");
+    public static String printSpace() {
+        return("\n\n\n\n\n\n");
     }
 
     /**
      * display for the user to make a match
      * @param rowOrCol: if the user is entering a row number or column number
      */
-    public static void userMatchMoveDisplay(String rowOrCol) {
-        System.out.println("Please enter " + rowOrCol + " number: ");
+    public static String userMatchMoveDisplay(String rowOrCol) {
+        return("Please enter " + rowOrCol + " number: ");
     }
 
     /**
@@ -77,43 +76,64 @@ public class DisplayPrompts {
      * @param rowOrCol: if the user is entering a row number or column number
      * @param moveNumber: the number of moves made
      */
-    public static void userPatternMoveDisplay(String rowOrCol, String moveNumber) {
-        System.out.println("Please enter " + rowOrCol + " number for tile #" + moveNumber);
+    public static String userPatternMoveDisplay(String rowOrCol, String moveNumber) {
+        return("Please enter " + rowOrCol + " number for tile #" + moveNumber);
     }
 
     /**
      * Login or Sign Up prompt message
      */
-    public static void loginOrSignupDisplay() {
-        System.out.println ("Please enter 'login' to log into an existing account or 'signup' to create a new account.");
+    public static String loginOrSignupDisplay() {
+        return("Please enter 'login' to log into an existing account or 'signup' to create a new account.");
     }
 
     /**
      * prompt to get the user's difficulty
      */
-    public static void getDifficultyDisplay() {
-        System.out.println("Please enter difficulty (Easy, Medium, or Hard)");
+    public static String getDifficultyDisplay() {
+        return("Please enter difficulty (Easy, Medium, or Hard)");
     }
 
     /**
      * prompt to get the user's game type
      */
-    public static void getGameTypeDisplay() {
-        System.out.println("Please enter game type (Matching or Pattern): ");
+    public static String getGameTypeDisplay() {
+        return("Please enter game type (Matching or Pattern): ");
     }
 
     /**
      * welcomes the user to the game
      */
-    public static void welcomeMessage() {
-        System.out.println ("Hello! Welcome to Group 57's Memory Game");
+    public static String welcomeMessage() {
+        return("Hello! Welcome to Group 57's Memory Game");
     }
 
     /**
      * Asks if the user wants to play as a guest
      */
-    public static void guestMessage() {
-        System.out.println("Would you like to play as a guest? (Y/N)");
+    public static String guestMessage() {
+        return("Would you like to play as a guest? (Y/N)");
+    }
+
+    public static String matchingRules() {
+        return ("Matching Rules: " +
+                "1. Your aim is to uncover every pair of tiles. Each tile in the game has another matching tile." +
+                "2. Uncover a tile by clicking on it." +
+                "3. Then, press another tile. " +
+                "4. If the two tiles look the same, you have found a pair!" +
+                "5. If the two tiles are not the same, they will flip back over and you can try again by flipping another tile." +
+                "6. The game ends when all tiles have been uncovered. Good luck and thanks for playing!");
+    }
+
+    public static String patternRules() {
+        return ("Pattern Rules: " +
+                "1. Your aim is to copy the pattern shown on screen." +
+                "2. One tile will uncover. Remember this tile!" +
+                "3. Press the same tile that was just shown to you! " +
+                "4. Another tile will flip." +
+                "5. Press the tile shown in step 2, followed by the tile in step 4." +
+                "6. The next tile will flip. Keep repeating the same pattern if you can remember!" +
+                "7. Good luck and thanks for playing!");
     }
 
 }
