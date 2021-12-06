@@ -245,6 +245,6 @@ public class MatchingGamePage {
      * @return colNum
      */
     public int getColNum(){
-      return colNum;
+        return colNum;
     }
 }
