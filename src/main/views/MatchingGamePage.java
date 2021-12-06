@@ -56,12 +56,13 @@ public class MatchingGamePage {
                 .getScaledInstance(40,40,Image.SCALE_DEFAULT));
         f1 = new Font(title.getFont().getName(), Font.PLAIN, 25);//title font
         f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
-        this.user = user;
+        MatchingGamePage.user = user;
         tiles = new JLabel[ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[0]]
                 [ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[1]];
         board = DifficultyStrategy.valueOf(user.getDifficulty()).generateMatchingBoard();
         theme = user.getTheme();
-        back = new ImageIcon();//get url
+        back = new ImageIcon(new ImageIcon("src/main/views/pictures/theme"+theme+"/imgBack.jpg").getImage()
+                .getScaledInstance(60,60,Image.SCALE_DEFAULT));
         setImg();
 
         //setup settings
@@ -70,7 +71,7 @@ public class MatchingGamePage {
         setting.setIcon(settingImg);
         setting.setBackground(Color.GRAY);
         setting.setOpaque(true);
-        setting.addActionListener(e -> new GameSettingsPage());
+        setting.addActionListener(e -> new GameSettingsPage(user));
 
         //setup panel
         panel.setLayout(null);
@@ -79,10 +80,12 @@ public class MatchingGamePage {
         panel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                rowNum = (int) Math.floor((e.getX()-40)/100.0);
-                colNum = (int) Math.floor((e.getY()-100)/60.0);
-                if ((rowNum >= 0 && rowNum <= tiles.length)&&(colNum >= 0 && colNum <= tiles[0].length)) {
-                    flipTile();
+                if ((e.getX()-40)%160<=60 && (e.getY()-100)%90<=60) {//make sure user click the tile
+                    rowNum = (int) Math.floor((e.getX() - 40) / 160.0);
+                    colNum = (int) Math.floor((e.getY() - 100) / 90.0);
+                    if ((rowNum >= 0 && rowNum <= tiles.length) && (colNum >= 0 && colNum <= tiles[0].length)) {
+                        flipTile();
+                    }
                 }
             }
 
@@ -118,10 +121,10 @@ public class MatchingGamePage {
         //setup JLabel tiles
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
-                tiles[i][j] = new JLabel("label " + i + "-"+ j);
-                tiles[i][j].setBounds(40+100*i,100+60*j,100,60);
+                tiles[i][j] = new JLabel();
+                tiles[i][j].setIcon(back);
+                tiles[i][j].setBounds(40+160*i,100+90*j,60,60);
                 tiles[i][j].setFont(f2);
-                tiles[i][j].setBorder(BorderFactory.createLineBorder(Color.green, 2));
                 panel.add(tiles[i][j]);
             }
         }
@@ -142,14 +145,14 @@ public class MatchingGamePage {
             if (counter % 2 == 0) {//if move number is even then store this move in move1[]
                 move1 = new int[]{rowNum, colNum};
                 BoardManager.flipTile(board, move1[0], move1[1]);
-                tiles[rowNum][colNum].setText("Flipped" + board.getTileKey(rowNum, colNum));//#TODO: change this to image later
+                tiles[rowNum][colNum].setIcon(img[board.getTileKey(rowNum,colNum)]);
             } else {//otherwise, store it move2
                 move2 = new int[]{rowNum, colNum};
                 BoardManager.flipTile(board, move2[0], move2[1]);
-                tiles[rowNum][colNum].setText("Flipped" + board.getTileKey(rowNum, colNum));//#TODO: change this to image later
+                tiles[rowNum][colNum].setIcon(img[board.getTileKey(rowNum,colNum)]);
                 if (!MatchingGame.checkMatch(board, move1, move2)) {
-                    tiles[move1[0]][move1[1]].setText("label" + move1[0] + "-" + move1[1]);
-                    tiles[move2[0]][move2[1]].setText("label" + move2[0] + "-" + move2[1]);
+                    tiles[move1[0]][move1[1]].setIcon(back);
+                    tiles[move2[0]][move2[1]].setIcon(back);
                 }
             }
             counter++;
@@ -164,11 +167,13 @@ public class MatchingGamePage {
         String url ;
         img = new ImageIcon[15];
         for (int i = 0; i < 15; i++) {
-            url = "src/main/views/pictures/theme"+theme+"/img"+i+".jpeg";
-            img[i] = new ImageIcon(url);
+            url = "src/main/views/pictures/theme"+theme+"/img"+i+".jpg";
+            img[i] = new ImageIcon(new ImageIcon(url).getImage()
+                    .getScaledInstance(60,60,Image.SCALE_DEFAULT));
         }
 
     }
+
     /**
      * runs a new game mode
      * @return number of moves, the time and difficulty of the finished game mode
@@ -266,20 +271,5 @@ public class MatchingGamePage {
 //        }
 //    }
 
-    /**
-     * rowNum Getter
-     * @return rowNum
-     */
-    public int getRowNum(){
-        return rowNum;
-    }
-
-    /**
-     * colNum Getter
-     * @return colNum
-     */
-    public int getColNum(){
-        return colNum;
-    }
 }
 

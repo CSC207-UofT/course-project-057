@@ -87,7 +87,7 @@ public class LoginOrSignupPage {
         rules.setBackground(Color.GRAY);
         rules.setOpaque(true);
         rules.setBorderPainted(false);
-        rules.addActionListener(e -> {new GameRulesPage(); frame.setVisible(false);});
+        rules.addActionListener(e -> {new GameRulesPage(user); frame.setVisible(false);});
 
         //add all JComponents to frame and set frame visible
         frame.setSize(540,540);

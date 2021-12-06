@@ -13,7 +13,7 @@ public class StartPage {
     private JButton pattern, matching, easy, medium, hard, theme1, theme2, theme3, play, home;
     private JLabel mode, difficulty, theme;
     private JButton[] modeArray, difficultyArray, themeArray;
-    private User user;
+    private static User user;
 
     private Font f;
     /**
@@ -27,15 +27,15 @@ public class StartPage {
         title = new JLabel("Start Menu");
         mode = new JLabel("Mode");
         difficulty = new JLabel("Difficulty");
-        theme = new JLabel("controller.Theme");
+        theme = new JLabel("Theme");
         pattern = new JButton("Pattern");
         matching = new JButton("Matching");
         easy = new JButton("Easy");
         medium = new JButton("Medium");
         hard = new JButton("Hard");
-        theme1 = new JButton("controller.Theme 1");
-        theme2 = new JButton("controller.Theme 2");
-        theme3 = new JButton("controller.Theme 3");
+        theme1 = new JButton("Theme 1");
+        theme2 = new JButton("Theme 2");
+        theme3 = new JButton("Theme 3");
         play = new JButton("Play!");
         home = new JButton("Home");
         modeArray = new JButton[]{pattern, matching};
@@ -166,7 +166,7 @@ public class StartPage {
         home.setBounds(30,430, 60,60);
         home.setBackground(Color.PINK);
         home.setOpaque(true);
-        home.addActionListener(e -> {new LoginOrSignupPage(); frame.setVisible(false);});
+        home.addActionListener(e -> {new LoginOrSignupPage(user); frame.setVisible(false);});
 
         //add all JComponents to frame and set frame visible
         panel.add(title);
