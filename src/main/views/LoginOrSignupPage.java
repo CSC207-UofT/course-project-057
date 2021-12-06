@@ -1,5 +1,6 @@
 package views;
 
+import entity.User;
 import gateways.database.UserSQLDatabase;
 
 import javax.swing.*;
@@ -17,14 +18,15 @@ public class LoginOrSignupPage {
     private JLabel title, background;
     private Icon backgroundImg;
     private Font f;
+    private static User user;
     /**
      * Default constructor
      * setting the GUI patterns
      */
-    public LoginOrSignupPage() {
+    public LoginOrSignupPage(User user) {
 
         //initialize JComponent
-        frame = new JFrame("Memory Game");
+        frame = new JFrame(user.getUsername());
         panel = new JPanel();
         login = new JButton("Login");
         signup = new JButton("Sign Up");
@@ -34,6 +36,7 @@ public class LoginOrSignupPage {
         backgroundImg = new ImageIcon(new ImageIcon("src/main/views/pictures/rainbowCat.gif").getImage()
                 .getScaledInstance(700,540,Image.SCALE_DEFAULT));
         f = new Font(title.getFont().getName(), Font.PLAIN, 18);
+        LoginOrSignupPage.user = user;
 
         //set panel
         panel.setLayout(null);
@@ -56,7 +59,7 @@ public class LoginOrSignupPage {
         //login method, close current frame and open login window
         login.addActionListener(e -> {
             frame.setVisible(false);
-            new LoginPage();
+            new LoginPage(user);
         });
 
         signup.setBounds(180,390,150,40);
@@ -64,7 +67,7 @@ public class LoginOrSignupPage {
         signup.setBackground(Color.CYAN);
         signup.setOpaque(true);
         signup.setBorderPainted(false);
-        signup.addActionListener(e -> new SignUpPage());
+        signup.addActionListener(e -> new SignUpPage(user));
 
         guest.setBounds(180,440,150,40);
         guest.setFont(f);
@@ -72,8 +75,9 @@ public class LoginOrSignupPage {
         guest.setOpaque(true);
         guest.setBorderPainted(false);
         guest.addActionListener(e -> {
+            LoginOrSignupPage.user.setGuest(true);
             JOptionPane.showMessageDialog(new JFrame(), "Play as guest!");
-            new StartPage();
+            new StartPage(user);
             frame.setVisible(false);
         });
 
@@ -92,24 +96,25 @@ public class LoginOrSignupPage {
     }
     /**
      *
-     * @param UserDatabase the SQL database
      * @return string list of username and password
      * @throws SQLException provides information on a database access error
      */
-    public static String[] loginOrSignup(UserSQLDatabase UserDatabase) throws SQLException {
-        String input = UserGameInput.promptLoginOrSignup();
-        String[] userData = new String[]{};
-        if (input.equals("login")) {
-            userData = LoginPage.login(UserDatabase);
-        }
-        else if (input.equals("sign up")) {
-            SignUpPage.signUp(UserDatabase);
-            System.out.println(DisplayPrompts.loginDisplay());
-            userData = LoginPage.login(UserDatabase);
-        }
-        return userData;
+//    public static String[] loginOrSignup(UserSQLDatabase UserDatabase) throws SQLException {
+//        String input = UserGameInput.promptLoginOrSignup();
+//        String[] userData = new String[]{};
+//        if (input.equals("login")) {
+//            userData = LoginPage.login(UserDatabase);
+//        }
+//        else if (input.equals("sign up")) {
+//            SignUpPage.signUp(UserDatabase);
+//            System.out.println(DisplayPrompts.loginDisplay());
+//            userData = LoginPage.login(UserDatabase);
+//        }
+//        return userData;
+//    }
+
+    public static User getUser() {
+        return LoginOrSignupPage.user;
     }
-
-
 }
 

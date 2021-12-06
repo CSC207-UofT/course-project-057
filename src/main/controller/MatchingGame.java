@@ -15,14 +15,12 @@ import java.util.Scanner;
 
 public class MatchingGame {
     private static String difficulty;
-    private static MatchingBoard board;
     private User user;
     private int numMove;
 
     public MatchingGame(User user,  String difficulty){
         this.user = user;
         MatchingGame.difficulty = difficulty;
-        board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
     }
     /**
      * runs a new game mode
@@ -89,8 +87,7 @@ public class MatchingGame {
     }
 
     public static boolean checkMatch(MatchingBoard board, int[] move1, int[] move2){
-        BoardManager.flipTile(board, move1[0], move1[1]);//implement later
-        BoardManager.flipTile(board, move2[0], move2[1]);
+        //implement later
         int move1Key = board.getTileKey(move1[0], move1[1]);
         int move2Key = board.getTileKey(move2[0], move2[1]);
         if (!(move1Key == move2Key)) {
@@ -102,7 +99,7 @@ public class MatchingGame {
         }
     }
 
-    public static boolean checkEnd(){
+    public static boolean checkEnd(MatchingBoard board){
         return BoardManager.allFlipped(board);
     }
 

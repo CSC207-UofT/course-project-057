@@ -1,5 +1,6 @@
 package views;
 
+import entity.User;
 import gateways.database.UserSQLDatabase;
 
 import javax.swing.*;
@@ -19,13 +20,14 @@ public class LoginPage {
     private JTextField username, password;
     private JLabel title, usernameLabel, passwordLabel;
     private Font f;
+    private static User user;
     private static String usernameInput, passwordInput;
 
     /**
      * default constructor
      * generates userLogin window
      */
-    public LoginPage(){
+    public LoginPage(User user){
         //initialize the variables
         usernameInput = "";
         passwordInput = "";
@@ -40,6 +42,7 @@ public class LoginPage {
         usernameLabel = new JLabel("username: ");
         passwordLabel = new JLabel("password: ");
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
+        this.user = user;
 
         //setup panel
         panel.setLayout(null);
@@ -64,7 +67,7 @@ public class LoginPage {
         home.setBounds(30,430, 60,60);
         home.setBackground(Color.PINK);
         home.setOpaque(true);
-        home.addActionListener(e -> {new LoginOrSignupPage();});
+        home.addActionListener(e -> {new LoginOrSignupPage(user);});
         /*//Might have to add something here (getter and setter to output the changes)
         home.addActionListener(e -> {new LoginOrSignupPage();
             frame.setVisible(false);});
@@ -79,7 +82,7 @@ public class LoginPage {
             usernameInput = username.getText();
             passwordInput = password.getText();
             //#TODO: login
-            new StartPage();
+            new StartPage(user);
             frame.setVisible(false);
         });
 
@@ -102,23 +105,12 @@ public class LoginPage {
      * @param user_database the SQL database
      * @return a string list of username and password
      */
-    public static String[] login(UserSQLDatabase user_database) {
-        Scanner s = new Scanner(System.in);
-        String [] userInput = new String[2];
+    public static boolean login(UserSQLDatabase user_database) {
 
-        System.out.print("Please enter your username: ");
-        userInput[0] = s.next();
+        String [] userInput = new String[]{usernameInput, passwordInput};
 
-        System.out.print("Please enter your password: ");
-        userInput[1] = s.next();
 
-        if (!user_database.checkUsernameAvailable(userInput[0]) &&
-                user_database.checkPassword(userInput[0], userInput[1])) {
-            System.out.println("Login successful");
-        } else {
-            System.out.println("Login unsuccessful, please re-enter your criteria.");
-            login(user_database);
-        }
-        return userInput;
+        return (!user_database.checkUsernameAvailable(userInput[0]) &&
+                user_database.checkPassword(userInput[0], userInput[1]));
     }
 }

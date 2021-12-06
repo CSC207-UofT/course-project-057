@@ -7,7 +7,18 @@ public class User {
      */
     private String username;
     private String password;
+    private boolean guest, playing;
+    private int numMove;
+    private String difficulty;
+    private int mode, theme;
 
+    public User(){
+        username = "";
+        password = "";
+        guest = false;
+        playing = true;
+        difficulty = "";
+    }
     /**
      * constructor for User
      * @param username the username of the user object
@@ -16,6 +27,56 @@ public class User {
     public User (String username, String password) {
         this.username = username;
         this.password = password;
+
+    }
+
+    //add setter and getters
+    public void setNumMove(int numMove) {
+        this.numMove = numMove;
+    }
+
+    public int getNumMove() {
+        return numMove;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public int getTheme() {
+        return theme;
+    }
+
+    public void setTheme(int theme) {
+        this.theme = theme;
+    }
+
+    public boolean isGuest() {
+        return guest;
+    }
+
+    public void setGuest(boolean guest) {
+        this.guest = guest;
+    }
+
+    public boolean isPlaying() {
+        return playing;
+    }
+
+    public void setPlaying(boolean playing) {
+        this.playing = playing;
     }
 
     /**
@@ -46,6 +107,15 @@ public class User {
      */
     public void setPassword (String new_password) {
         this.password = new_password;
+    }
+
+    public User clone(){
+        User clone = new User();
+        clone.setGuest(guest);
+        clone.setPassword(password);
+        clone.setUsername(username);
+        clone.setGuest(guest);
+        return clone;
     }
 
 }

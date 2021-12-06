@@ -1,5 +1,6 @@
 package views;
 
+import entity.User;
 import gateways.database.UserSQLDatabase;
 
 import javax.swing.*;
@@ -12,13 +13,14 @@ public class GameSettingsPage {
     private JButton resume, home, matchingRules, patternRules;
     private JLabel title;
     private Font f;
+    private static User user;
     private static String usernameInput, passwordInput;
 
     /**
      * default constructor
      * generates userLogin window
      */
-    public GameSettingsPage(){
+    public GameSettingsPage(User user){
         //initialize the variables
         frame = new JFrame("Settings");
         panel = new JPanel();
@@ -28,6 +30,7 @@ public class GameSettingsPage {
         patternRules = new JButton("Pattern Rules");
         title = new JLabel("Settings");
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
+        this.user = user;
 
         //setup panel
         panel.setLayout(null);
@@ -56,7 +59,7 @@ public class GameSettingsPage {
         home.setBackground(Color.PINK);
         home.setOpaque(true);
         //Might have to add something here (getter and setter to output the changes)
-        home.addActionListener(e -> {new LoginOrSignupPage();
+        home.addActionListener(e -> {new LoginOrSignupPage(user);
             frame.setVisible(false);});
 
         //setup buttons

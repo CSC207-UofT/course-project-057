@@ -1,5 +1,6 @@
 package views;
 
+import controller.MatchingGame;
 import entity.*;
 import gateways.database.PatternGameHistorySQLDatabase;
 import gateways.database.PatternLeaderboardSQLDatabase;
@@ -26,27 +27,31 @@ public class PatternGamePage {
     private JLabel[][] tiles;
     private Font f1, f2;
     private static MatchingBoard board;
-    private int rowNum, colNum, boardX, boardY;
-    UserGameInput UGP;
+    private int rowNum, colNum;
+    private int counter, theme;
+    private int[] move1, move2;
+    private static User user;
 
     /**
      *
      * constructor
-     * generates PatternGame window by selected difficulty and theme
-     * @param difficulty difficultyInput from StartPage
-     * @param theme themeInput from StartPage
+     * generates MatchingGame window by selected difficulty and theme
+     * @param user user of current game
      */
-    public PatternGamePage(String difficulty, int theme){
+    public PatternGamePage(User user){
         //initialize variables
         frame = new JFrame("Memory Game");
         panel = new JPanel();
-        title = new JLabel("Pattern MEMORY");
+        title = new JLabel("MEMORY MATCHING");
         time = new JLabel("Time: 00:00");
+        totalMove = new JLabel("");
         f1 = new Font(title.getFont().getName(), Font.PLAIN, 25);//title font
         f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
-        tiles = new JLabel[ DifficultyStrategy.valueOf(difficulty).setDimension()[0]]
-                [ DifficultyStrategy.valueOf(difficulty).setDimension()[1]];
-        board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
+        PatternGamePage.user = user;
+        tiles = new JLabel[ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[0]]
+                [ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[1]];
+        board = DifficultyStrategy.valueOf(user.getDifficulty()).generateMatchingBoard();
+        theme = user.getTheme();
 
         //setup panel
         panel.setLayout(null);
@@ -55,10 +60,23 @@ public class PatternGamePage {
         panel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                colNum = (int) Math.floor((e.getX()-40)/100.0);
-                rowNum = (int) Math.floor((e.getY()-100)/60.0);
-                if ((colNum >= 0 && colNum <= tiles.length)&&(rowNum >= 0 && rowNum <= tiles[0].length)) {
-                    BoardManager.flipTile(board, rowNum, colNum);
+                rowNum = (int) Math.floor((e.getX()-40)/100.0);
+                colNum = (int) Math.floor((e.getY()-100)/60.0);
+                if ((rowNum >= 0 && rowNum <= tiles.length)&&(colNum >= 0 && colNum <= tiles[0].length)) {
+                    if (!board.getTileAtIndex(rowNum,colNum).getFlipped()) {//do if the tile clicked has not flipped yet
+                        if (counter % 2 == 0) {//if move number is even then store this move in move1[]
+                            move1 = new int[]{rowNum, colNum};
+                            tiles[rowNum][colNum].setText("Flipped" + board.getTileKey(rowNum, colNum));//#TODO: change this to image later
+                        } else {//otherwise, store it move2
+                            move2 = new int[]{rowNum, colNum};
+                            tiles[rowNum][colNum].setText("Flipped" + board.getTileKey(rowNum, colNum));//#TODO: change this to image later
+                            if (!MatchingGame.checkMatch(board, move1, move2)) {
+                                tiles[move1[0]][move1[1]].setText("label" + move1[0] + "-" + move1[1]);
+                                tiles[move2[0]][move2[1]].setText("label" + move2[0] + "-" + move2[1]);
+                            }
+                        }
+                        counter++;
+                    }
                 }
             }
 
@@ -91,6 +109,7 @@ public class PatternGamePage {
         time.setForeground(Color.green);
         time.setFont(f2);
 
+        //setup JLabel tiles
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
                 tiles[i][j] = new JLabel("label " + i + "-"+ j);
@@ -108,6 +127,7 @@ public class PatternGamePage {
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
     }
 
     public static String[] runPatternGame(String difficulty) {
@@ -165,27 +185,27 @@ public class PatternGamePage {
         return statistics;
     }
 
-    public static void main (String [] args) throws SQLException { // more for testing, can delete
-        UserSQLDatabase UserDatabase = new UserSQLDatabase();
-        PatternLeaderboardSQLDatabase PatternLeaderboardDatabase = new PatternLeaderboardSQLDatabase();
-        PatternGameHistorySQLDatabase PatternHistoryDatabase = new PatternGameHistorySQLDatabase();
-
-        //login
-        String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
-        String username = userData[0];
-
-        //run the game mode including start page
-        String[] gameType = StartPage.startPage();
-        String[] statistics = runPatternGame(gameType[1]); // test
-        long time = Long.parseLong(statistics[0]);
-        String difficulty = statistics[1];
-        if (statistics[2].equals("true")) {
-            Random rand = new Random();
-            Integer GID = rand.nextInt();
-            // Updates the leaderboard
-            PatternHistoryDatabase.addGameHistory(GID, username, (double) (time/1000), difficulty);
-            PatternLeaderboardDatabase.generateLeaderboard(difficulty);
-        }
-        PatternLeaderboardDatabase.generateLeaderboard(difficulty);
-    }
+//    public static void main (String [] args) throws SQLException { // more for testing, can delete
+//        UserSQLDatabase UserDatabase = new UserSQLDatabase();
+//        PatternLeaderboardSQLDatabase PatternLeaderboardDatabase = new PatternLeaderboardSQLDatabase();
+//        PatternGameHistorySQLDatabase PatternHistoryDatabase = new PatternGameHistorySQLDatabase();
+//
+//        //login
+//        String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
+//        String username = userData[0];
+//
+//        //run the game mode including start page
+//        String[] gameType = StartPage.startPage();
+//        String[] statistics = runPatternGame(gameType[1]); // test
+//        long time = Long.parseLong(statistics[0]);
+//        String difficulty = statistics[1];
+//        if (statistics[2].equals("true")) {
+//            Random rand = new Random();
+//            Integer GID = rand.nextInt();
+//            // Updates the leaderboard
+//            PatternHistoryDatabase.addGameHistory(GID, username, (double) (time/1000), difficulty);
+//            PatternLeaderboardDatabase.generateLeaderboard(difficulty);
+//        }
+//        PatternLeaderboardDatabase.generateLeaderboard(difficulty);
+//    }
 }
