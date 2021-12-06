@@ -28,6 +28,7 @@ public class MatchingGamePage {
     private JButton setting;
     private JLabel[][] tiles;
     private Font f1, f2;
+    private Icon settingImg;
     private static MatchingBoard board;
     private int rowNum, colNum, boardX, boardY;
     private int counter;
@@ -47,11 +48,22 @@ public class MatchingGamePage {
         title = new JLabel("MEMORY MATCHING");
         time = new JLabel("Time: 00:00");
         totalMove = new JLabel("");
+        setting = new JButton();
+        settingImg = new ImageIcon(new ImageIcon("src/main/views/pictures/settings.png").getImage()
+                .getScaledInstance(40,40,Image.SCALE_DEFAULT));
         f1 = new Font(title.getFont().getName(), Font.PLAIN, 25);//title font
         f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
         tiles = new JLabel[ DifficultyStrategy.valueOf(difficulty).setDimension()[0]]
                 [ DifficultyStrategy.valueOf(difficulty).setDimension()[1]];
         board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
+
+        //setup settings
+        setting.setBounds(460,460,40,40);
+        setting.setFont(new Font(title.getFont().getName(), Font.BOLD, 15));
+        setting.setIcon(settingImg);
+        setting.setBackground(Color.GRAY);
+        setting.setOpaque(true);
+        setting.addActionListener(e -> new GameSettingsPage());
 
         //setup panel
         panel.setLayout(null);
@@ -124,6 +136,7 @@ public class MatchingGamePage {
         frame.setBounds(0,0,960,540);
         panel.add(title);
         panel.add(time);
+        panel.add(setting);
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -239,7 +252,7 @@ public class MatchingGamePage {
      * @return colNum
      */
     public int getColNum(){
-      return colNum;
+        return colNum;
     }
-
 }
+

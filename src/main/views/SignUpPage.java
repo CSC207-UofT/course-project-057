@@ -23,7 +23,7 @@ public class SignUpPage {
     private JLabel title, usernameLabel, passwordLabel;
     private Font f;
     private static String usernameInput, passwordInput;
-
+ //
     /**
      * default constructor
      * generates SignUpPage window
@@ -67,7 +67,7 @@ public class SignUpPage {
         home.setBounds(30,430, 60,60);
         home.setBackground(Color.PINK);
         home.setOpaque(true);
-        home.addActionListener(e -> {new LoginOrSignupPage();});
+        home.addActionListener(e -> {new LoginOrSignupPage(); frame.setVisible(false);});
 
         //setup buttons
         signup.setBounds(200, 360, 180, 55);
