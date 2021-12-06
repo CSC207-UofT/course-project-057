@@ -7,7 +7,7 @@ public class User {
      */
     private String username;
     private String password;
-    private boolean guest, playing;
+    private boolean guest;
     private int numMove;
     private String difficulty;
     private int mode, theme;
@@ -16,7 +16,6 @@ public class User {
         username = "";
         password = "";
         guest = false;
-        playing = true;
         difficulty = "";
     }
     /**
@@ -71,12 +70,13 @@ public class User {
         this.guest = guest;
     }
 
-    public boolean isPlaying() {
-        return playing;
-    }
-
-    public void setPlaying(boolean playing) {
-        this.playing = playing;
+    public void reset(){
+        username = "";
+        password = "";
+        guest = false;
+        difficulty = "";
+        mode = 0;
+        theme = 0;
     }
 
     /**
@@ -109,8 +109,8 @@ public class User {
         this.password = new_password;
     }
 
-    public User clone(){
-        User clone = new User();
+    public User clone() throws CloneNotSupportedException {
+        User clone = (User) super.clone();
         clone.setGuest(guest);
         clone.setPassword(password);
         clone.setUsername(username);
