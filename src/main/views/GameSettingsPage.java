@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class GameSettingsPage {
     private JFrame frame;
     private JPanel panel;
-    private JButton resume, home, matchingRules, patternRules;
+    private JButton resume, restart, home;
     private JLabel title;
     private Font f;
     private static User user;
@@ -25,9 +25,8 @@ public class GameSettingsPage {
         frame = new JFrame("Settings");
         panel = new JPanel();
         resume = new JButton("Resume");
+        restart = new JButton("Restart");
         home = new JButton("Home");
-        matchingRules = new JButton("Matching Rules");
-        patternRules = new JButton("Pattern Rules");
         title = new JLabel("Settings");
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
         this.user = user;
@@ -63,21 +62,17 @@ public class GameSettingsPage {
             frame.setVisible(false);});
 
         //setup buttons
-        resume.setBounds(180,340,180,55);
+        resume.setBounds(180,280,180,55);
         resume.setBackground(Color.CYAN);
         resume.setOpaque(true);
         resume.setBorderPainted(false);
         resume.addActionListener(e ->{frame.setVisible(false);});
 
-        matchingRules.setBounds(180,340,180,55);
-        matchingRules.setBackground(Color.ORANGE);
-        matchingRules.setOpaque(true);
-        matchingRules.setBorderPainted(false);
-
-        patternRules.setBounds(180,340,180,55);
-        patternRules.setBackground(Color.ORANGE);
-        patternRules.setOpaque(true);
-        patternRules.setBorderPainted(false);
+        restart.setBounds(180,350,180,55);
+        restart.setBackground(Color.CYAN);
+        restart.setOpaque(true);
+        restart.setBorderPainted(false);
+        restart.addActionListener(e ->{new StartPage(user); frame.setVisible(false);});
         //command for what happens when you click login
         /*
         resume.addActionListener(e -> {
@@ -95,8 +90,7 @@ public class GameSettingsPage {
         panel.add(resume);
         panel.add(title);
         panel.add(home);
-        panel.add(matchingRules);
-        panel.add(patternRules);
+        panel.add(restart);
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
