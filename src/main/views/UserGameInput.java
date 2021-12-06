@@ -5,7 +5,10 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class UserGameInput {
-    int counter;
+    private int numMove;
+    private String difficulty, mode;
+
+
     /**
      * Obtains user's input.
      * @param numRows the number of rows in the tileboard

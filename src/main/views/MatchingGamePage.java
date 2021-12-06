@@ -63,24 +63,19 @@ public class MatchingGamePage {
                 rowNum = (int) Math.floor((e.getX()-40)/100.0);
                 colNum = (int) Math.floor((e.getY()-100)/60.0);
                 if ((rowNum >= 0 && rowNum <= tiles.length)&&(colNum >= 0 && colNum <= tiles[0].length)) {
-                    if(counter%2==0) {
-                        move1 = new int[]{rowNum, colNum};
-                        tiles[rowNum][colNum].setText("Flipped" + board.getTileKey(rowNum, colNum));//#TODO: change this to images later
-                        counter++;
-
-                    }else {
-                        move2 = new int[]{rowNum, colNum};
-                        tiles[rowNum][colNum].setText("Flipped"+ board.getTileKey(rowNum, colNum));//#TODO: change this to images later
-                        if (board.getTileAtIndex(rowNum,colNum).getFlipped()){
-                            tiles[move1[0]][move1[1]].setText("label" + move1[0] + "-"+ move1[1]);
-                            tiles[move2[0]][move2[1]].setText("label" + move2[0] + "-"+ move2[1]);
-                        }else if(MatchingGame.checkMatch(board, move1, move2)){
-                            counter++;
-                        }else {
-                            tiles[move1[0]][move1[1]].setText("label" + move1[0] + "-"+ move1[1]);
-                            tiles[move2[0]][move2[1]].setText("label" + move2[0] + "-"+ move2[1]);
-                            counter++;
+                    if (!board.getTileAtIndex(rowNum,colNum).getFlipped()) {//do if the tile clicked has not flipped yet
+                        if (counter % 2 == 0) {//if move number is even then store this move in move1[]
+                            move1 = new int[]{rowNum, colNum};
+                            tiles[rowNum][colNum].setText("Flipped" + board.getTileKey(rowNum, colNum));//#TODO: change this to image later
+                        } else {//otherwise, store it move2
+                            move2 = new int[]{rowNum, colNum};
+                            tiles[rowNum][colNum].setText("Flipped" + board.getTileKey(rowNum, colNum));//#TODO: change this to image later
+                            if (!MatchingGame.checkMatch(board, move1, move2)) {
+                                tiles[move1[0]][move1[1]].setText("label" + move1[0] + "-" + move1[1]);
+                                tiles[move2[0]][move2[1]].setText("label" + move2[0] + "-" + move2[1]);
+                            }
                         }
+                        counter++;
                     }
                 }
             }
@@ -114,6 +109,7 @@ public class MatchingGamePage {
         time.setForeground(Color.green);
         time.setFont(f2);
 
+        //setup JLabel tiles
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
                 tiles[i][j] = new JLabel("label " + i + "-"+ j);
@@ -123,8 +119,6 @@ public class MatchingGamePage {
                 panel.add(tiles[i][j]);
             }
         }
-
-
 
         //add components and setup frame
         frame.setBounds(0,0,960,540);
@@ -247,4 +241,5 @@ public class MatchingGamePage {
     public int getColNum(){
       return colNum;
     }
+
 }
