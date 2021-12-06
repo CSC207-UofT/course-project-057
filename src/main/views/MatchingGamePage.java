@@ -51,6 +51,8 @@ public class MatchingGamePage {
         title = new JLabel("MEMORY MATCHING");
         time = new JLabel("Time: 00:00");
         totalMove = new JLabel("");
+        move1 = new int[]{-1,-1};
+        move2 = new int[]{-1,-1};
         setting = new JButton();
         settingImg = new ImageIcon(new ImageIcon("src/main/views/pictures/settings.png").getImage()
                 .getScaledInstance(40,40,Image.SCALE_DEFAULT));
@@ -66,7 +68,7 @@ public class MatchingGamePage {
         setImg();
 
         //setup settings
-        setting.setBounds(460,460,40,40);
+        setting.setBounds(900,40,40,40);
         setting.setFont(new Font(title.getFont().getName(), Font.BOLD, 15));
         setting.setIcon(settingImg);
         setting.setBackground(Color.GRAY);
@@ -84,7 +86,11 @@ public class MatchingGamePage {
                     rowNum = (int) Math.floor((e.getX() - 40) / 160.0);
                     colNum = (int) Math.floor((e.getY() - 100) / 90.0);
                     if ((rowNum >= 0 && rowNum <= tiles.length) && (colNum >= 0 && colNum <= tiles[0].length)) {
-                        flipTile();
+                        try {
+                            flipTile();
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
             }
@@ -140,21 +146,22 @@ public class MatchingGamePage {
 
     }
 
-    public void flipTile(){
+    public void flipTile() throws InterruptedException {
         if (!board.getTileAtIndex(rowNum,colNum).getFlipped()) {//do if the tile clicked has not flipped yet
             if (counter % 2 == 0) {//if move number is even then store this move in move1[]
+                if (!(move1[0]==-1 && move2[0]==-1)){
+                    if (!MatchingGame.checkMatch(board, move1, move2)) {
+                        tiles[move1[0]][move1[1]].setIcon(back);
+                        tiles[move2[0]][move2[1]].setIcon(back);
+                    }
+                }
                 move1 = new int[]{rowNum, colNum};
                 BoardManager.flipTile(board, move1[0], move1[1]);
-                tiles[rowNum][colNum].setIcon(img[board.getTileKey(rowNum,colNum)]);
             } else {//otherwise, store it move2
                 move2 = new int[]{rowNum, colNum};
                 BoardManager.flipTile(board, move2[0], move2[1]);
-                tiles[rowNum][colNum].setIcon(img[board.getTileKey(rowNum,colNum)]);
-                if (!MatchingGame.checkMatch(board, move1, move2)) {
-                    tiles[move1[0]][move1[1]].setIcon(back);
-                    tiles[move2[0]][move2[1]].setIcon(back);
-                }
             }
+            tiles[rowNum][colNum].setIcon(img[board.getTileKey(rowNum,colNum)]);
             counter++;
             if (MatchingGame.checkEnd(board)){
                 user.setNumMove(counter/2);
@@ -171,7 +178,6 @@ public class MatchingGamePage {
             img[i] = new ImageIcon(new ImageIcon(url).getImage()
                     .getScaledInstance(60,60,Image.SCALE_DEFAULT));
         }
-
     }
 
     /**

@@ -29,7 +29,7 @@ public class GameSettingsPage {
         home = new JButton("Home");
         title = new JLabel("Settings");
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
-        this.user = user;
+        GameSettingsPage.user = user;
 
         //setup panel
         panel.setLayout(null);
@@ -66,13 +66,16 @@ public class GameSettingsPage {
         resume.setBackground(Color.CYAN);
         resume.setOpaque(true);
         resume.setBorderPainted(false);
-        resume.addActionListener(e ->{frame.setVisible(false);});
+        resume.addActionListener(e -> frame.setVisible(false));
 
         restart.setBounds(180,350,180,55);
         restart.setBackground(Color.CYAN);
         restart.setOpaque(true);
         restart.setBorderPainted(false);
-        restart.addActionListener(e ->{new StartPage(user); frame.setVisible(false);});
+        restart.addActionListener(e ->{
+            user.reset();
+            new StartPage(user);
+            frame.setVisible(false);});
         //command for what happens when you click login
         /*
         resume.addActionListener(e -> {
