@@ -14,7 +14,16 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class MatchingGame {
+    private static String difficulty;
+    private static MatchingBoard board;
+    private User user;
+    private int numMove;
 
+    public MatchingGame(User user,  String difficulty){
+        this.user = user;
+        MatchingGame.difficulty = difficulty;
+        board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
+    }
     /**
      * runs a new game mode
      * @return number of moves, the time and difficulty of the finished game mode
@@ -93,11 +102,12 @@ public class MatchingGame {
         }
     }
 
-    public static boolean checkSameTile(int[] move1, int[] move2){
-        return move1[0] == move2[0] && move1[1] == move2[1];
+    public static boolean checkEnd(){
+        return BoardManager.allFlipped(board);
     }
 
-/**
+
+    /**
     public static void main (String [] args) throws SQLException { // more for testing, can delete
         UserSQLDatabase UserDatabase = new UserSQLDatabase();
         MatchingLeaderboardSQLDatabase LeaderboardDatabase = new MatchingLeaderboardSQLDatabase();
