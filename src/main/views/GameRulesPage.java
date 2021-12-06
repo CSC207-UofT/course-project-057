@@ -47,19 +47,28 @@ public class GameRulesPage {
         home.addActionListener(e -> {new LoginOrSignupPage(user);
             frame.setVisible(false);});
 
+        //JOptionPane.showMessageDialog(new JFrame(), DisplayPrompts.winGameDisplay());
+
         //setup buttons
         matchingRules.setBounds(180,220,180,60);
         matchingRules.setFont(f);
         matchingRules.setBackground(Color.ORANGE);
         matchingRules.setOpaque(true);
         matchingRules.setBorderPainted(false);
-        //matchingRules.addActionListener(e->{new DisplayPrompts().matchingRules();}); //todo
+        matchingRules.addActionListener(e->{
+            JOptionPane.showMessageDialog(new JFrame(), DisplayPrompts.matchingRules());
+            frame.setVisible(false);
+            new GameRulesPage(user);});
 
         patternRules.setBounds(180,330,180,60);
         patternRules.setFont(f);
         patternRules.setBackground(Color.ORANGE);
         patternRules.setOpaque(true);
-        patternRules.setBorderPainted(false); //todo
+        patternRules.setBorderPainted(false);
+        patternRules.addActionListener(e->{
+            JOptionPane.showMessageDialog(new JFrame(), DisplayPrompts.patternRules());
+            frame.setVisible(false);
+            new GameRulesPage(user);});
 
         //add all JComponents to frame and set frame visible
         frame.setSize(540,540);

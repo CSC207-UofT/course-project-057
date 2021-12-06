@@ -116,23 +116,23 @@ public class DisplayPrompts {
     }
 
     public static String matchingRules() {
-        return ("Matching Rules: " +
-                "1. Your aim is to uncover every pair of tiles. Each tile in the game has another matching tile." +
-                "2. Uncover a tile by clicking on it." +
-                "3. Then, press another tile. " +
-                "4. If the two tiles look the same, you have found a pair!" +
-                "5. If the two tiles are not the same, they will flip back over and you can try again by flipping another tile." +
+        return ("Matching Rules:\n " +
+                "1. Your aim is to uncover every pair of tiles. Each tile in the game has another matching tile.\n" +
+                "2. Uncover a tile by clicking on it.\n" +
+                "3. Then, press another tile. \n" +
+                "4. If the two tiles look the same, you have found a pair!\n" +
+                "5. If the two tiles are not the same, they will flip back over and you can try again by flipping another tile.\n" +
                 "6. The game ends when all tiles have been uncovered. Good luck and thanks for playing!");
     }
 
     public static String patternRules() {
-        return ("Pattern Rules: " +
-                "1. Your aim is to copy the pattern shown on screen." +
-                "2. One tile will uncover. Remember this tile!" +
-                "3. Press the same tile that was just shown to you! " +
-                "4. Another tile will flip." +
-                "5. Press the tile shown in step 2, followed by the tile in step 4." +
-                "6. The next tile will flip. Keep repeating the same pattern if you can remember!" +
+        return ("Pattern Rules:\n " +
+                "1. Your aim is to copy the pattern shown on screen.\n" +
+                "2. One tile will uncover. Remember this tile!\n" +
+                "3. Press the same tile that was just shown to you! \n" +
+                "4. Another tile will flip.\n" +
+                "5. Press the tile shown in step 2, followed by the tile in step 4.\n" +
+                "6. The next tile will flip. Keep repeating the same pattern if you can remember!\n" +
                 "7. Good luck and thanks for playing!");
     }
 
