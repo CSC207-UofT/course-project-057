@@ -157,12 +157,11 @@ public class MatchingGamePage {
                 }
                 move1 = new int[]{rowNum, colNum};
                 BoardManager.flipTile(board, move1[0], move1[1]);
-                tiles[rowNum][colNum].setIcon(img[board.getTileKey(rowNum,colNum)]);
             } else {//otherwise, store it move2
                 move2 = new int[]{rowNum, colNum};
                 BoardManager.flipTile(board, move2[0], move2[1]);
-                tiles[rowNum][colNum].setIcon(img[board.getTileKey(rowNum,colNum)]);
             }
+            tiles[rowNum][colNum].setIcon(img[board.getTileKey(rowNum,colNum)]);
             counter++;
             if (MatchingGame.checkEnd(board)){
                 user.setNumMove(counter/2);
