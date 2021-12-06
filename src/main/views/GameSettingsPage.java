@@ -9,9 +9,10 @@ import java.util.Scanner;
 public class GameSettingsPage {
     private JFrame frame;
     private JPanel panel;
-    private JButton resume, home, matchingRules, patternRules;
+    private JButton resume, home, restart;
     private JLabel title;
     private Font f;
+    private Icon settingImg;
     private static String usernameInput, passwordInput;
 
     /**
@@ -23,9 +24,8 @@ public class GameSettingsPage {
         frame = new JFrame("Settings");
         panel = new JPanel();
         resume = new JButton("Resume");
+        restart = new JButton( "Restart");
         home = new JButton("Home");
-        matchingRules = new JButton("Matching Rules");
-        patternRules = new JButton("Pattern Rules");
         title = new JLabel("Settings");
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
 
@@ -52,29 +52,29 @@ public class GameSettingsPage {
         password.setBounds(250,270,200,45);
         */
         //setup home button
-        home.setBounds(180,210, 180,55);
+        home.setBounds(30,430, 55,55);
         home.setBackground(Color.PINK);
         home.setOpaque(true);
         //Might have to add something here (getter and setter to output the changes)
         home.addActionListener(e -> {new LoginOrSignupPage();
             frame.setVisible(false);});
 
+        //setup settings button
+
+
         //setup buttons
-        resume.setBounds(180,340,180,55);
+        resume.setBounds(180,220,150,60);
         resume.setBackground(Color.CYAN);
         resume.setOpaque(true);
         resume.setBorderPainted(false);
-        resume.addActionListener(e ->{frame.setVisible(false);});
+        resume.addActionListener(e ->frame.setVisible(false));
 
-        matchingRules.setBounds(180,340,180,55);
-        matchingRules.setBackground(Color.ORANGE);
-        matchingRules.setOpaque(true);
-        matchingRules.setBorderPainted(false);
+        restart.setBounds(180, 330, 150, 60);
+        restart.setBackground(Color.CYAN);
+        restart.setOpaque(true);
+        restart.setBorderPainted(false);
+        restart.addActionListener(e -> {new StartPage(); frame.setVisible(false);});
 
-        patternRules.setBounds(180,340,180,55);
-        patternRules.setBackground(Color.ORANGE);
-        patternRules.setOpaque(true);
-        patternRules.setBorderPainted(false);
         //command for what happens when you click login
         /*
         resume.addActionListener(e -> {
@@ -90,10 +90,9 @@ public class GameSettingsPage {
         frame.setSize(540,540);
         frame.setResizable(false);
         panel.add(resume);
+        panel.add(restart);
         panel.add(title);
         panel.add(home);
-        panel.add(matchingRules);
-        panel.add(patternRules);
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

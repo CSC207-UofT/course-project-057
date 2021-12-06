@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class LoginOrSignupPage {
     private JFrame frame;
     private JPanel panel;
-    private JButton login, signup, guest;
+    private JButton login, signup, guest, rules;
     private JLabel title, background;
     private Icon backgroundImg;
     private Font f;
@@ -30,6 +30,7 @@ public class LoginOrSignupPage {
         signup = new JButton("Sign Up");
         guest = new JButton("Guest");
         title = new JLabel("Memory Game");
+        rules = new JButton("Rules");
         background = new JLabel();
         backgroundImg = new ImageIcon(new ImageIcon("src/main/views/pictures/rainbowCat.gif").getImage()
                 .getScaledInstance(700,540,Image.SCALE_DEFAULT));
@@ -40,7 +41,7 @@ public class LoginOrSignupPage {
         panel.setBounds(0,0,700,540);
 
         //set label
-        title.setBounds(180,88,250,55);
+        title.setBounds(140,88,250,55);
         title.setFont(new Font(title.getFont().getName(), Font.BOLD, 32));
         title.setForeground(Color.WHITE);
 
@@ -77,6 +78,13 @@ public class LoginOrSignupPage {
             frame.setVisible(false);
         });
 
+        rules.setBounds(450,460,80,40);
+        rules.setFont(new Font(title.getFont().getName(), Font.BOLD, 12));
+        rules.setBackground(Color.GRAY);
+        rules.setOpaque(true);
+        rules.setBorderPainted(false);
+        rules.addActionListener(e -> {new GameRulesPage(); frame.setVisible(false);});
+
         //add all JComponents to frame and set frame visible
         frame.setSize(540,540);
         frame.setResizable(false);
@@ -85,6 +93,7 @@ public class LoginOrSignupPage {
         panel.add(login);
         panel.add(signup);
         panel.add(guest);
+        panel.add(rules);
         panel.add(background);
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
