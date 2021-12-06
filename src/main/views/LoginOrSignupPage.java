@@ -104,7 +104,7 @@ public class LoginOrSignupPage {
         }
         else if (input.equals("sign up")) {
             SignUpPage.signUp(UserDatabase);
-            DisplayPrompts.loginDisplay();
+            System.out.println(DisplayPrompts.loginDisplay());
             userData = LoginPage.login(UserDatabase);
         }
         return userData;

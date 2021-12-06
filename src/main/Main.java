@@ -19,7 +19,7 @@ public class Main {
         new LoginOrSignupPage();
         //guest mode?
         Scanner sc =new Scanner(System.in);
-        DisplayPrompts.guestMessage();
+        System.out.println(DisplayPrompts.guestMessage());
         String mode = sc.next();
         boolean signed = false;
         String username = "";
@@ -32,7 +32,7 @@ public class Main {
             } else if(mode.equals("Y")) {
                 signed = true;
             } else {
-                DisplayPrompts.guestMessage();
+                System.out.println(DisplayPrompts.guestMessage());
             }
         }
 
