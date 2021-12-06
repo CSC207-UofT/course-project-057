@@ -10,7 +10,7 @@ public class StartPage {
     private JFrame frame;
     private JPanel panel;
     private JLabel title;
-    private JButton pattern, matching, easy, medium, hard, theme1, theme2, theme3, play;
+    private JButton pattern, matching, easy, medium, hard, theme1, theme2, theme3, play, home;
     private JLabel mode, difficulty, theme;
     private JButton[] modeArray, difficultyArray, themeArray;
     private User user;
@@ -37,6 +37,7 @@ public class StartPage {
         theme2 = new JButton("controller.Theme 2");
         theme3 = new JButton("controller.Theme 3");
         play = new JButton("Play!");
+        home = new JButton("Home");
         modeArray = new JButton[]{pattern, matching};
         difficultyArray = new JButton[]{easy, medium, hard};
         themeArray = new JButton[]{theme1, theme2, theme3};
@@ -162,6 +163,11 @@ public class StartPage {
             }
         });
 
+        home.setBounds(30,430, 60,60);
+        home.setBackground(Color.PINK);
+        home.setOpaque(true);
+        home.addActionListener(e -> {new LoginOrSignupPage(); frame.setVisible(false);});
+
         //add all JComponents to frame and set frame visible
         panel.add(title);
         panel.add(mode);
@@ -176,6 +182,7 @@ public class StartPage {
         panel.add(theme2);
         panel.add(theme3);
         panel.add(play);
+        panel.add(home);
         frame.setSize(960,540);
         frame.setResizable(false);
         frame.add(panel);
@@ -226,12 +233,6 @@ public class StartPage {
         gameType[1] = UserGameInput.getUserDifficulty();
         return gameType;
 
-        /**
-         * Matching Game Rules:
-         * 1. Your goal is to match all the tiles!
-         * 2.
-         * Pattern Game Rules:
-         */
     }
 
 }
