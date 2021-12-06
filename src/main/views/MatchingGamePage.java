@@ -150,7 +150,7 @@ public class MatchingGamePage {
         //MatchingBoard board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
         // System.out.println("Input a row number from 1 to " + board.getNumRows()
         //        + " and a column from 1 to " + (board.getNumCols()) + ". Tile must not be revealed.");
-        DisplayPrompts.enterMoveDisplay(board.getNumRows(), board.getNumCols());
+        System.out.println(DisplayPrompts.enterMoveDisplay(board.getNumRows(), board.getNumCols()));
         System.out.println(board);
         long startTime = System.currentTimeMillis();
 
@@ -161,7 +161,7 @@ public class MatchingGamePage {
             int move1Key = board.getTileKey(move1[0], move1[1]);
             int move2Key = board.getTileKey(move2[0], move2[1]);
 
-            DisplayPrompts.matchDisplay(move1Key == move2Key);
+            System.out.println(DisplayPrompts.matchDisplay(move1Key == move2Key));
             if (!(move1Key == move2Key)) {
                 BoardManager.flipTile(board, move1[0], move1[1]);
                 BoardManager.flipTile(board, move2[0], move2[1]);
@@ -182,7 +182,7 @@ public class MatchingGamePage {
             */
             numMoves++;
         }
-        DisplayPrompts.winGameDisplay();
+        System.out.println(DisplayPrompts.winGameDisplay());
         // System.out.println("Congratulations! You matched all the tiles.");
         statistics[0] = Integer.toString(numMoves);
         statistics[1] = Long.toString(System.currentTimeMillis() - startTime);

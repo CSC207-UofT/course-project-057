@@ -134,7 +134,7 @@ public class PatternGamePage {
             {
                 Thread.currentThread().interrupt();
             }
-            DisplayPrompts.printSpace();
+            System.out.println(DisplayPrompts.printSpace());
             BoardManager.unflipAll(patternBoard);
             System.out.println(patternBoard);
             // gets user input
@@ -153,10 +153,10 @@ public class PatternGamePage {
             }
         }
         if (allCorrect) {
-            DisplayPrompts.winGameDisplay();
+            System.out.println(DisplayPrompts.winGameDisplay());
         }
         else {
-            DisplayPrompts.loseGameDisplay();
+            System.out.println(DisplayPrompts.loseGameDisplay());
         }
 
         statistics[0] = Long.toString((System.currentTimeMillis() - startTime)/ 1000);
