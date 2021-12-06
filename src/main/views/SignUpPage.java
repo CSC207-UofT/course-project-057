@@ -1,5 +1,6 @@
 package views;
 
+import entity.User;
 import gateways.database.UserSQLDatabase;
 import usecase.UserManager;
 
@@ -22,13 +23,14 @@ public class SignUpPage {
     private JTextField username, password;
     private JLabel title, usernameLabel, passwordLabel;
     private Font f;
+    private static User user;
     private static String usernameInput, passwordInput;
- //
+
     /**
      * default constructor
      * generates SignUpPage window
      */
-    public SignUpPage(){
+    public SignUpPage(User user){
         //initialize the variables
         usernameInput = "";
         passwordInput = "";
@@ -42,6 +44,7 @@ public class SignUpPage {
         title = new JLabel("Memory Game");
         usernameLabel = new JLabel("username: ");
         passwordLabel = new JLabel("password: ");
+        this.user = user;
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
 
         //setup panel
@@ -67,7 +70,7 @@ public class SignUpPage {
         home.setBounds(30,430, 60,60);
         home.setBackground(Color.PINK);
         home.setOpaque(true);
-        home.addActionListener(e -> {new LoginOrSignupPage(); frame.setVisible(false);});
+        home.addActionListener(e -> {new LoginOrSignupPage(user);});
 
         //setup buttons
         signup.setBounds(200, 360, 180, 55);
@@ -78,7 +81,7 @@ public class SignUpPage {
             usernameInput = username.getText();
             passwordInput = password.getText();
             //#TODO: signup
-            new StartPage();
+            new StartPage(user);
             frame.setVisible(false);
         });
 

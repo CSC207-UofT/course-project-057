@@ -2,6 +2,7 @@ package views;
 
 import controller.MatchingGame;
 import entity.DifficultyStrategy;
+import entity.User;
 import gateways.database.MatchingGameHistorySQLDatabase;
 import gateways.database.MatchingLeaderboardSQLDatabase;
 import gateways.database.UserSQLDatabase;
@@ -30,18 +31,20 @@ public class MatchingGamePage {
     private Font f1, f2;
     private Icon settingImg;
     private static MatchingBoard board;
-    private int rowNum, colNum, boardX, boardY;
-    private int counter;
+    private int rowNum, colNum;
+    private int counter, theme;
     private int[] move1, move2;
+    private static User user;
+    private Icon[] img;
+    private Icon back;
 
     /**
      *
      * constructor
      * generates MatchingGame window by selected difficulty and theme
-     * @param difficulty difficultyInput from StartPage
-     * @param theme themeInput from StartPage
+     * @param user user of current game
      */
-    public MatchingGamePage(String difficulty, int theme){
+    public MatchingGamePage(User user){
         //initialize variables
         frame = new JFrame("Memory Game");
         panel = new JPanel();
@@ -53,9 +56,14 @@ public class MatchingGamePage {
                 .getScaledInstance(40,40,Image.SCALE_DEFAULT));
         f1 = new Font(title.getFont().getName(), Font.PLAIN, 25);//title font
         f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
-        tiles = new JLabel[ DifficultyStrategy.valueOf(difficulty).setDimension()[0]]
-                [ DifficultyStrategy.valueOf(difficulty).setDimension()[1]];
-        board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
+        MatchingGamePage.user = user;
+        tiles = new JLabel[ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[0]]
+                [ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[1]];
+        board = DifficultyStrategy.valueOf(user.getDifficulty()).generateMatchingBoard();
+        theme = user.getTheme();
+        back = new ImageIcon(new ImageIcon("src/main/views/pictures/theme"+theme+"/imgBack.jpg").getImage()
+                .getScaledInstance(60,60,Image.SCALE_DEFAULT));
+        setImg();
 
         //setup settings
         setting.setBounds(460,460,40,40);
@@ -63,7 +71,7 @@ public class MatchingGamePage {
         setting.setIcon(settingImg);
         setting.setBackground(Color.GRAY);
         setting.setOpaque(true);
-        setting.addActionListener(e -> new GameSettingsPage());
+        setting.addActionListener(e -> new GameSettingsPage(user));
 
         //setup panel
         panel.setLayout(null);
@@ -72,22 +80,11 @@ public class MatchingGamePage {
         panel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                rowNum = (int) Math.floor((e.getX()-40)/100.0);
-                colNum = (int) Math.floor((e.getY()-100)/60.0);
-                if ((rowNum >= 0 && rowNum <= tiles.length)&&(colNum >= 0 && colNum <= tiles[0].length)) {
-                    if (!board.getTileAtIndex(rowNum,colNum).getFlipped()) {//do if the tile clicked has not flipped yet
-                        if (counter % 2 == 0) {//if move number is even then store this move in move1[]
-                            move1 = new int[]{rowNum, colNum};
-                            tiles[rowNum][colNum].setText("Flipped" + board.getTileKey(rowNum, colNum));//#TODO: change this to image later
-                        } else {//otherwise, store it move2
-                            move2 = new int[]{rowNum, colNum};
-                            tiles[rowNum][colNum].setText("Flipped" + board.getTileKey(rowNum, colNum));//#TODO: change this to image later
-                            if (!MatchingGame.checkMatch(board, move1, move2)) {
-                                tiles[move1[0]][move1[1]].setText("label" + move1[0] + "-" + move1[1]);
-                                tiles[move2[0]][move2[1]].setText("label" + move2[0] + "-" + move2[1]);
-                            }
-                        }
-                        counter++;
+                if ((e.getX()-40)%160<=60 && (e.getY()-100)%90<=60) {//make sure user click the tile
+                    rowNum = (int) Math.floor((e.getX() - 40) / 160.0);
+                    colNum = (int) Math.floor((e.getY() - 100) / 90.0);
+                    if ((rowNum >= 0 && rowNum <= tiles.length) && (colNum >= 0 && colNum <= tiles[0].length)) {
+                        flipTile();
                     }
                 }
             }
@@ -124,10 +121,10 @@ public class MatchingGamePage {
         //setup JLabel tiles
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
-                tiles[i][j] = new JLabel("label " + i + "-"+ j);
-                tiles[i][j].setBounds(40+100*i,100+60*j,100,60);
+                tiles[i][j] = new JLabel();
+                tiles[i][j].setIcon(back);
+                tiles[i][j].setBounds(40+160*i,100+90*j,60,60);
                 tiles[i][j].setFont(f2);
-                tiles[i][j].setBorder(BorderFactory.createLineBorder(Color.green, 2));
                 panel.add(tiles[i][j]);
             }
         }
@@ -142,6 +139,41 @@ public class MatchingGamePage {
         frame.setVisible(true);
 
     }
+
+    public void flipTile(){
+        if (!board.getTileAtIndex(rowNum,colNum).getFlipped()) {//do if the tile clicked has not flipped yet
+            if (counter % 2 == 0) {//if move number is even then store this move in move1[]
+                move1 = new int[]{rowNum, colNum};
+                BoardManager.flipTile(board, move1[0], move1[1]);
+                tiles[rowNum][colNum].setIcon(img[board.getTileKey(rowNum,colNum)]);
+            } else {//otherwise, store it move2
+                move2 = new int[]{rowNum, colNum};
+                BoardManager.flipTile(board, move2[0], move2[1]);
+                tiles[rowNum][colNum].setIcon(img[board.getTileKey(rowNum,colNum)]);
+                if (!MatchingGame.checkMatch(board, move1, move2)) {
+                    tiles[move1[0]][move1[1]].setIcon(back);
+                    tiles[move2[0]][move2[1]].setIcon(back);
+                }
+            }
+            counter++;
+            if (MatchingGame.checkEnd(board)){
+                user.setNumMove(counter/2);
+                JOptionPane.showMessageDialog(new JFrame(), DisplayPrompts.winGameDisplay());
+            }
+        }
+    }
+
+    public void setImg(){
+        String url ;
+        img = new ImageIcon[15];
+        for (int i = 0; i < 15; i++) {
+            url = "src/main/views/pictures/theme"+theme+"/img"+i+".jpg";
+            img[i] = new ImageIcon(new ImageIcon(url).getImage()
+                    .getScaledInstance(60,60,Image.SCALE_DEFAULT));
+        }
+
+    }
+
     /**
      * runs a new game mode
      * @return number of moves, the time and difficulty of the finished game mode
@@ -206,53 +238,38 @@ public class MatchingGamePage {
         return statistics;
     }
 
-    public static void main (String [] args) throws SQLException { // more for testing, can delete
-        UserSQLDatabase UserDatabase = new UserSQLDatabase();
-        MatchingLeaderboardSQLDatabase LeaderboardDatabase = new MatchingLeaderboardSQLDatabase();
-        MatchingGameHistorySQLDatabase GameHistoryDatabase = new MatchingGameHistorySQLDatabase();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Running the Matching Game from inside the MatchingGame class.");
-        System.out.println("Would you like to play as a guest? (Y/N)");
-        String guest = sc.nextLine();
-        String username = "";
-        if (guest.equals("N")) {
-            String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
-            username = userData[0];
-        }
-        //run the game mode including start page
-        // String[] gameType = StartPage.startPage();
-        String[] statistics = runMatchingGame("Easy", guest);
-        int numMoves = Integer.parseInt(statistics[0]);
-        long time = Long.parseLong(statistics[1]);
-        String difficulty = statistics[2];
-        if (guest.equals("N")) {
-            Random rand = new Random();
-            Integer GID = rand.nextInt();
-            // Updates the leaderboard
-            GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time / 1000), difficulty);
-            LeaderboardDatabase.generateLeaderboard(difficulty);
-        } else {
-            System.out.println("Memory Matching Game Guest Statistics: ");
-            System.out.println("Number of Moves: " + numMoves);
-            System.out.println("Time: " + time);
-            System.out.println("Difficulty: " + difficulty);
-        }
-    }
+//    public static void main (String [] args) throws SQLException { // more for testing, can delete
+//        UserSQLDatabase UserDatabase = new UserSQLDatabase();
+//        MatchingLeaderboardSQLDatabase LeaderboardDatabase = new MatchingLeaderboardSQLDatabase();
+//        MatchingGameHistorySQLDatabase GameHistoryDatabase = new MatchingGameHistorySQLDatabase();
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Running the Matching Game from inside the MatchingGame class.");
+//        System.out.println("Would you like to play as a guest? (Y/N)");
+//        String guest = sc.nextLine();
+//        String username = "";
+//        if (guest.equals("N")) {
+//            String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
+//            username = userData[0];
+//        }
+//        //run the game mode including start page
+//        // String[] gameType = StartPage.startPage();
+//        String[] statistics = runMatchingGame("Easy", guest);
+//        int numMoves = Integer.parseInt(statistics[0]);
+//        long time = Long.parseLong(statistics[1]);
+//        String difficulty = statistics[2];
+//        if (guest.equals("N")) {
+//            Random rand = new Random();
+//            Integer GID = rand.nextInt();
+//            // Updates the leaderboard
+//            GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time / 1000), difficulty);
+//            LeaderboardDatabase.generateLeaderboard(difficulty);
+//        } else {
+//            System.out.println("Memory Matching Game Guest Statistics: ");
+//            System.out.println("Number of Moves: " + numMoves);
+//            System.out.println("Time: " + time);
+//            System.out.println("Difficulty: " + difficulty);
+//        }
+//    }
 
-    /**
-     * rowNum Getter
-     * @return rowNum
-     */
-    public int getRowNum(){
-        return rowNum;
-    }
-
-    /**
-     * colNum Getter
-     * @return colNum
-     */
-    public int getColNum(){
-        return colNum;
-    }
 }
 

@@ -27,17 +27,16 @@ public class PatternGamePage {
     private Font f1, f2;
     private Icon settingImg;
     private static MatchingBoard board;
-    private int rowNum, colNum, boardX, boardY;
-    UserGameInput UGP;
+    private int rowNum, colNum, theme;
+    User user;
 
     /**
      *
      * constructor
      * generates PatternGame window by selected difficulty and theme
-     * @param difficulty difficultyInput from StartPage
-     * @param theme themeInput from StartPage
+
      */
-    public PatternGamePage(String difficulty, int theme){
+    public PatternGamePage(User user){
         //initialize variables
         frame = new JFrame("Memory Game");
         panel = new JPanel();
@@ -48,9 +47,10 @@ public class PatternGamePage {
                 .getScaledInstance(40,40,Image.SCALE_DEFAULT));
         f1 = new Font(title.getFont().getName(), Font.PLAIN, 25);//title font
         f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
-        tiles = new JLabel[ DifficultyStrategy.valueOf(difficulty).setDimension()[0]]
-                [ DifficultyStrategy.valueOf(difficulty).setDimension()[1]];
-        board = DifficultyStrategy.valueOf(difficulty).generateMatchingBoard();
+        tiles = new JLabel[ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[0]]
+                [ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[1]];
+        board = DifficultyStrategy.valueOf(user.getDifficulty()).generateMatchingBoard();
+        theme = user.getTheme();
 
         //setup settings
         setting.setBounds(460,460,40,40);
@@ -58,7 +58,7 @@ public class PatternGamePage {
         setting.setIcon(settingImg);
         setting.setBackground(Color.GRAY);
         setting.setOpaque(true);
-        setting.addActionListener(e -> new GameSettingsPage());
+        setting.addActionListener(e -> new GameSettingsPage(user));
 
         //setup panel
         panel.setLayout(null);
@@ -178,27 +178,27 @@ public class PatternGamePage {
         return statistics;
     }
 
-    public static void main (String [] args) throws SQLException { // more for testing, can delete
-        UserSQLDatabase UserDatabase = new UserSQLDatabase();
-        PatternLeaderboardSQLDatabase PatternLeaderboardDatabase = new PatternLeaderboardSQLDatabase();
-        PatternGameHistorySQLDatabase PatternHistoryDatabase = new PatternGameHistorySQLDatabase();
-
-        //login
-        String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
-        String username = userData[0];
-
-        //run the game mode including start page
-        String[] gameType = StartPage.startPage();
-        String[] statistics = runPatternGame(gameType[1]); // test
-        long time = Long.parseLong(statistics[0]);
-        String difficulty = statistics[1];
-        if (statistics[2].equals("true")) {
-            Random rand = new Random();
-            Integer GID = rand.nextInt();
-            // Updates the leaderboard
-            PatternHistoryDatabase.addGameHistory(GID, username, (double) (time/1000), difficulty);
-            PatternLeaderboardDatabase.generateLeaderboard(difficulty);
-        }
-        PatternLeaderboardDatabase.generateLeaderboard(difficulty);
-    }
+//    public static void main (String [] args) throws SQLException { // more for testing, can delete
+//        UserSQLDatabase UserDatabase = new UserSQLDatabase();
+//        PatternLeaderboardSQLDatabase PatternLeaderboardDatabase = new PatternLeaderboardSQLDatabase();
+//        PatternGameHistorySQLDatabase PatternHistoryDatabase = new PatternGameHistorySQLDatabase();
+//
+//        //login
+//        String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
+//        String username = userData[0];
+//
+//        //run the game mode including start page
+//        String[] gameType = StartPage.startPage();
+//        String[] statistics = runPatternGame(gameType[1]); // test
+//        long time = Long.parseLong(statistics[0]);
+//        String difficulty = statistics[1];
+//        if (statistics[2].equals("true")) {
+//            Random rand = new Random();
+//            Integer GID = rand.nextInt();
+//            // Updates the leaderboard
+//            PatternHistoryDatabase.addGameHistory(GID, username, (double) (time/1000), difficulty);
+//            PatternLeaderboardDatabase.generateLeaderboard(difficulty);
+//        }
+//        PatternLeaderboardDatabase.generateLeaderboard(difficulty);
+//    }
 }
