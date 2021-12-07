@@ -1,0 +1,5 @@
+**Specification**\
+Our project is a memory card game which allows players to either log in with credentials and play, or play on a guest mode.\
+While in the program, players can select either a memory matching game or a memory pattern game. There is also a difficulty setting which will determine the dimensions of the board. Easy mode displays 6 pairs of tiles in a 3x4 dimension. Medium mode displays 10 pairs of tiles in a 4x5 dimension. Hard mode displays 15 pairs of tiles in a 5x6 dimension. Extra hard mode displays 21 pairs of tiles in a 6x7 dimension.\
+Memory matching requires the user to click on tiles and try to click on pairs in a consecutive order until all pairs are found. Pattern matching involves a pattern of tiles being shown on the screen and having the user repeat the pattern, increasing in length with each round.\
+The game has a timer (and a move counter in the case of Matching), to track these statistics. There are also options to pause and reset the game mode. The game should also have a leaderboard that records the top 10 highest scores among all players. Each game mode and difficulty has its own leaderboard. 
