@@ -1,11 +1,9 @@
 package views;
 
 import entity.User;
-import gateways.database.UserSQLDatabase;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Scanner;
 
 public class GameRulesPage {
     private JFrame frame;

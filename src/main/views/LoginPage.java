@@ -1,13 +1,13 @@
 package views;
 
 import entity.User;
-import gateways.database.UserSQLDatabase;
+import gateways.database.SQLDatabase;
+import usecase.IDatabaseConnection;
+import usecase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Scanner;
+import java.sql.SQLException;
 
 /**
  * User can log in with correct combination of username and password
@@ -22,12 +22,14 @@ public class LoginPage {
     private Font f;
     private static User user;
     private static String usernameInput, passwordInput;
+    private static IDatabaseConnection db = new SQLDatabase();
+    private static UserManager userManager = new UserManager(db);
 
     /**
      * default constructor
      * generates userLogin window
      */
-    public LoginPage(User user){
+    public LoginPage(User user) {
         //initialize the variables
         usernameInput = "";
         passwordInput = "";
@@ -46,48 +48,49 @@ public class LoginPage {
 
         //setup panel
         panel.setLayout(null);
-        panel.setBounds(0,0,540,540);
+        panel.setBounds(0, 0, 540, 540);
         panel.setBackground(Color.GRAY);
 
         //setup labels
-        title.setBounds(180,88,250,55);
+        title.setBounds(180, 88, 250, 55);
         title.setFont(f);
 
-        usernameLabel.setBounds(57,180,150,45);
+        usernameLabel.setBounds(57, 180, 150, 45);
         usernameLabel.setFont(f);
 
-        passwordLabel.setBounds(57,270,150,45);
+        passwordLabel.setBounds(57, 270, 150, 45);
         passwordLabel.setFont(f);
 
         //setup textfields
-        username.setBounds(250,180,200,45);
-        password.setBounds(250,270,200,45);
+        username.setBounds(250, 180, 200, 45);
+        password.setBounds(250, 270, 200, 45);
 
         //setup home button
-        home.setBounds(30,430, 60,60);
+        home.setBounds(30, 430, 60, 60);
         home.setBackground(Color.PINK);
         home.setOpaque(true);
-        home.addActionListener(e -> {new LoginOrSignupPage(user);});
+        home.addActionListener(e -> {
+            new LoginOrSignupPage(user);
+        });
         /*//Might have to add something here (getter and setter to output the changes)
         home.addActionListener(e -> {new LoginOrSignupPage();
             frame.setVisible(false);});
         */
 
         //setup buttons
-        login.setBounds(200,360,180,55);
+        login.setBounds(200, 360, 180, 55);
         login.setBackground(Color.CYAN);
         login.setOpaque(true);
         login.setBorderPainted(false);
         login.addActionListener(e -> {
             usernameInput = username.getText();
             passwordInput = password.getText();
-            //#TODO: login
-            new StartPage(user);
+            logIn(usernameInput, passwordInput);
             frame.setVisible(false);
         });
 
         //add all JComponents to frame and set frame visible
-        frame.setSize(540,540);
+        frame.setSize(540, 540);
         frame.setResizable(false);
         panel.add(login);
         panel.add(title);
@@ -100,17 +103,17 @@ public class LoginPage {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-    /**
-     * login page
-     * @param user_database the SQL database
-     * @return a string list of username and password
-     */
-    public static boolean login(UserSQLDatabase user_database) {
 
-        String [] userInput = new String[]{usernameInput, passwordInput};
-
-
-        return (!user_database.checkUsernameAvailable(userInput[0]) &&
-                user_database.checkPassword(userInput[0], userInput[1]));
+    public void logIn(String username, String password) {
+        // helper function that check if inputted username is available, signs up if true
+        if (userManager.checkPassword(username, password)) {
+            JOptionPane.showMessageDialog(new JFrame(), "Log-in successful.");
+            user.setUsername(username);
+            user.setPassword(password);
+            new StartPage(user);
+        } else {
+            JOptionPane.showMessageDialog(new JFrame(), "Username or password incorrect! Please try again.");
+            new LoginPage(user);
+        }
     }
 }

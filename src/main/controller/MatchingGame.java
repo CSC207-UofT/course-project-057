@@ -1,17 +1,7 @@
 package controller;
 
 import entity.*;
-import gateways.database.MatchingGameHistorySQLDatabase;
-import gateways.database.MatchingLeaderboardSQLDatabase;
-import gateways.database.UserSQLDatabase;
 import usecase.BoardManager;
-import views.DisplayPrompts;
-import views.LoginOrSignupPage;
-import views.MatchingGamePage;
-
-import java.sql.SQLException;
-import java.util.Random;
-import java.util.Scanner;
 
 public class MatchingGame {
     private static String difficulty;

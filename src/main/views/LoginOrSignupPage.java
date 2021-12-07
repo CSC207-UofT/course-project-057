@@ -1,7 +1,6 @@
 package views;
 
 import entity.User;
-import gateways.database.UserSQLDatabase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,7 +58,7 @@ public class LoginOrSignupPage {
         login.setBorderPainted(false);
         //login method, close current frame and open login window
         login.addActionListener(e -> {
-            frame.setVisible(false);
+            frame.dispose();
             new LoginPage(user);
         });
 
@@ -68,7 +67,11 @@ public class LoginOrSignupPage {
         signup.setBackground(Color.CYAN);
         signup.setOpaque(true);
         signup.setBorderPainted(false);
-        signup.addActionListener(e -> new SignUpPage(user));
+        //signup method, close current frame and open login window
+        signup.addActionListener(e -> {
+            frame.dispose();
+            new SignUpPage(user);
+        });
 
         guest.setBounds(180,440,150,40);
         guest.setFont(f);

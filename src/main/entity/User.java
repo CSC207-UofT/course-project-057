@@ -9,24 +9,22 @@ public class User {
     private String password;
     private boolean guest;
     private int numMove;
+    private double time;
     private String difficulty;
     private int mode, theme;
 
-    public User(){
-        username = "";
-        password = "";
-        guest = false;
-        difficulty = "";
-    }
     /**
      * constructor for User
      * @param username the username of the user object
      * @param password the password of the user object
      */
-    public User (String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-
+        this.guest = false;
+        this.numMove = 0;
+        this.time = 0.0;
+        this.difficulty = "";
     }
 
     //add setter and getters
@@ -45,6 +43,10 @@ public class User {
     public String getDifficulty() {
         return difficulty;
     }
+
+    public void setTime(double time) { this.time = time; }
+
+    public double getTime() { return time; }
 
     public void setMode(int mode) {
         this.mode = mode;
@@ -75,6 +77,7 @@ public class User {
         password = "";
         guest = false;
         difficulty = "";
+        time = 0.0;
         mode = 0;
         theme = 0;
     }

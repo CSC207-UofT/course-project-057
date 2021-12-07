@@ -1,10 +1,9 @@
 import entity.User;
 import gateways.database.*;
-import gateways.database.UserSQLDatabase;
+import gateways.database.SQLDatabase;
 import views.*;
 
 import java.sql.SQLException;
-import java.util.Scanner;
 
 /**
  * runs the whole program - add test here
@@ -12,13 +11,13 @@ import java.util.Scanner;
 public class Main {
     private static User user;
     public static void main (String [] args) throws SQLException {
-        UserSQLDatabase UserDatabase = new UserSQLDatabase();
+        SQLDatabase UserDatabase = new SQLDatabase();
         MatchingLeaderboardSQLDatabase MatchingLeaderboardSQLDatabase = new MatchingLeaderboardSQLDatabase();
         MatchingGameHistorySQLDatabase GameHistoryDatabase = new MatchingGameHistorySQLDatabase();
         PatternLeaderboardSQLDatabase PatternLeaderboardSQLDatabase = new PatternLeaderboardSQLDatabase();
         PatternGameHistorySQLDatabase PatternHistorySQLDatabase = new PatternGameHistorySQLDatabase();
 
-        user = new User();
+        user = new User("", "");
         new LoginOrSignupPage(user);
 
         //guest mode?
