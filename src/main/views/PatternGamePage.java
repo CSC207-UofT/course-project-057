@@ -1,25 +1,20 @@
 package views;
 
 import entity.*;
-import gateways.database.PatternGameHistorySQLDatabase;
-import gateways.database.PatternLeaderboardSQLDatabase;
-import gateways.database.UserSQLDatabase;
 import usecase.BoardManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * move to controller
  */
 
 public class PatternGamePage {
-    private JFrame frame;
+    static JFrame frame1;
     private JPanel panel;
     private JLabel title, time, totalMove;
     private JButton setting;
@@ -38,7 +33,7 @@ public class PatternGamePage {
      */
     public PatternGamePage(User user){
         //initialize variables
-        frame = new JFrame("Memory Game");
+        frame1 = new JFrame("Memory Game");
         panel = new JPanel();
         title = new JLabel("Pattern MEMORY");
         time = new JLabel("Time: 00:00");
@@ -58,7 +53,7 @@ public class PatternGamePage {
         setting.setIcon(settingImg);
         setting.setBackground(Color.GRAY);
         setting.setOpaque(true);
-        setting.addActionListener(e -> new GameSettingsPage(user));
+        setting.addActionListener(e -> new MatchingGameSettingsPage(user));
 
         //setup panel
         panel.setLayout(null);
@@ -114,13 +109,13 @@ public class PatternGamePage {
         }
 
         //add components and setup frame
-        frame.setBounds(0,0,960,540);
+        frame1.setBounds(0,0,960,540);
         panel.add(title);
         panel.add(time);
         panel.add(setting);
-        frame.add(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        frame1.add(panel);
+        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame1.setVisible(true);
     }
 
     public static String[] runPatternGame(String difficulty) {

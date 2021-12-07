@@ -1,14 +1,13 @@
 package views;
 
 import entity.User;
-import gateways.database.UserSQLDatabase;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Scanner;
 
-public class GameSettingsPage {
-    private JFrame frame;
+
+public class MatchingGameSettingsPage {
+    private JFrame frame2;
     private JPanel panel;
     private JButton resume, restart, home;
     private JLabel title;
@@ -20,16 +19,16 @@ public class GameSettingsPage {
      * default constructor
      * generates userLogin window
      */
-    public GameSettingsPage(User user){
+    public MatchingGameSettingsPage(User user){
         //initialize the variables
-        frame = new JFrame("Settings");
+        frame2 = new JFrame("Settings");
         panel = new JPanel();
         resume = new JButton("Resume");
         restart = new JButton("Restart");
         home = new JButton("Home");
         title = new JLabel("Settings");
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
-        GameSettingsPage.user = user;
+        MatchingGameSettingsPage.user = user;
 
         //setup panel
         panel.setLayout(null);
@@ -58,15 +57,18 @@ public class GameSettingsPage {
         home.setBackground(Color.PINK);
         home.setOpaque(true);
         //Might have to add something here (getter and setter to output the changes)
-        home.addActionListener(e -> {new LoginOrSignupPage(user);
-            frame.setVisible(false);});
+        home.addActionListener(e -> {
+            MatchingGamePage.frame1.dispose();
+            frame2.dispose();
+            new LoginOrSignupPage(user);
+            frame2.setVisible(false);});
 
         //setup buttons
         resume.setBounds(180,280,180,55);
         resume.setBackground(Color.CYAN);
         resume.setOpaque(true);
         resume.setBorderPainted(false);
-        resume.addActionListener(e -> frame.setVisible(false));
+        resume.addActionListener(e -> frame2.setVisible(false));
 
         restart.setBounds(180,350,180,55);
         restart.setBackground(Color.CYAN);
@@ -74,8 +76,9 @@ public class GameSettingsPage {
         restart.setBorderPainted(false);
         restart.addActionListener(e ->{
             user.reset();
+            MatchingGamePage.frame1.dispose();
             new StartPage(user);
-            frame.setVisible(false);});
+            frame2.setVisible(false);});
         //command for what happens when you click login
         /*
         resume.addActionListener(e -> {
@@ -88,14 +91,14 @@ public class GameSettingsPage {
         */
 
         //add all JComponents to frame and set frame visible
-        frame.setSize(540,540);
-        frame.setResizable(false);
+        frame2.setSize(540,540);
+        frame2.setResizable(false);
         panel.add(resume);
         panel.add(title);
         panel.add(home);
         panel.add(restart);
-        frame.add(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        frame2.add(panel);
+        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame2.setVisible(true);
     }
 }

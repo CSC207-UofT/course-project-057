@@ -49,32 +49,32 @@ public class MatchingLeaderboardSQLDatabase {
         }
     }
 
-    public static void main (String[] args) throws SQLException {
+    //public static void main (String[] args) throws SQLException {
         //TODO: Test methods
-        String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
-        String USER = "postgres";
-        String PASS = "Password";
+        //String DB_URL = "jdbc:postgresql://localhost:5432/group57database";
+        //String USER = "postgres";
+        //String PASS = "Password";
 
 
-        MatchingGameHistorySQLDatabase db = new MatchingGameHistorySQLDatabase();
-        db.createTable();
-        db.addGameHistory(1, "Jun", 12, 30.5, "easy");
-        db.addGameHistory(2, "Akansha", 20, 50.0, "medium");
-        db.addGameHistory(3, "Jun", 10, 29.0, "easy");
-        db.addGameHistory(4, "Akansha", 10, 29.0, "easy");
-        db.addGameHistory(5, "Chris", 12, 60.4, "hard");
-        db.addGameHistory(6, "Chris", 16, 62.4, "hard");
-        db.addGameHistory(7, "Jun", 26, 29.4, "hard");
-        db.addGameHistory(8, "Akansha", 9, 30.2, "easy");
-        db.addGameHistory(9, "Iris", 30, 20.2, "medium");
-        db.addGameHistory(10, "Koji", 30, 30.2, "medium");
+       // MatchingGameHistorySQLDatabase db = new MatchingGameHistorySQLDatabase();
+        //db.createTable();
+        //db.addGameHistory(1, "Jun", 12, 30.5, "easy");
+        //db.addGameHistory(2, "Akansha", 20, 50.0, "medium");
+        //db.addGameHistory(3, "Jun", 10, 29.0, "easy");
+        //db.addGameHistory(4, "Akansha", 10, 29.0, "easy");
+       //db.addGameHistory(5, "Chris", 12, 60.4, "hard");
+        //db.addGameHistory(6, "Chris", 16, 62.4, "hard");
+        //db.addGameHistory(7, "Jun", 26, 29.4, "hard");
+        //db.addGameHistory(8, "Akansha", 9, 30.2, "easy");
+       // db.addGameHistory(9, "Iris", 30, 20.2, "medium");
+        //db.addGameHistory(10, "Koji", 30, 30.2, "medium");
 
-        MatchingLeaderboardSQLDatabase lb = new MatchingLeaderboardSQLDatabase();
-        System.out.println("easy");
-        lb.generateLeaderboard("easy");
-        System.out.println("medium");
-        lb.generateLeaderboard("medium");
-        System.out.println("hard");
-        lb.generateLeaderboard("hard");
+        //MatchingLeaderboardSQLDatabase lb = new MatchingLeaderboardSQLDatabase();
+        //System.out.println("easy");
+       // lb.generateLeaderboard("easy");
+       // System.out.println("medium");
+        //lb.generateLeaderboard("medium");
+       // System.out.println("hard");
+        //lb.generateLeaderboard("hard");
     }
-}
+

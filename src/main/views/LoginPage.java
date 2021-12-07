@@ -1,13 +1,13 @@
 package views;
 
 import entity.User;
-import gateways.database.UserSQLDatabase;
+import gateways.database.SQLDatabase;
+import usecase.IDatabaseConnection;
+import usecase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Scanner;
+import java.sql.SQLException;
 
 /**
  * User can log in with correct combination of username and password
@@ -22,6 +22,8 @@ public class LoginPage {
     private Font f;
     private static User user;
     private static String usernameInput, passwordInput;
+    private static IDatabaseConnection db = new SQLDatabase();
+    private static UserManager userManager = new UserManager(db);
 
     /**
      * default constructor
@@ -83,8 +85,7 @@ public class LoginPage {
         login.addActionListener(e -> {
             usernameInput = username.getText();
             passwordInput = password.getText();
-            //#TODO: login
-            new StartPage(user);
+            logIn(usernameInput, passwordInput);
             frame.setVisible(false);
         });
 
@@ -101,5 +102,18 @@ public class LoginPage {
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+    }
+
+    public void logIn(String username, String password) {
+        // helper function that check if inputted username is available, signs up if true
+        if (userManager.checkPassword(username, password)) {
+            JOptionPane.showMessageDialog(new JFrame(), "Log-in successful.");
+            user.setUsername(username);
+            user.setPassword(password);
+            new StartPage(user);
+        } else {
+            JOptionPane.showMessageDialog(new JFrame(), "Username or password incorrect! Please try again.");
+            new LoginPage(user);
+        }
     }
 }

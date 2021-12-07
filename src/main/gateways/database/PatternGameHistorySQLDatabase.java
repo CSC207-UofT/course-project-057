@@ -3,7 +3,6 @@ package gateways.database;
 import java.sql.*;
 
 // inheritance -> if it doesn't work, put in design doc
-
 /**
  * Database class
  * Holds all games played (Game ID, username, total moves, time, difficulty)
@@ -67,3 +66,4 @@ public class PatternGameHistorySQLDatabase {
         }
     }
 }
+

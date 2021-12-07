@@ -18,30 +18,6 @@ public class MatchingGameHistorySQLDatabase {
     Statement stmt = null;
     ResultSet rs = null;
 
-    /**
-     * This method creates a new table 'GameHistory'
-     * @throws SQLException provides information on a database access error
-     */
-    public void createTable() throws SQLException {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class not found " + e);
-        }
-        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement stmt = conn.createStatement();) {
-            // Removes the table 'GameHistory' if it already exists in the gateways.database
-            stmt.executeUpdate("DROP TABLE IF EXISTS MatchingGameHistory");
-            // Create a table called 'GameHistory' that stores user information
-            stmt.executeUpdate("CREATE TABLE MatchingGameHistory (GID INT NOT NULL, Username TEXT, TotalMoves INT, " +
-                    "Time FLOAT, Difficulty TEXT, PRIMARY KEY (GID))");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            try { if (conn != null) conn.close(); } catch (Exception e) {};
-        }
-    }
 
     /**
      * This method adds a game record to the game history database

@@ -1,16 +1,13 @@
 package views;
 
 import entity.User;
-import gateways.database.UserSQLDatabase;
+import gateways.database.SQLDatabase;
 import usecase.IDatabaseConnection;
 import usecase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 /**
  * option to sign up for a new account
@@ -26,7 +23,7 @@ public class SignUpPage {
     private Font f;
     private static User user;
     private static String usernameInput, passwordInput;
-    private static IDatabaseConnection db = new UserSQLDatabase();
+    private static IDatabaseConnection db = new SQLDatabase();
     private static UserManager userManager = new UserManager(db);
 
     /**
@@ -111,14 +108,14 @@ public class SignUpPage {
             JOptionPane.showMessageDialog(new JFrame(), "Username Available! Sign up successful.");
             user.setUsername(username);
             user.setPassword(password);
-            new StartPage(user);
+            new LoginPage(user);
             try {
                 userManager.createUser(user);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         } else {
-            JOptionPane.showMessageDialog(new JFrame(), "Username Unavailable! Select another username.");
+            JOptionPane.showMessageDialog(new JFrame(), "Username Unavailable! Please select another username.");
             new SignUpPage(user);
         }
     }
