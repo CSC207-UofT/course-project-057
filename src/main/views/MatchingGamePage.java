@@ -8,6 +8,8 @@ import usecase.BoardManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -25,6 +27,7 @@ public class MatchingGamePage {
     private Icon settingImg;
     private static MatchingBoard board;
     private int rowNum, colNum;
+    private Timer timer;
     private int counter, theme;
     private int[] move1, move2;
     private static User user;
@@ -42,7 +45,7 @@ public class MatchingGamePage {
         frame1 = new JFrame("Memory Game");
         panel = new JPanel();
         title = new JLabel("MEMORY MATCHING");
-        time = new JLabel("Time: 00:00");
+        time = new JLabel();
         totalMove = new JLabel("");
         move1 = new int[]{-1,-1};
         move2 = new int[]{-1,-1};
@@ -115,7 +118,21 @@ public class MatchingGamePage {
         title.setBounds(320,30,300,50);
         title.setFont(f1);
 
-        time.setBounds(780,440,100,50);
+        // for timer
+        ActionListener listener = new ActionListener() {
+            final long start = System.currentTimeMillis();
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long elapsed = System.currentTimeMillis() - start;
+                time.setText(((elapsed / (1000*60*60)) % 24) + ":" + ((elapsed / (1000*60)) % 60) + ":" + ((elapsed / 1000) % 60));
+                if (MatchingGame.checkEnd(board)) {
+                    timer.stop();
+                }
+            }
+        };
+        timer = new Timer(1000, listener); // 1 sec
+        timer.start();
+        time.setBounds(800,440,100,50);
         time.setForeground(Color.green);
         time.setFont(f2);
 

@@ -7,7 +7,7 @@ public class MatchingGame {
     private static String difficulty;
     private User user;
 
-    public MatchingGame(User user,  String difficulty){
+    public MatchingGame(User user, String difficulty){
         this.user = user;
         MatchingGame.difficulty = difficulty;
     }

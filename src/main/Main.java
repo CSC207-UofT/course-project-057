@@ -10,7 +10,7 @@ import java.sql.SQLException;
  */
 public class Main {
     private static User user;
-    public static void main (String [] args) throws SQLException {
+    public static void main (String [] args) throws SQLException, InterruptedException {
         SQLDatabase UserDatabase = new SQLDatabase();
         MatchingLeaderboardSQLDatabase MatchingLeaderboardSQLDatabase = new MatchingLeaderboardSQLDatabase();
         MatchingGameHistorySQLDatabase GameHistoryDatabase = new MatchingGameHistorySQLDatabase();
@@ -19,6 +19,8 @@ public class Main {
 
         user = new User("", "");
         new LoginOrSignupPage(user);
+
+        Thread.sleep(5000);
 
         //guest mode?
 //        Scanner sc =new Scanner(System.in);
