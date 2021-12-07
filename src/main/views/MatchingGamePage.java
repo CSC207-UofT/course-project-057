@@ -46,7 +46,7 @@ public class MatchingGamePage {
         panel = new JPanel();
         title = new JLabel("MEMORY MATCHING");
         time = new JLabel();
-        totalMove = new JLabel("");
+        totalMove = new JLabel();
         move1 = new int[]{-1,-1};
         move2 = new int[]{-1,-1};
         setting = new JButton();
@@ -125,16 +125,21 @@ public class MatchingGamePage {
             public void actionPerformed(ActionEvent e) {
                 long elapsed = System.currentTimeMillis() - start;
                 time.setText(((elapsed / (1000*60*60)) % 24) + ":" + ((elapsed / (1000*60)) % 60) + ":" + ((elapsed / 1000) % 60));
+                totalMove.setText(Integer.toString(user.getNumMove()));
                 if (MatchingGame.checkEnd(board)) {
                     timer.stop();
                 }
             }
         };
-        timer = new Timer(1000, listener); // 1 sec
+        timer = new Timer(500, listener); // 0.5 sec
         timer.start();
-        time.setBounds(800,440,100,50);
+        time.setBounds(890,440,100,50);
         time.setForeground(Color.green);
         time.setFont(f2);
+
+        totalMove.setBounds(890,400,100,50);
+        totalMove.setForeground(Color.green);
+        totalMove.setFont(f2);
 
         //setup JLabel tiles
         for (int i = 0; i < tiles.length; i++) {
@@ -152,6 +157,7 @@ public class MatchingGamePage {
         panel.add(title);
         panel.add(time);
         panel.add(setting);
+        panel.add(totalMove);
         frame1.add(panel);
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setVisible(true);
@@ -160,6 +166,7 @@ public class MatchingGamePage {
 
     public void flipTile() throws InterruptedException {
         if (!board.getTileAtIndex(rowNum,colNum).getFlipped()) {//do if the tile clicked has not flipped yet
+            user.setNumMove(counter/2);
             if (counter % 2 == 0) {//if move number is even then store this move in move1[]
                 if (!(move1[0]==-1 && move2[0]==-1)){
                     if (!MatchingGame.checkMatch(board, move1, move2)) {
