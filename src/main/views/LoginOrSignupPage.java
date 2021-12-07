@@ -68,7 +68,10 @@ public class LoginOrSignupPage {
         signup.setBackground(Color.CYAN);
         signup.setOpaque(true);
         signup.setBorderPainted(false);
-        signup.addActionListener(e -> new SignUpPage(user));
+        signup.addActionListener(e -> {
+            frame.dispose();
+            new SignUpPage(user);
+        });
 
         guest.setBounds(180,440,150,40);
         guest.setFont(f);

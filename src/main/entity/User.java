@@ -12,21 +12,16 @@ public class User {
     private String difficulty;
     private int mode, theme;
 
-    public User(){
-        username = "";
-        password = "";
-        guest = false;
-        difficulty = "";
-    }
     /**
      * constructor for User
      * @param username the username of the user object
      * @param password the password of the user object
      */
-    public User (String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-
+        this.guest = false;
+        this.difficulty = "";
     }
 
     //add setter and getters

@@ -18,7 +18,7 @@ public class Main {
         PatternLeaderboardSQLDatabase PatternLeaderboardSQLDatabase = new PatternLeaderboardSQLDatabase();
         PatternGameHistorySQLDatabase PatternHistorySQLDatabase = new PatternGameHistorySQLDatabase();
 
-        user = new User();
+        user = new User("", "");
         new LoginOrSignupPage(user);
 
         //guest mode?
