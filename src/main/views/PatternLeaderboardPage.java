@@ -2,31 +2,22 @@ package views;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
 
-import usecase.*;
-import gateways.database.SQLDatabase;
-import usecase.BoardManager;
-import usecase.GameStatManager;
-import usecase.IDatabaseConnection;
-
-public class MatchingLeaderboardPage {
-    private static final IDatabaseConnection db = new SQLDatabase();
-    private static GameStatManager gsm = new GameStatManager(db);
+public class PatternLeaderboardPage {
     private JFrame frame;
     private JPanel panel;
     private JLabel title;
     private JTable table;
     private String[] columns;
     private Object[][] info;
+
     private Font f;
 
-    public MatchingLeaderboardPage(String difficulty) throws SQLException {
+    public PatternLeaderboardPage() {
         //initialize variables
-
         columns = new String[] {
-                "Game ID", "Username", "Total Moves", "Time"};
-        info = gsm.generateMatchingLeaderboard(difficulty); // added in PR63
+                "Game ID", "Username", "Time"};
+        // insert helper method to populate info in here
         frame = new JFrame("Matching Leaderboard");
         panel = new JPanel();
         title = new JLabel("Matching Leaderboard");
