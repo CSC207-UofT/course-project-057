@@ -73,13 +73,8 @@ public class User {
     }
 
     public void reset(){
-        username = "";
-        password = "";
-        guest = false;
-        difficulty = "";
         time = 0;
-        mode = 0;
-        theme = 0;
+        numMove = 0;
     }
 
     /**

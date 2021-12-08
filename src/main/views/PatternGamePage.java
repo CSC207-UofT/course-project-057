@@ -2,12 +2,16 @@ package views;
 
 import controller.PatternGame;
 import entity.*;
+import gateways.database.SQLDatabase;
 import usecase.BoardManager;
+import usecase.GameStatManager;
+import usecase.IDatabaseConnection;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +28,8 @@ public class PatternGamePage {
     private JLabel[][] tiles;
     private Font f1, f2;
     private Icon settingImg;
+    private static final IDatabaseConnection db = new SQLDatabase();
+    private static GameStatManager gm = new GameStatManager(db);
     private static PatternBoard board;
     private static int counter, currentCounter;
     private int rowNum, colNum, theme;
@@ -82,7 +88,7 @@ public class PatternGamePage {
         setting.setIcon(settingImg);
         setting.setBackground(Color.GRAY);
         setting.setOpaque(true);
-        setting.addActionListener(e -> new MatchingGameSettingsPage(user));
+        setting.addActionListener(e -> new GameSettingsPage(user));
 
 
         //setup panel
@@ -139,6 +145,13 @@ public class PatternGamePage {
                 time.setText(((elapsed / (1000*60*60)) % 24) + ":" + ((elapsed / (1000*60)) % 60) + ":" + ((elapsed / 1000) % 60));
                 if (PatternGame.checkEnd(board, counter)) { // add this
                     timer.stop();
+                    user.setTime(elapsed);
+                    try {
+                        gm.addMatchingGameHistory(user);
+                        gm.generatePatternLeaderboard(user.getDifficulty());
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         };
@@ -187,8 +200,8 @@ public class PatternGamePage {
 
         if (PatternGame.checkMove(board, counter,currentCounter,tileList,rowNum,colNum)){
             tiles[rowNum][colNum].setIcon(img[1]);
-
             currentCounter++;
+
             if(counter < currentCounter){
                 currentCounter = 0;
                 counter++;

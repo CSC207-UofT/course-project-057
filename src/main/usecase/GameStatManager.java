@@ -102,10 +102,10 @@ public class GameStatManager {
                 String Rank = rs.getString("rank");
                 String Username = rs.getString("Username");
                 String TotalMoves = rs.getString("totalmoves");
-                String Time = rs.getString("Time");
+                int Time = Integer.parseInt(rs.getString("Time"));
                 System.out.println("Rank: " + Rank + ", Username: " + Username
-                        + ", TotalMoves: " + TotalMoves + ", Time: " + Time);
-                list.add(new String[]{Rank, Username, TotalMoves, Time}); // changed after PR62
+                        + ", TotalMoves: " + TotalMoves + ", Time: " + (((Time / (1000*60*60)) % 24) + ":" + ((Time / (1000*60)) % 60) + ":" + ((Time/ 1000) % 60)));
+                list.add(new String[]{Rank, Username, TotalMoves, Time+""}); // changed after PR62
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,7 +116,7 @@ public class GameStatManager {
         // for loop and return added after PR62
         String [][] list2d = new String[10][4];
         String [] row;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < list.size(); i++) {
             row = list.get(i);
             System.arraycopy(row, 0, list2d[i], 0, 4);
         }
@@ -129,6 +129,7 @@ public class GameStatManager {
      * @throws SQLException provides information on a database access error
      */
     public void generatePatternLeaderboard(String Difficulty) throws SQLException {
+        ArrayList<String[]> list = new ArrayList<>();
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -144,15 +145,23 @@ public class GameStatManager {
             while (rs.next()) {
                 String Rank = rs.getString("rank");
                 String Username = rs.getString("Username");
-                String Time = rs.getString("Time");
+                int Time = Integer.parseInt(rs.getString("Time"));
                 System.out.println("Rank: " + Rank + ", Username: " + Username
-                        + ", Time: " + Time);
+                        + ", Time: " + (((Time / (1000*60*60)) % 24) + ":" + ((Time / (1000*60)) % 60) + ":" + ((Time/ 1000) % 60)));
+                list.add(new String[]{Rank, Username, Time+""}); // changed after PR62
             }
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
         } finally {
             try { if (conn != null) conn.close(); } catch (Exception e) {}
+        }
+        // for loop and return added after PR62
+        String [][] list2d = new String[10][4];
+        String [] row;
+        for (int i = 0; i < 10; i++) {
+            row = list.get(i);
+            System.arraycopy(row, 0, list2d[i], 0, 4);
         }
     }
 
