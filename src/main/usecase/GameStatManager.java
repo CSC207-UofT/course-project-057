@@ -103,9 +103,10 @@ public class GameStatManager {
                 String Username = rs.getString("Username");
                 String TotalMoves = rs.getString("totalmoves");
                 int Time = Integer.parseInt(rs.getString("Time"));
+                String formatted = (((Time / (1000*60*60)) % 24) + ":" + ((Time / (1000*60)) % 60) + ":" + ((Time/ 1000) % 60));
                 System.out.println("Rank: " + Rank + ", Username: " + Username
-                        + ", TotalMoves: " + TotalMoves + ", Time: " + (((Time / (1000*60*60)) % 24) + ":" + ((Time / (1000*60)) % 60) + ":" + ((Time/ 1000) % 60)));
-                list.add(new String[]{Rank, Username, TotalMoves, Time+""}); // changed after PR62
+                        + ", TotalMoves: " + TotalMoves + ", Time: " + formatted);
+                list.add(new String[]{Rank, Username, TotalMoves, formatted}); // changed after PR62
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,7 +115,7 @@ public class GameStatManager {
             try { if (conn != null) conn.close(); } catch (Exception e) {}
         }
         // for loop and return added after PR62
-        String [][] list2d = new String[10][4];
+        String [][] list2d = new String[20][4];
         String [] row;
         for (int i = 0; i < list.size(); i++) {
             row = list.get(i);
@@ -146,9 +147,10 @@ public class GameStatManager {
                 String Rank = rs.getString("rank");
                 String Username = rs.getString("Username");
                 int Time = Integer.parseInt(rs.getString("Time"));
+                String formatted = (((Time / (1000*60*60)) % 24) + ":" + ((Time / (1000*60)) % 60) + ":" + ((Time/ 1000) % 60));
                 System.out.println("Rank: " + Rank + ", Username: " + Username
-                        + ", Time: " + (((Time / (1000*60*60)) % 24) + ":" + ((Time / (1000*60)) % 60) + ":" + ((Time/ 1000) % 60)));
-                list.add(new String[]{Rank, Username, Time+""}); // changed after PR62
+                        + ", Time: " + formatted);
+                list.add(new String[]{Rank, Username, formatted}); // changed after PR62
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -157,11 +159,11 @@ public class GameStatManager {
             try { if (conn != null) conn.close(); } catch (Exception e) {}
         }
         // for loop and return added after PR62
-        String [][] list2d = new String[10][4];
+        String [][] list2d = new String[20][3];
         String [] row;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < list.size(); i++) {
             row = list.get(i);
-            System.arraycopy(row, 0, list2d[i], 0, 4);
+            System.arraycopy(row, 0, list2d[i], 0, 3);
         }
         return list2d;
     }

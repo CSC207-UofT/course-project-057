@@ -138,6 +138,7 @@ public class MatchingGamePage {
                     try {
                         gm.addMatchingGameHistory(user);
                         new LeaderBoardPage(user,gm , db);
+                        frame1.dispose();
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -198,6 +199,7 @@ public class MatchingGamePage {
             if (MatchingGame.checkEnd(board)){
                 user.setNumMove(counter/2);
                 JOptionPane.showMessageDialog(new JFrame(), DisplayPrompts.winGameDisplay());
+
             }
         }
     }
