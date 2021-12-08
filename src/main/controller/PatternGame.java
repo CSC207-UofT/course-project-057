@@ -24,7 +24,7 @@ public class PatternGame {
     }
 
     public static boolean checkEnd(PatternBoard board, int counter){
-        return board.getTotalTiles() <= counter;
+        return board.getTotalTiles() == counter;
     }
 
 }

@@ -137,7 +137,7 @@ public class MatchingGamePage {
                     user.setTime(elapsed);
                     try {
                         gm.addMatchingGameHistory(user);
-                        gm.generateMatchingLeaderboard(user.getDifficulty());
+                        new LeaderBoardPage(user,gm , db);
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
