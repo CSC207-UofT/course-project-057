@@ -56,6 +56,7 @@ public class PatternGamePage {
         board = DifficultyStrategy.valueOf(user.getDifficulty()).generatePatternBoard();
         theme = user.getTheme();
         tileList = board.getTileList();
+        this.user = user;
 
 
         // taken from MatchingGamePage
@@ -176,7 +177,7 @@ public class PatternGamePage {
         boolean end = PatternGame.checkEnd(board,counter);
 
         if (PatternGame.checkMove(board, counter,currentCounter,tileList,rowNum,colNum)){
-            tiles[rowNum][colNum].setIcon(img[0]);
+            tiles[rowNum][colNum].setIcon(img[1]);
 
             currentCounter++;
             if(counter < currentCounter){
@@ -206,6 +207,8 @@ public class PatternGamePage {
 //            t.start();
         }else if (end){
             JOptionPane.showMessageDialog(new JFrame(), DisplayPrompts.winGameDisplay());
+            frame1.setVisible(false);
+            new PatternGamePage(user);
         }else{
             int[] next = board.getIndexOfTile(tileList.get(counter));
             tiles[next[0]][next[1]].setIcon(back); // rng the image LATER
