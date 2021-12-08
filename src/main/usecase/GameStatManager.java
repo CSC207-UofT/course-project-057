@@ -74,7 +74,7 @@ public class GameStatManager {
             e.printStackTrace();
             throw e;
         } finally {
-            try { if (conn != null) conn.close(); } catch (Exception e) {};
+            try { if (conn != null) conn.close(); } catch (Exception e) {}
         }
     }
 
@@ -111,10 +111,10 @@ public class GameStatManager {
             e.printStackTrace();
             throw e;
         } finally {
-            try { if (conn != null) conn.close(); } catch (Exception e) {};
+            try { if (conn != null) conn.close(); } catch (Exception e) {}
         }
         // for loop and return added after PR62
-        String [][] list2d = new String[][];
+        String [][] list2d = new String[10][4];
         String [] row;
         for (int i = 0; i < 10; i++) {
             row = list.get(i);
@@ -152,7 +152,7 @@ public class GameStatManager {
             e.printStackTrace();
             throw e;
         } finally {
-            try { if (conn != null) conn.close(); } catch (Exception e) {};
+            try { if (conn != null) conn.close(); } catch (Exception e) {}
         }
     }
 
