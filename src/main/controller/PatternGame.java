@@ -1,19 +1,30 @@
 package controller;
 
+import entity.PatternBoard;
+import entity.Tile;
 import usecase.BoardManager;
+
+import java.util.ArrayList;
 
 public class PatternGame {
 
-    public boolean checkMove () {
-        for (int i = 1; i <= counter; i++) {
-            int[] move = BoardManager.Move(patternBoard, "Pattern", i);
+    public static boolean checkMove (PatternBoard patternBoard, int counter, int currentCounter, ArrayList<Tile> tileList, int rowNum, int colNum) {
+
+            int[] move = new int[]{rowNum, colNum};
             int moveKey = patternBoard.getTileKey(move[0], move[1]);
-            int correctKey = tileList.get(i-1).getKey();
-            if (!(moveKey == correctKey)) {
-                allCorrect = false;
-//                    DisplayPrompts.incorrectDisplay();
-                break;
+            int correctKey = tileList.get(currentCounter).getKey();
+            if (moveKey == correctKey) {
+                BoardManager.flipTile(patternBoard, rowNum, colNum);
+
+                return true;
+            }else {
+                return false;
             }
-        }
+
     }
+
+    public static boolean checkEnd(PatternBoard board, int counter){
+        return board.getTotalTiles() <= counter;
+    }
+
 }

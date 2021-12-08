@@ -24,10 +24,11 @@ public class PatternGamePage {
     private JLabel[][] tiles;
     private Font f1, f2;
     private Icon settingImg;
-    public static PatternBoard board;
+    private static PatternBoard board;
+    private static int counter, currentCounter;
     private int rowNum, colNum, theme;
     private Timer timer;
-    User user;
+    private User user;
     private Icon[] img;
     private Icon back;
     public ArrayList<Tile> tileList;
@@ -79,6 +80,7 @@ public class PatternGamePage {
         setting.setBackground(Color.GRAY);
         setting.setOpaque(true);
         setting.addActionListener(e -> new MatchingGameSettingsPage(user));
+
 
         //setup panel
         panel.setLayout(null);
@@ -132,7 +134,7 @@ public class PatternGamePage {
             public void actionPerformed(ActionEvent e) {
                 long elapsed = System.currentTimeMillis() - start;
                 time.setText(((elapsed / (1000*60*60)) % 24) + ":" + ((elapsed / (1000*60)) % 60) + ":" + ((elapsed / 1000) % 60));
-                if (PatternGame.checkEnd(board)) { // add this
+                if (PatternGame.checkEnd(board, counter)) { // add this
                     timer.stop();
                 }
             }
@@ -145,13 +147,17 @@ public class PatternGamePage {
 
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
-                tiles[i][j] = new JLabel("label " + i + "-"+ j);
-                tiles[i][j].setBounds(40+100*i,100+60*j,100,60);
+                tiles[i][j] = new JLabel();
+                tiles[i][j].setBounds(40+160*i,100+90*j,60,60);
                 tiles[i][j].setFont(f2);
-                tiles[i][j].setBorder(BorderFactory.createLineBorder(Color.green, 2));
+                tiles[i][j].setIcon(back);
                 panel.add(tiles[i][j]);
             }
         }
+
+
+        int[] next = board.getIndexOfTile(tileList.get(counter));
+        tiles[next[0]][next[1]].setIcon(img[0]); // rng the image LATER
 
         //add components and setup frame
         frame1.setBounds(0,0,960,540);
@@ -163,9 +169,45 @@ public class PatternGamePage {
         frame1.setVisible(true);
     }
 
+
     public void flipTile() throws InterruptedException {
-        // computer's move
-        tiles[board.getIndexOfTile(tileList.get(counter-1))].setIcon(img[0]); // rng the image LATER
+        //player's move
+
+        boolean end = PatternGame.checkEnd(board,counter);
+        if (currentCounter == 0 && !end) {
+//            // computer's move
+//            ActionListener listener = new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+
+            int[] next = board.getIndexOfTile(tileList.get(counter));
+            tiles[next[0]][next[1]].setIcon(img[0]); // rng the image LATER
+//                }
+//            };
+//            Timer t = new Timer(3000, listener);
+//            t.setRepeats(false);
+//            t.start();
+        }else if (end){
+            JOptionPane.showMessageDialog(new JFrame(), DisplayPrompts.winGameDisplay());
+        }
+        if (PatternGame.checkMove(board, counter,currentCounter,tileList,rowNum,colNum)){
+            tiles[rowNum][colNum].setIcon(img[0]);
+            if(counter == currentCounter){
+                currentCounter = 0;
+                counter++;
+                for (JLabel[] tile : tiles) {
+                    for (JLabel jLabel : tile) {
+                        jLabel.setIcon(back);
+                    }
+                }
+            }
+            currentCounter++;
+        }else {
+            JOptionPane.showMessageDialog(new JFrame(), "u XXXXed up");
+            frame1.setVisible(false);
+        }
+
+
     }
 
 
