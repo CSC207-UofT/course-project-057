@@ -9,7 +9,7 @@ public class User {
     private String password;
     private boolean guest;
     private int numMove;
-    private double time;
+    private long time;
     private String difficulty;
     private int mode, theme;
 
@@ -23,7 +23,7 @@ public class User {
         this.password = password;
         this.guest = false;
         this.numMove = 0;
-        this.time = 0.0;
+        this.time = 0;
         this.difficulty = "";
     }
 
@@ -44,7 +44,7 @@ public class User {
         return difficulty;
     }
 
-    public void setTime(double time) { this.time = time; }
+    public void setTime(long time) { this.time = time; }
 
     public double getTime() { return time; }
 
@@ -77,7 +77,7 @@ public class User {
         password = "";
         guest = false;
         difficulty = "";
-        time = 0.0;
+        time = 0;
         mode = 0;
         theme = 0;
     }

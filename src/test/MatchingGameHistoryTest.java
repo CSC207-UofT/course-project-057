@@ -29,7 +29,7 @@ public class MatchingGameHistoryTest {
         db.createMatchingGameTable();
         User user = new User("Jun", "1234");
         user.setNumMove(12);
-        user.setTime(30.5);
+        user.setTime(30);
         user.setDifficulty("easy");
         gm.addMatchingGameHistory(user);
         try {
@@ -43,7 +43,7 @@ public class MatchingGameHistoryTest {
             while (results.next()) {
                 assertEquals("Jun", results.getString("Username"));
                 assertEquals("12", results.getString("TotalMoves"));
-                assertEquals("30.5", results.getString("Time"));
+                assertEquals("30", results.getString("Time"));
                 assertEquals("easy", results.getString("Difficulty"));
             }
         } catch (SQLException e) {

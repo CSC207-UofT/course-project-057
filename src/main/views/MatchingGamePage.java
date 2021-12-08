@@ -4,7 +4,10 @@ import controller.MatchingGame;
 import entity.DifficultyStrategy;
 import entity.User;
 import entity.MatchingBoard;
+import gateways.database.SQLDatabase;
 import usecase.BoardManager;
+import usecase.GameStatManager;
+import usecase.IDatabaseConnection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 
 /**
  * move to controller
@@ -26,6 +30,8 @@ public class MatchingGamePage {
     private Font f1, f2;
     private Icon settingImg;
     private static MatchingBoard board;
+    private static final IDatabaseConnection db = new SQLDatabase();
+    private static GameStatManager gm = new GameStatManager(db);
     private int rowNum, colNum;
     private Timer timer;
     private int counter, theme;
@@ -128,6 +134,13 @@ public class MatchingGamePage {
                 totalMove.setText(Integer.toString(user.getNumMove()));
                 if (MatchingGame.checkEnd(board)) {
                     timer.stop();
+                    user.setTime(elapsed);
+                    try {
+                        gm.addMatchingGameHistory(user);
+                        gm.generateMatchingLeaderboard(user.getDifficulty());
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         };
