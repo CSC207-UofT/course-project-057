@@ -148,7 +148,7 @@ public class PatternGamePage {
                     user.setTime(elapsed);
                     try {
                         gm.addMatchingGameHistory(user);
-                        gm.generatePatternLeaderboard(user.getDifficulty());
+                        new LeaderBoardPage(user, gm , db);
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -196,7 +196,7 @@ public class PatternGamePage {
             }
         }
 
-        boolean end = PatternGame.checkEnd(board,counter);
+
 
         if (PatternGame.checkMove(board, counter,currentCounter,tileList,rowNum,colNum)){
             tiles[rowNum][colNum].setIcon(img[1]);
@@ -212,6 +212,7 @@ public class PatternGamePage {
             frame1.setVisible(false);
             new PatternGamePage(user);
         }
+        boolean end = PatternGame.checkEnd(board,counter);
         if (currentCounter == 0 && !end) {
 //            // computer's move
             int[] next = board.getIndexOfTile(tileList.get(counter));

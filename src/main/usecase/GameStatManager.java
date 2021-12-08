@@ -128,7 +128,7 @@ public class GameStatManager {
      * @param Difficulty the difficulty of game mode that leaderboard should display
      * @throws SQLException provides information on a database access error
      */
-    public void generatePatternLeaderboard(String Difficulty) throws SQLException {
+    public String[][] generatePatternLeaderboard(String Difficulty) throws SQLException {
         ArrayList<String[]> list = new ArrayList<>();
         try {
             Class.forName("org.postgresql.Driver");
@@ -163,6 +163,7 @@ public class GameStatManager {
             row = list.get(i);
             System.arraycopy(row, 0, list2d[i], 0, 4);
         }
+        return list2d;
     }
 
 }
