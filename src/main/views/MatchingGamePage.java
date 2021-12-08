@@ -29,6 +29,7 @@ public class MatchingGamePage {
     private int rowNum, colNum;
     private Timer timer;
     private int counter, theme;
+    private long totalTime;
     private int[] move1, move2;
     private static User user;
     private Icon[] img;
@@ -128,6 +129,7 @@ public class MatchingGamePage {
                 totalMove.setText(Integer.toString(user.getNumMove()));
                 if (MatchingGame.checkEnd(board)) {
                     timer.stop();
+                    totalTime = elapsed;
                 }
             }
         };
