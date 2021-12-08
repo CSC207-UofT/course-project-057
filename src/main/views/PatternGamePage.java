@@ -56,6 +56,7 @@ public class PatternGamePage {
         board = DifficultyStrategy.valueOf(user.getDifficulty()).generatePatternBoard();
         theme = user.getTheme();
         tileList = board.getTileList();
+        this.user = user;
 
 
         // taken from MatchingGamePage
@@ -174,6 +175,23 @@ public class PatternGamePage {
         //player's move
 
         boolean end = PatternGame.checkEnd(board,counter);
+
+        if (PatternGame.checkMove(board, counter,currentCounter,tileList,rowNum,colNum)){
+            tiles[rowNum][colNum].setIcon(img[1]);
+
+            currentCounter++;
+            if(counter < currentCounter){
+                currentCounter = 0;
+                counter++;
+                for (JLabel[] tile : tiles) {
+                    for (JLabel jLabel : tile) {
+                        jLabel.setIcon(back);
+                    }
+                }
+            }
+        }else {
+            JOptionPane.showMessageDialog(new JFrame(), "u XXXXed up");
+        }
         if (currentCounter == 0 && !end) {
 //            // computer's move
 //            ActionListener listener = new ActionListener() {
@@ -189,24 +207,12 @@ public class PatternGamePage {
 //            t.start();
         }else if (end){
             JOptionPane.showMessageDialog(new JFrame(), DisplayPrompts.winGameDisplay());
-        }
-        if (PatternGame.checkMove(board, counter,currentCounter,tileList,rowNum,colNum)){
-            tiles[rowNum][colNum].setIcon(img[0]);
-            if(counter == currentCounter){
-                currentCounter = 0;
-                counter++;
-                for (JLabel[] tile : tiles) {
-                    for (JLabel jLabel : tile) {
-                        jLabel.setIcon(back);
-                    }
-                }
-            }
-            currentCounter++;
-        }else {
-            JOptionPane.showMessageDialog(new JFrame(), "u XXXXed up");
             frame1.setVisible(false);
+            new PatternGamePage(user);
+        }else{
+            int[] next = board.getIndexOfTile(tileList.get(counter));
+            tiles[next[0]][next[1]].setIcon(back); // rng the image LATER
         }
-
 
     }
 
