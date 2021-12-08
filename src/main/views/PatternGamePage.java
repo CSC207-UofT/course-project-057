@@ -1,6 +1,6 @@
 package views;
 
-import controller.MatchingGame;
+import controller.PatternGame;
 import entity.*;
 import usecase.BoardManager;
 
@@ -24,10 +24,14 @@ public class PatternGamePage {
     private JLabel[][] tiles;
     private Font f1, f2;
     private Icon settingImg;
-    private static MatchingBoard board;
+    public static PatternBoard board;
     private int rowNum, colNum, theme;
     private Timer timer;
     User user;
+    private Icon[] img;
+    private Icon back;
+    public ArrayList<Tile> tileList;
+
 
     /**
      *
@@ -48,8 +52,25 @@ public class PatternGamePage {
         f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
         tiles = new JLabel[ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[0]]
                 [ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[1]];
-        board = DifficultyStrategy.valueOf(user.getDifficulty()).generateMatchingBoard();
+        board = DifficultyStrategy.valueOf(user.getDifficulty()).generatePatternBoard();
         theme = user.getTheme();
+        tileList = board.getTileList();
+
+
+        // taken from MatchingGamePage
+        settingImg = new ImageIcon(new ImageIcon("src/main/views/pictures/settings.png").getImage()
+                .getScaledInstance(40,40,Image.SCALE_DEFAULT));
+        f1 = new Font(title.getFont().getName(), Font.PLAIN, 25);//title font
+        f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
+
+        tiles = new JLabel[ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[0]]
+                [ DifficultyStrategy.valueOf(user.getDifficulty()).setDimension()[1]];
+        board = DifficultyStrategy.valueOf(user.getDifficulty()).generatePatternBoard();
+        theme = user.getTheme();
+        back = new ImageIcon(new ImageIcon("src/main/views/pictures/theme"+theme+"/imgBack.jpg").getImage()
+                .getScaledInstance(60,60,Image.SCALE_DEFAULT));
+        setImg();
+        // above taken from MatchingGamePage
 
         //setup settings
         setting.setBounds(460,460,40,40);
@@ -66,10 +87,16 @@ public class PatternGamePage {
         panel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                colNum = (int) Math.floor((e.getX()-40)/100.0);
-                rowNum = (int) Math.floor((e.getY()-100)/60.0);
-                if ((colNum >= 0 && colNum <= tiles.length)&&(rowNum >= 0 && rowNum <= tiles[0].length)) {
-                    BoardManager.flipTile(board, rowNum, colNum);
+                if ((e.getX()-40)%160<=60 && (e.getY()-100)%90<=60) {//make sure user click the tile
+                    rowNum = (int) Math.floor((e.getX() - 40) / 160.0);
+                    colNum = (int) Math.floor((e.getY() - 100) / 90.0);
+                    if ((rowNum >= 0 && rowNum <= tiles.length) && (colNum >= 0 && colNum <= tiles[0].length)) {
+                        try {
+                            flipTile();
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
                 }
             }
 
@@ -105,7 +132,7 @@ public class PatternGamePage {
             public void actionPerformed(ActionEvent e) {
                 long elapsed = System.currentTimeMillis() - start;
                 time.setText(((elapsed / (1000*60*60)) % 24) + ":" + ((elapsed / (1000*60)) % 60) + ":" + ((elapsed / 1000) % 60));
-                if (MatchingGame.checkEnd(board)) {
+                if (PatternGame.checkEnd(board)) { // add this
                     timer.stop();
                 }
             }
@@ -134,6 +161,23 @@ public class PatternGamePage {
         frame1.add(panel);
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setVisible(true);
+    }
+
+    public void flipTile() throws InterruptedException {
+        // computer's move
+        tiles[board.getIndexOfTile(tileList.get(counter-1))].setIcon(img[0]); // rng the image LATER
+    }
+
+
+
+    public void setImg(){
+        String url ;
+        img = new ImageIcon[15];
+        for (int i = 0; i < 15; i++) {
+            url = "src/main/views/pictures/theme"+theme+"/img"+i+".jpg";
+            img[i] = new ImageIcon(new ImageIcon(url).getImage()
+                    .getScaledInstance(60,60,Image.SCALE_DEFAULT));
+        }
     }
 
     public static String[] runPatternGame(String difficulty) {
