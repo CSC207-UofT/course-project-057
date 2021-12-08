@@ -70,6 +70,7 @@ public class LoginPage {
         home.setBackground(Color.PINK);
         home.setOpaque(true);
         home.addActionListener(e -> {
+            frame.dispose();
             new LoginOrSignupPage(user);
         });
         /*//Might have to add something here (getter and setter to output the changes)

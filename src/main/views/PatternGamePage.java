@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
 public class PatternGamePage {
     static JFrame frame1;
     private JPanel panel;
-    private JLabel title, time, totalMove;
+    private JLabel title, time, round;
     private JButton setting;
     private JLabel[][] tiles;
     private Font f1, f2;
@@ -52,6 +52,7 @@ public class PatternGamePage {
         panel = new JPanel();
         title = new JLabel("Pattern MEMORY");
         time = new JLabel("Time: 00:00");
+        round = new JLabel("");
         setting = new JButton();
         settingImg = new ImageIcon(new ImageIcon("src/main/views/pictures/settings.png").getImage()
                 .getScaledInstance(40,40,Image.SCALE_DEFAULT));
@@ -143,12 +144,14 @@ public class PatternGamePage {
             public void actionPerformed(ActionEvent e) {
                 long elapsed = System.currentTimeMillis() - start;
                 time.setText(((elapsed / (1000*60*60)) % 24) + ":" + ((elapsed / (1000*60)) % 60) + ":" + ((elapsed / 1000) % 60));
+                round.setText("Round:" + Integer.toString(counter+1));
                 if (PatternGame.checkEnd(board, counter)) { // add this
                     timer.stop();
                     user.setTime(elapsed);
                     try {
-                        gm.addMatchingGameHistory(user);
+                        gm.addPatternGameHistory(user);
                         new LeaderBoardPage(user, gm , db);
+                        frame1.dispose();
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -160,6 +163,10 @@ public class PatternGamePage {
         time.setBounds(780,440,100,50);
         time.setForeground(Color.green);
         time.setFont(f2);
+
+        round.setBounds(780,200,100,50);
+        round.setForeground(Color.green);
+        round.setFont(f2);
 
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
@@ -180,6 +187,7 @@ public class PatternGamePage {
         panel.add(title);
         panel.add(time);
         panel.add(setting);
+        panel.add(round);
         frame1.add(panel);
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setVisible(true);
@@ -197,8 +205,7 @@ public class PatternGamePage {
         }
 
 
-
-        if (PatternGame.checkMove(board, counter,currentCounter,tileList,rowNum,colNum)){
+        if (PatternGame.checkMove(board, counter, currentCounter,tileList,rowNum,colNum)){
             tiles[rowNum][colNum].setIcon(img[1]);
             currentCounter++;
 
@@ -208,7 +215,7 @@ public class PatternGamePage {
 
             }
         }else {
-            JOptionPane.showMessageDialog(new JFrame(), "u XXXXedup");
+            JOptionPane.showMessageDialog(new JFrame(), "Wrong move!");
             frame1.setVisible(false);
             new PatternGamePage(user);
         }

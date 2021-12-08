@@ -71,6 +71,7 @@ public class SignUpPage {
         home.setBackground(Color.PINK);
         home.setOpaque(true);
         home.addActionListener(e -> {
+            frame.dispose();
             new LoginOrSignupPage(user);
         });
 

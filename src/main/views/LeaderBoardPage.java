@@ -5,6 +5,7 @@ import usecase.GameStatManager;
 import usecase.IDatabaseConnection;
 
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.sql.SQLException;
 
@@ -22,25 +23,31 @@ public class LeaderBoardPage {
         frame1 = new JFrame("Leader Board");
         panel = new JPanel();
         home = new JButton("Home");
-        title = new JLabel("Leader Board");
+        title = new JLabel("");
         f1 = new Font(title.getFont().getName(), Font.PLAIN, 25);//title font
         f2 = new Font(title.getFont().getName(), Font.PLAIN, 15);//paragraph font
 
-        String[] header = new String[] {"Rank","ID", "Moves","Time"};
+        String[] header = new String[]{};
         if (user.getMode() == 1) {
             output = gm.generatePatternLeaderboard(user.getDifficulty());
+            header = new String[] {"Rank", "ID", "Time"};
         }else {
             output = gm.generateMatchingLeaderboard(user.getDifficulty());
+            header = new String[] {"Rank", "ID", "Moves", "Time"};
         }
 
-        //
+        home.setBounds(180,210, 180,55);
+        home.setBackground(Color.PINK);
+        home.setOpaque(true);
+        //Might have to add something here (getter and setter to output the changes)
+        home.addActionListener(e -> {
+            frame1.dispose();
+            new LoginOrSignupPage(user);});
+
         table = new JTable(output, header);
-        table.setBounds(200,100,600,500);
+        table.setBounds(200,200,600,500);
         table.setFont(f2);
 
-        //setup label
-        title.setBounds(320,30,300,50);
-        title.setFont(f1);
 
         //setup panel
         panel.setLayout(null);
@@ -48,8 +55,10 @@ public class LeaderBoardPage {
         panel.setBackground(Color.GRAY);
         frame1.setBounds(0,0,960,540);
         panel.add(home);
-        panel.add(title);
-        panel.add(table);
+        panel.setLayout(new BorderLayout());
+        panel.add(table.getTableHeader(), BorderLayout.PAGE_START);
+        panel.add(table, BorderLayout.CENTER);
+        panel.add(home, BorderLayout.SOUTH);
         frame1.add(panel);
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setVisible(true);
