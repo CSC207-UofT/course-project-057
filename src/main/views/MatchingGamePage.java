@@ -77,7 +77,7 @@ public class MatchingGamePage {
         setting.setOpaque(true);
         setting.addActionListener(e -> {
             frame1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-            new MatchingGameSettingsPage(user);});
+            new GameSettingsPage(user);});
 
         //setup panel
         panel.setLayout(null);

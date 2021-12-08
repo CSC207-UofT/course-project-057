@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class MatchingGameSettingsPage {
+public class GameSettingsPage {
     private JFrame frame2;
     private JPanel panel;
     private JButton resume, restart, home;
@@ -19,7 +19,7 @@ public class MatchingGameSettingsPage {
      * default constructor
      * generates userLogin window
      */
-    public MatchingGameSettingsPage(User user){
+    public GameSettingsPage(User user){
         //initialize the variables
         frame2 = new JFrame("Settings");
         panel = new JPanel();
@@ -28,7 +28,7 @@ public class MatchingGameSettingsPage {
         home = new JButton("Home");
         title = new JLabel("Settings");
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
-        MatchingGameSettingsPage.user = user;
+        GameSettingsPage.user = user;
 
         //setup panel
         panel.setLayout(null);
@@ -58,7 +58,11 @@ public class MatchingGameSettingsPage {
         home.setOpaque(true);
         //Might have to add something here (getter and setter to output the changes)
         home.addActionListener(e -> {
-            MatchingGamePage.frame1.dispose();
+            if (user.getMode() == 2) {
+                MatchingGamePage.frame1.dispose();
+            } else {
+                PatternGamePage.frame1.dispose();
+            }
             frame2.dispose();
             new LoginOrSignupPage(user);
             frame2.setVisible(false);});
@@ -76,8 +80,13 @@ public class MatchingGameSettingsPage {
         restart.setBorderPainted(false);
         restart.addActionListener(e ->{
             user.reset();
-            MatchingGamePage.frame1.dispose();
-            new StartPage(user);
+            if (user.getMode() == 2) {
+                MatchingGamePage.frame1.dispose();
+                new MatchingGamePage(user);
+            } else {
+                PatternGamePage.frame1.dispose();
+                new PatternGamePage(user);
+            }
             frame2.setVisible(false);});
         //command for what happens when you click login
         /*
