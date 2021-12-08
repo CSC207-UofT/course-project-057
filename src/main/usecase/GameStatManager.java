@@ -1,5 +1,6 @@
 package usecase;
 
+import java.util.ArrayList;
 import java.util.Random;
 import entity.*;
 import java.sql.*;
@@ -82,7 +83,9 @@ public class GameStatManager {
      * @param Difficulty the difficulty of game mode that leaderboard should display
      * @throws SQLException provides information on a database access error
      */
-    public void generateMatchingLeaderboard(String Difficulty) throws SQLException {
+    // return type was void in PR62
+    public String[][] generateMatchingLeaderboard(String Difficulty) throws SQLException {
+        ArrayList<String[]> list = new ArrayList<>();
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -102,6 +105,7 @@ public class GameStatManager {
                 String Time = rs.getString("Time");
                 System.out.println("Rank: " + Rank + ", Username: " + Username
                         + ", TotalMoves: " + TotalMoves + ", Time: " + Time);
+                list.add(new String[]{Rank, Username, TotalMoves, Time}); // changed after PR62
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -109,6 +113,14 @@ public class GameStatManager {
         } finally {
             try { if (conn != null) conn.close(); } catch (Exception e) {};
         }
+        // for loop and return added after PR62
+        String [][] list2d = new String[][];
+        String [] row;
+        for (int i = 0; i < 10; i++) {
+            row = list.get(i);
+            System.arraycopy(row, 0, list2d[i], 0, 4);
+        }
+        return list2d;
     }
 
     /**
