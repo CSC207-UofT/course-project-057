@@ -57,6 +57,8 @@ public class PatternGamePage {
         theme = user.getTheme();
         tileList = board.getTileList();
         this.user = user;
+        counter = 0;
+        currentCounter = 0;
 
 
         // taken from MatchingGamePage
@@ -173,6 +175,13 @@ public class PatternGamePage {
 
     public void flipTile() throws InterruptedException {
         //player's move
+        if (currentCounter ==0 ){
+            for (JLabel[] tile : tiles) {
+                for (JLabel jLabel : tile) {
+                    jLabel.setIcon(back);
+                }
+            }
+        }
 
         boolean end = PatternGame.checkEnd(board,counter);
 
@@ -183,32 +192,28 @@ public class PatternGamePage {
             if(counter < currentCounter){
                 currentCounter = 0;
                 counter++;
-                for (JLabel[] tile : tiles) {
-                    for (JLabel jLabel : tile) {
-                        jLabel.setIcon(back);
-                    }
-                }
+
             }
         }else {
-            JOptionPane.showMessageDialog(new JFrame(), "u XXXXed up");
+            JOptionPane.showMessageDialog(new JFrame(), "u XXXXedup");
+            frame1.setVisible(false);
+            new PatternGamePage(user);
         }
         if (currentCounter == 0 && !end) {
 //            // computer's move
-//            ActionListener listener = new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-
             int[] next = board.getIndexOfTile(tileList.get(counter));
-            tiles[next[0]][next[1]].setIcon(img[0]); // rng the image LATER
-//                }
-//            };
-//            Timer t = new Timer(3000, listener);
-//            t.setRepeats(false);
-//            t.start();
+            tiles[next[0]][next[1]].setIcon(img[0]);
+            ActionListener listener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                tiles[next[0]][next[1]].setIcon(back); // rng the image LATER
+                    }
+                };
+            Timer t = new Timer(3000, listener);
+            t.setRepeats(false);
+            t.start();
         }else if (end){
             JOptionPane.showMessageDialog(new JFrame(), DisplayPrompts.winGameDisplay());
-            frame1.setVisible(false);
-            new PatternGamePage(user);
         }else{
             int[] next = board.getIndexOfTile(tileList.get(counter));
             tiles[next[0]][next[1]].setIcon(back); // rng the image LATER
