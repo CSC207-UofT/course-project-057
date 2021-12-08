@@ -5,6 +5,7 @@ import entity.User;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.Random;
 
 
 /**
@@ -81,6 +82,8 @@ public class LoginOrSignupPage {
         guest.addActionListener(e -> {
             LoginOrSignupPage.user.setGuest(true);
             JOptionPane.showMessageDialog(new JFrame(), "Play as guest!");
+            Random rand = new Random();
+            user.setUsername("guest"+rand.nextInt(1000));
             new StartPage(user);
             frame.setVisible(false);
         });
