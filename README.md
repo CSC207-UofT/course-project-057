@@ -20,3 +20,5 @@ Pattern Rules:
 6. The next tile will flip. Repeat the process above.
 7. Note that every time a new tile is shown you will need to start your move from the first tile. 
 8. Keep repeating the same pattern if you can remember!
+
+This game program connects to local database, and store user and game data in the database. Therefore if local database is not set up for the program, leaderboard will not return after each game round is finished. 
