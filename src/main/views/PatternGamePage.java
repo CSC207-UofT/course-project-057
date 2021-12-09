@@ -92,7 +92,7 @@ public class PatternGamePage {
 
         //setup panel
         panel.setLayout(null);
-        panel.setBounds(0,0,960,540);
+        panel.setBounds(0,0,960,700);
         panel.setBackground(Color.GRAY);
         panel.addMouseListener(new MouseListener() {
             @Override
@@ -181,7 +181,7 @@ public class PatternGamePage {
         tiles[next[0]][next[1]].setIcon(img[0]); // rng the image LATER
 
         //add components and setup frame
-        frame1.setBounds(0,0,960,540);
+        frame1.setBounds(0,0,960,700);
         panel.add(title);
         panel.add(time);
         panel.add(setting);
@@ -226,12 +226,9 @@ public class PatternGamePage {
 //            // computer's move
             int[] next = board.getIndexOfTile(tileList.get(counter));
             tiles[next[0]][next[1]].setIcon(img[0]);
-            ActionListener listener = new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+            ActionListener listener = e -> {
                 tiles[next[0]][next[1]].setIcon(back); // rng the image LATER
-                    }
-                };
+            };
             Timer t = new Timer(3000, listener);
             t.setRepeats(false);
             t.start();

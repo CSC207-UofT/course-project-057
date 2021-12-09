@@ -81,7 +81,7 @@ public class MatchingGamePage {
 
         //setup panel
         panel.setLayout(null);
-        panel.setBounds(0,0,960,540);
+        panel.setBounds(0,0,960,700);
         panel.setBackground(Color.GRAY);
         panel.addMouseListener(new MouseListener() {
             @Override
@@ -167,7 +167,7 @@ public class MatchingGamePage {
         }
 
         //add components and setup frame
-        frame1.setBounds(0,0,960,540);
+        frame1.setBounds(0,0,960,700);
         panel.add(title);
         panel.add(time);
         panel.add(setting);
