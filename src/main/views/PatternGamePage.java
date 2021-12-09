@@ -44,7 +44,6 @@ public class PatternGamePage {
      *
      * constructor
      * generates PatternGame window by selected difficulty and theme
-
      */
     public PatternGamePage(User user){
         //initialize variables
@@ -194,6 +193,10 @@ public class PatternGamePage {
     }
 
 
+    /**
+     * when the user flips a tile
+     * @throws InterruptedException throws the InterruptedException
+     */
     public void flipTile() throws InterruptedException {
         //player's move
         if (currentCounter ==0 ){

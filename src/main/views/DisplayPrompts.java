@@ -5,8 +5,8 @@ package views;
  */
 public class DisplayPrompts {
     /**
-     * display for match vs no match
      * @param match boolean for if a match was made or not
+     * @return display for match vs no match
      */
     public static String matchDisplay (boolean match) {
         if (match) {
@@ -17,9 +17,9 @@ public class DisplayPrompts {
     }
 
     /**
-     * display for entering a move
      * @param getNumRows pass in tileboard.getNumRows()
      * @param getNumCols pass in tileboard.getNumColumns()
+     * @return display for entering a move
      */
     public static String enterMoveDisplay (int getNumRows, int getNumCols) {
         return("Please input a row number from 1 to " + (getNumRows)
@@ -115,6 +115,9 @@ public class DisplayPrompts {
         return("Would you like to play as a guest? (Y/N)");
     }
 
+    /**
+     * @return the rules for the matching game
+     */
     public static String matchingRules() {
         return ("Matching Rules:\n " +
                 "1. Your aim is to uncover every pair of tiles. Each tile in the game has another matching tile.\n" +
@@ -125,6 +128,9 @@ public class DisplayPrompts {
                 "6. The game ends when all tiles have been uncovered. Good luck and thanks for playing!");
     }
 
+    /**
+     * @return the rules for the pattern game
+     */
     public static String patternRules() {
         return ("Pattern Rules:\n " +
                 "1. Your aim is to copy the pattern shown on screen.\n" +

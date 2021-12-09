@@ -103,6 +103,10 @@ public class SignUpPage {
         frame.setVisible(true);
     }
 
+    /**
+     * @param username username of the user
+     * @param password password of the user
+     */
     public void signUp(String username, String password) {
         // helper function that check if inputted username is available, signs up if true
         if (userManager.checkUsernameAvailable(username)) {

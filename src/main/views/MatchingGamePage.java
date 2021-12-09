@@ -178,6 +178,10 @@ public class MatchingGamePage {
 
     }
 
+    /**
+     * called when the user flips a tile
+     * @throws InterruptedException an interruptedException
+     */
     public void flipTile() throws InterruptedException {
         if (!board.getTileAtIndex(rowNum,colNum).getFlipped()) {//do if the tile clicked has not flipped yet
             user.setNumMove(counter/2);
@@ -204,8 +208,11 @@ public class MatchingGamePage {
         }
     }
 
+    /**
+     * sets the images of the tiles
+     */
     public void setImg(){
-        String url ;
+        String url;
         img = new ImageIcon[15];
         for (int i = 0; i < 15; i++) {
             url = "src/main/views/pictures/theme"+theme+"/img"+i+".jpg";
@@ -215,7 +222,7 @@ public class MatchingGamePage {
     }
 
     /**
-     * runs a new game mode
+     * OLD
      * @return number of moves, the time and difficulty of the finished game mode
      */
     public static String[] runMatchingGame(String difficulty, String guest) {
