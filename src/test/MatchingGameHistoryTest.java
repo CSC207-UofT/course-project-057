@@ -1,10 +1,8 @@
 import entity.User;
-import gateways.database.MatchingGameHistorySQLDatabase;
 import gateways.database.SQLDatabase;
 import org.junit.Before;
 import org.junit.Test;
 import usecase.GameStatManager;
-import usecase.UserManager;
 
 import java.sql.*;
 
