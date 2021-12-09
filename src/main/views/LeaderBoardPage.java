@@ -15,7 +15,6 @@ public class LeaderBoardPage {
     private JButton home;
     private JLabel title;
     private JTable table;
-    private String difficulty, mode;
     private String[][] output;
     private Font f1, f2;
 

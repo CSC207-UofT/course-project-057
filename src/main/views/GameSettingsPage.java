@@ -39,19 +39,6 @@ public class GameSettingsPage {
         title.setBounds(180,88,250,55);
         title.setFont(f);
 
-        /*
-        usernameLabel.setBounds(57,180,150,45);
-        usernameLabel.setFont(f);
-
-        passwordLabel.setBounds(57,270,150,45);
-        passwordLabel.setFont(f);
-
-
-
-        //setup textfields
-        username.setBounds(250,180,200,45);
-        password.setBounds(250,270,200,45);
-        */
         //setup home button
         home.setBounds(180,210, 180,55);
         home.setBackground(Color.PINK);
@@ -88,16 +75,6 @@ public class GameSettingsPage {
                 new PatternGamePage(user);
             }
             frame2.setVisible(false);});
-        //command for what happens when you click login
-        /*
-        resume.addActionListener(e -> {
-            usernameInput = username.getText();
-            passwordInput = password.getText();
-            //#TODO: login
-            new StartPage();
-            frame.setVisible(false);
-        });
-        */
 
         //add all JComponents to frame and set frame visible
         frame2.setSize(540,540);

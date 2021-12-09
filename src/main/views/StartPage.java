@@ -42,7 +42,7 @@ public class StartPage {
         difficultyArray = new JButton[]{easy, medium, hard};
         themeArray = new JButton[]{theme1, theme2, theme3};
         f = new Font(title.getFont().getName(), Font.PLAIN, 25);
-        this.user = user;
+        StartPage.user = user;
 
         //setup panel
         panel.setLayout(null);
@@ -74,7 +74,7 @@ public class StartPage {
         pattern.setBorderPainted(false);
         pattern.addActionListener(e -> {
             user.setMode(1);
-            highLightButton(modeArray, pattern);
+            highlightButton(modeArray, pattern);
         });
 
         matching.setBounds(590,100,250,50);
@@ -84,7 +84,7 @@ public class StartPage {
         matching.setBorderPainted(false);
         matching.addActionListener(e -> {
             user.setMode(2);
-            highLightButton(modeArray, matching);
+            highlightButton(modeArray, matching);
         });
 
         easy.setBounds(290,200,150,50);
@@ -94,7 +94,7 @@ public class StartPage {
         easy.setBorderPainted(false);
         easy.addActionListener(e -> {
             user.setDifficulty("Easy");
-            highLightButton(difficultyArray, easy);
+            highlightButton(difficultyArray, easy);
         });
 
         medium.setBounds(490,200,150,50);
@@ -104,7 +104,7 @@ public class StartPage {
         medium.setBorderPainted(false);
         medium.addActionListener(e -> {
             user.setDifficulty("Medium");
-            highLightButton(difficultyArray, medium);
+            highlightButton(difficultyArray, medium);
         });
 
         hard.setBounds(690,200,150,50);
@@ -114,7 +114,7 @@ public class StartPage {
         hard.setBorderPainted(false);
         hard.addActionListener(e -> {
             user.setDifficulty("Hard");
-            highLightButton(difficultyArray, hard);
+            highlightButton(difficultyArray, hard);
         });
 
         theme1.setBounds(290,300,150,50);
@@ -124,7 +124,7 @@ public class StartPage {
         theme1.setBorderPainted(false);
         theme1.addActionListener(e -> {
             user.setTheme(1);
-            highLightButton(themeArray, theme1);
+            highlightButton(themeArray, theme1);
         });
 
         theme2.setBounds(490,300,150,50);
@@ -134,7 +134,7 @@ public class StartPage {
         theme2.setBorderPainted(false);
         theme2.addActionListener(e -> {
             user.setTheme(2);
-            highLightButton(themeArray, theme2);
+            highlightButton(themeArray, theme2);
         });
 
         theme3.setBounds(690,300,150,50);
@@ -144,7 +144,7 @@ public class StartPage {
         theme3.setBorderPainted(false);
         theme3.addActionListener(e -> {
             user.setTheme(3);
-            highLightButton(themeArray, theme3);
+            highlightButton(themeArray, theme3);
         });
 
         play.setBounds(300,400,350,80);
@@ -197,7 +197,7 @@ public class StartPage {
      * @param array array contains JButton b
      * @param b Button to be highlighted
      */
-    private void highLightButton(JButton[] array, JButton b){
+    private void highlightButton(JButton[] array, JButton b){
         for (JButton jButton : array) {
             jButton.setBorderPainted(false);
         }
@@ -222,17 +222,6 @@ public class StartPage {
         } else {
             return true;
         }
-    }
-
-
-    //old
-    public static String[] startPage() {
-        System.out.println(DisplayPrompts.welcomeMessage());
-        String[] gameType = new String[3];
-        gameType[0] = UserGameInput.getGameType();
-        gameType[1] = UserGameInput.getUserDifficulty();
-        return gameType;
-
     }
 
 }

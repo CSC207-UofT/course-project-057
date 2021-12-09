@@ -86,7 +86,7 @@ public class SQLDatabase implements IDatabaseConnection {
      * This method creates a new table 'PatternGameHistory'
      * @throws SQLException provides information on a database access error
      */
-    public void createPatternGameTable() throws SQLException {
+    public void createPatternTable() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {

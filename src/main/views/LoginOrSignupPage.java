@@ -109,24 +109,6 @@ public class LoginOrSignupPage {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-    /**
-     *
-     * @return string list of username and password
-     * @throws SQLException provides information on a database access error
-     */
-//    public static String[] loginOrSignup(UserSQLDatabase UserDatabase) throws SQLException {
-//        String input = UserGameInput.promptLoginOrSignup();
-//        String[] userData = new String[]{};
-//        if (input.equals("login")) {
-//            userData = LoginPage.login(UserDatabase);
-//        }
-//        else if (input.equals("sign up")) {
-//            SignUpPage.signUp(UserDatabase);
-//            System.out.println(DisplayPrompts.loginDisplay());
-//            userData = LoginPage.login(UserDatabase);
-//        }
-//        return userData;
-//    }
 
     /**
      * @return user

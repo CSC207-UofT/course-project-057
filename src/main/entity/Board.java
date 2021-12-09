@@ -8,7 +8,7 @@ import java.util.Collections;
  * Parent class for MatchingBoard and PatternBoard
  */
 public class Board {
-    public final Tile[][] TilePositions;
+    public final Tile[][] tilePositions;
     public final int totalTiles;
     public final int numRows;
     public final int numCols;
@@ -19,7 +19,7 @@ public class Board {
         this.difficulty = difficulty;
         this.numRows = difficulty.setDimension()[0];
         this.numCols = difficulty.setDimension()[1];
-        this.TilePositions = new Tile[numRows][numCols];
+        this.tilePositions = new Tile[numRows][numCols];
         this.totalTiles = numRows * numCols;
         this.tileList = generateTileList();
     }
@@ -68,7 +68,7 @@ public class Board {
      */
     public int getTileKey(int row, int col) {
 
-        return this.TilePositions[row][col].getKey();
+        return this.tilePositions[row][col].getKey();
     }
 
     /**
@@ -100,7 +100,7 @@ public class Board {
      * @return the positions of all the tiles
      */
     public Tile[][] getTilePositions() {
-        return this.TilePositions;
+        return this.tilePositions;
     }
 
     /**
@@ -110,7 +110,7 @@ public class Board {
      * assigns a Tile object to the specified location on TileBoard
      */
     public void setTilePositions(int row, int col, Tile tile) {
-        this.TilePositions[row][col] = tile;
+        this.tilePositions[row][col] = tile;
     }
 
     /**
