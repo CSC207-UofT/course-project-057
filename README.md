@@ -2,7 +2,7 @@
 
 This project is a game program that consists of two game modes: matching game and pattern game. Player can register an account and log in, or play as a guest. Each game mode has three difficulties and themes for the player to choose from. 
 
-**Game Rules**
+**Game Rules**\
 Matching Rules:
 1. Your aim is to uncover every pair of tiles. Each tile in the game has another matching tile.
 2. Uncover a tile by clicking on it.
