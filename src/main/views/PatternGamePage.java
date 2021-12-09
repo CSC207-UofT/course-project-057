@@ -142,7 +142,7 @@ public class PatternGamePage {
             public void actionPerformed(ActionEvent e) {
                 long elapsed = System.currentTimeMillis() - start;
                 time.setText(((elapsed / (1000*60*60)) % 24) + ":" + ((elapsed / (1000*60)) % 60) + ":" + ((elapsed / 1000) % 60));
-                round.setText("Round:" + Integer.toString(counter+1));
+                round.setText("Round:" + (counter+1));
                 if (PatternGame.checkEnd(board, counter)) { // add this
                     timer.stop();
                     user.setTime(elapsed);
@@ -244,10 +244,8 @@ public class PatternGamePage {
 
     }
 
-
-
     public void setImg(){
-        String url ;
+        String url;
         img = new ImageIcon[15];
         for (int i = 0; i < 15; i++) {
             url = "src/main/views/pictures/theme"+theme+"/img"+i+".jpg";
@@ -256,58 +254,4 @@ public class PatternGamePage {
         }
     }
 
-    public static String[] runPatternGame(String difficulty) {
-        String[] statistics = new String[3];
-       // String difficulty = UserGameInput.getUserDifficulty(); // delete, this is moved to StartGame
-
-        PatternBoard patternBoard = DifficultyStrategy.valueOf(difficulty).generatePatternBoard();
-        ArrayList<Tile> tileList = patternBoard.getTileList();
-
-        // shows the pattern one tile at a time
-        int counter = 1;
-        long startTime = System.currentTimeMillis();
-        boolean allCorrect = true;
-
-        while (counter <= patternBoard.totalTiles && allCorrect) {
-            int[] index = patternBoard.getIndexOfTile(tileList.get(counter-1));
-            BoardManager.flipTile(patternBoard, index[0], index[1]);
-            System.out.println(patternBoard);
-            try
-            {
-                Thread.sleep(1000);
-            }
-            catch(InterruptedException ex)
-            {
-                Thread.currentThread().interrupt();
-            }
-            System.out.println(DisplayPrompts.printSpace());
-            BoardManager.unflipAll(patternBoard);
-            System.out.println(patternBoard);
-            // gets user input
-            for (int i = 1; i <= counter; i++) {
-                int[] move = BoardManager.Move(patternBoard, "Pattern", i);
-                int moveKey = patternBoard.getTileKey(move[0], move[1]);
-                int correctKey = tileList.get(i-1).getKey();
-                if (!(moveKey == correctKey)) {
-                    allCorrect = false;
-//                    DisplayPrompts.incorrectDisplay();
-                    break;
-                }
-            }
-            if (allCorrect) {
-                counter++;
-            }
-        }
-        if (allCorrect) {
-            System.out.println(DisplayPrompts.winGameDisplay());
-        }
-        else {
-            System.out.println(DisplayPrompts.loseGameDisplay());
-        }
-
-        statistics[0] = Long.toString((System.currentTimeMillis() - startTime)/ 1000);
-        statistics[1] = difficulty;
-        statistics[2] = Boolean.toString(allCorrect);
-        return statistics;
-    }
 }

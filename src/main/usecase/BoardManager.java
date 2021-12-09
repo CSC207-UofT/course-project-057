@@ -69,7 +69,7 @@ public class BoardManager {
      * methods that tracks the tile the user wants to move
      * @param board a Board object
      */
-    public static int[] Move(Board board, String gameType, int counter) {
+    public static int[] move(Board board, String gameType, int counter) {
         boolean validMove = false;
         int rowMove;
         int colMove;

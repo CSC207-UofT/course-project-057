@@ -8,7 +8,7 @@ import java.util.Collections;
  * The main object that will be acted on by other use case classes for the matching game. Related to Entity.Tile class.
  */
 public class MatchingBoard extends Board {
-    private final int numPairs;
+    public final int numPairs;
 
     /**
      * @param difficulty A DifficultyStrategy enum
