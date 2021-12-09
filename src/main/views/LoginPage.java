@@ -105,8 +105,12 @@ public class LoginPage {
         frame.setVisible(true);
     }
 
+    /**
+     * helper function that check if inputted username is available, signs up if true
+     * @param username player's username
+     * @param password player's password
+     */
     public void logIn(String username, String password) {
-        // helper function that check if inputted username is available, signs up if true
         if (userManager.checkPassword(username, password)) {
             JOptionPane.showMessageDialog(new JFrame(), "Log-in successful.");
             user.setUsername(username);

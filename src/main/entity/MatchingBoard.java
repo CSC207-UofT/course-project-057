@@ -28,6 +28,8 @@ public class MatchingBoard extends Board {
 
     /**
      * Creates a randomized ArrayList of Entity.Tile objects that are put into the tileBoard object.
+     * This is different from the method in Board because this ensures that every tile has a pair
+     * Also can be explained as: the keys of 2 tiles will be the same for all tiles in the board
      * @return an arraylist of tiles
      */
     @Override

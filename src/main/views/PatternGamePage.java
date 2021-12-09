@@ -41,10 +41,8 @@ public class PatternGamePage {
 
 
     /**
-     *
      * constructor
      * generates PatternGame window by selected difficulty and theme
-
      */
     public PatternGamePage(User user){
         //initialize variables
@@ -194,6 +192,10 @@ public class PatternGamePage {
     }
 
 
+    /**
+     * when the user flips a tile
+     * @throws InterruptedException throws the InterruptedException
+     */
     public void flipTile() throws InterruptedException {
         //player's move
         if (currentCounter ==0 ){
@@ -308,28 +310,4 @@ public class PatternGamePage {
         statistics[2] = Boolean.toString(allCorrect);
         return statistics;
     }
-
-//    public static void main (String [] args) throws SQLException { // more for testing, can delete
-//        UserSQLDatabase UserDatabase = new UserSQLDatabase();
-//        PatternLeaderboardSQLDatabase PatternLeaderboardDatabase = new PatternLeaderboardSQLDatabase();
-//        PatternGameHistorySQLDatabase PatternHistoryDatabase = new PatternGameHistorySQLDatabase();
-//
-//        //login
-//        String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
-//        String username = userData[0];
-//
-//        //run the game mode including start page
-//        String[] gameType = StartPage.startPage();
-//        String[] statistics = runPatternGame(gameType[1]); // test
-//        long time = Long.parseLong(statistics[0]);
-//        String difficulty = statistics[1];
-//        if (statistics[2].equals("true")) {
-//            Random rand = new Random();
-//            Integer GID = rand.nextInt();
-//            // Updates the leaderboard
-//            PatternHistoryDatabase.addGameHistory(GID, username, (double) (time/1000), difficulty);
-//            PatternLeaderboardDatabase.generateLeaderboard(difficulty);
-//        }
-//        PatternLeaderboardDatabase.generateLeaderboard(difficulty);
-//    }
 }

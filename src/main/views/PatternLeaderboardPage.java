@@ -3,6 +3,7 @@ package views;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class PatternLeaderboardPage {
     private JFrame frame;
     private JPanel panel;
@@ -13,6 +14,10 @@ public class PatternLeaderboardPage {
 
     private Font f;
 
+    /**
+     * default constructor
+     * generates the Pattern Leaderboard Page
+     */
     public PatternLeaderboardPage() {
         //initialize variables
         columns = new String[] {

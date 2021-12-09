@@ -82,25 +82,6 @@ public class UserGameInput {
         }
         return difficulty;
     }
-    // old
-    public static String getGameType() {
-        String type = "";
-        Scanner scanner = new Scanner(System.in);
-        boolean done = false;
-        while (!done){
-            System.out.println(DisplayPrompts.getGameTypeDisplay());
-            try {
-                type = scanner.nextLine();
-                if (Objects.equals(type, "Matching") || Objects.equals(type, "Pattern")){
-                    done = true;
-                }
-            }
-            catch (InputMismatchException e){
-                scanner.nextLine();
-            }
-        }
-        return type;
-    }
 
     /**
      * obtains either 'login' or 'sign up' from user input
@@ -122,5 +103,25 @@ public class UserGameInput {
             }
         }
         return method;
+    }
+
+    // old
+    public static String getGameType() {
+        String type = "";
+        Scanner scanner = new Scanner(System.in);
+        boolean done = false;
+        while (!done){
+            System.out.println(DisplayPrompts.getGameTypeDisplay());
+            try {
+                type = scanner.nextLine();
+                if (Objects.equals(type, "Matching") || Objects.equals(type, "Pattern")){
+                    done = true;
+                }
+            }
+            catch (InputMismatchException e){
+                scanner.nextLine();
+            }
+        }
+        return type;
     }
 }

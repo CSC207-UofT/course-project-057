@@ -118,7 +118,7 @@ public class UserManager {
 
 
     /**
-     * @param user         a User object
+     * @param user a User object
      * @param new_username the new username the user wants
      */
     public void changeUsername(User user, String new_username) {

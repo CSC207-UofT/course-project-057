@@ -32,7 +32,6 @@ public class SQLDatabase implements IDatabaseConnection {
 
     /**
      * Creates a table named 'users' in the local database
-     *
      * @throws SQLException provides information on a database access error
      */
     public void createUserTable() throws SQLException {

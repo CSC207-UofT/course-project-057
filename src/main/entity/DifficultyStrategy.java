@@ -85,6 +85,10 @@ public enum DifficultyStrategy {
         }
     }
 
+    /**
+     * a helper method for getTileBoard
+     * @param board the board being passed in
+     */
     public static void getTileBoardHelper(Board board) {
         int numRows = board.getNumRows();
         int numCols = board.getNumCols();

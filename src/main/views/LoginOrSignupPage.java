@@ -19,12 +19,12 @@ public class LoginOrSignupPage {
     private Icon backgroundImg;
     private Font f;
     private static User user;
+
     /**
      * Default constructor
      * setting the GUI patterns
      */
     public LoginOrSignupPage(User user) {
-
         //initialize JComponent
         frame = new JFrame(user.getUsername());
         panel = new JPanel();
@@ -128,6 +128,9 @@ public class LoginOrSignupPage {
 //        return userData;
 //    }
 
+    /**
+     * @return user
+     */
     public static User getUser() {
         return LoginOrSignupPage.user;
     }

@@ -27,51 +27,89 @@ public class User {
         this.difficulty = "";
     }
 
-    //add setter and getters
+    /**
+     * @param numMove the move number
+     */
     public void setNumMove(int numMove) {
         this.numMove = numMove;
     }
 
+    /**
+     * @return the move number
+     */
     public int getNumMove() {
         return numMove;
     }
 
+    /**
+     * @param difficulty the difficulty of the game
+     */
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 
+    /**
+     * @return the difficulty of the game
+     */
     public String getDifficulty() {
         return difficulty;
     }
 
+    /**
+     * @param time sets the time elapsed
+     */
     public void setTime(long time) { this.time = time; }
 
+    /**
+     * @return the time elapsed
+     */
     public double getTime() { return time; }
 
+    /**
+     * @param mode the game mode (Pattern or Matching)
+     */
     public void setMode(int mode) {
         this.mode = mode;
     }
 
+    /**
+     * @return the game mode (Pattern or Matching)
+     */
     public int getMode() {
         return mode;
     }
 
+    /**
+     * @return the theme of the game (1=cats, 2=shapes, 3=League of Legends)
+     */
     public int getTheme() {
         return theme;
     }
 
+    /**
+     * @param theme the theme of the game (1=cats, 2=shapes, 3=League of Legends)
+     */
     public void setTheme(int theme) {
         this.theme = theme;
     }
 
+    /**
+     * @return if the user is a guest
+     */
     public boolean isGuest() {
         return guest;
     }
 
+    /**
+     * @param guest if the user is a guest or not
+     */
     public void setGuest(boolean guest) {
         this.guest = guest;
     }
 
+    /**
+     * resets the game statistics
+     */
     public void reset(){
         time = 0;
         numMove = 0;
@@ -107,6 +145,10 @@ public class User {
         this.password = new_password;
     }
 
+    /**
+     * @return the cloned user
+     * @throws CloneNotSupportedException throws the exception
+     */
     public User clone() throws CloneNotSupportedException {
         User clone = (User) super.clone();
         clone.setGuest(guest);

@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * Parent class of all boards.
- *
+ * Parent class for MatchingBoard and PatternBoard
  */
 public class Board {
     public final Tile[][] TilePositions;
@@ -83,7 +82,7 @@ public class Board {
     }
 
     /**
-     *
+     * @return the index of the tile that is passed in
      */
     public int[] getIndexOfTile(Tile tile) {
         for (int i = 0 ; i < numRows; i++) {
@@ -98,10 +97,9 @@ public class Board {
 
 
     /**
-     * no idea what this means Koji pls help :(
+     * @return the positions of all the tiles
      */
     public Tile[][] getTilePositions() {
-
         return this.TilePositions;
     }
 
@@ -115,6 +113,9 @@ public class Board {
         this.TilePositions[row][col] = tile;
     }
 
+    /**
+     * @return a shuffled list of all the tile objects
+     */
     public ArrayList<Tile> generateTileList() {
         ArrayList<Tile> tileList = new ArrayList<>();
         for (int i = 0; i < totalTiles; i++) { // loops totalTiles times

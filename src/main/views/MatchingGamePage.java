@@ -178,6 +178,10 @@ public class MatchingGamePage {
 
     }
 
+    /**
+     * called when the user flips a tile
+     * @throws InterruptedException an interruptedException
+     */
     public void flipTile() throws InterruptedException {
         if (!board.getTileAtIndex(rowNum,colNum).getFlipped()) {//do if the tile clicked has not flipped yet
             user.setNumMove(counter/2);
@@ -204,8 +208,11 @@ public class MatchingGamePage {
         }
     }
 
+    /**
+     * sets the images of the tiles
+     */
     public void setImg(){
-        String url ;
+        String url;
         img = new ImageIcon[15];
         for (int i = 0; i < 15; i++) {
             url = "src/main/views/pictures/theme"+theme+"/img"+i+".jpg";
@@ -215,7 +222,7 @@ public class MatchingGamePage {
     }
 
     /**
-     * runs a new game mode
+     * OLD
      * @return number of moves, the time and difficulty of the finished game mode
      */
     public static String[] runMatchingGame(String difficulty, String guest) {
@@ -278,38 +285,6 @@ public class MatchingGamePage {
         return statistics;
     }
 
-//    public static void main (String [] args) throws SQLException { // more for testing, can delete
-//        UserSQLDatabase UserDatabase = new UserSQLDatabase();
-//        MatchingLeaderboardSQLDatabase LeaderboardDatabase = new MatchingLeaderboardSQLDatabase();
-//        MatchingGameHistorySQLDatabase GameHistoryDatabase = new MatchingGameHistorySQLDatabase();
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Running the Matching Game from inside the MatchingGame class.");
-//        System.out.println("Would you like to play as a guest? (Y/N)");
-//        String guest = sc.nextLine();
-//        String username = "";
-//        if (guest.equals("N")) {
-//            String[] userData = LoginOrSignupPage.loginOrSignup(UserDatabase);
-//            username = userData[0];
-//        }
-//        //run the game mode including start page
-//        // String[] gameType = StartPage.startPage();
-//        String[] statistics = runMatchingGame("Easy", guest);
-//        int numMoves = Integer.parseInt(statistics[0]);
-//        long time = Long.parseLong(statistics[1]);
-//        String difficulty = statistics[2];
-//        if (guest.equals("N")) {
-//            Random rand = new Random();
-//            Integer GID = rand.nextInt();
-//            // Updates the leaderboard
-//            GameHistoryDatabase.addGameHistory(GID, username, numMoves, (double) (time / 1000), difficulty);
-//            LeaderboardDatabase.generateLeaderboard(difficulty);
-//        } else {
-//            System.out.println("Memory Matching Game Guest Statistics: ");
-//            System.out.println("Number of Moves: " + numMoves);
-//            System.out.println("Time: " + time);
-//            System.out.println("Difficulty: " + difficulty);
-//        }
-//    }
 
 }
 

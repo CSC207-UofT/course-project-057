@@ -21,6 +21,11 @@ public class MatchingLeaderboardPage {
     private Object[][] info;
     private Font f;
 
+    /**
+     * constructor
+     * @param difficulty the difficulty determines the dimensions of the board
+     * @throws SQLException
+     */
     public MatchingLeaderboardPage(String difficulty) throws SQLException {
         //initialize variables
 

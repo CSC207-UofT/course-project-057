@@ -18,7 +18,14 @@ public class LeaderBoardPage {
     private String difficulty, mode;
     private String[][] output;
     private Font f1, f2;
-    
+
+    /**
+     * the page to display the leaderboard
+     * @param user player of the game
+     * @param gm gameStatManager
+     * @param db Database
+     * @throws SQLException exception for SQL
+     */
     public LeaderBoardPage(User user, GameStatManager gm, IDatabaseConnection db) throws SQLException {
         frame1 = new JFrame("Leader Board");
         panel = new JPanel();
