@@ -135,11 +135,12 @@ public class DisplayPrompts {
         return ("Pattern Rules:\n " +
                 "1. Your aim is to copy the pattern shown on screen.\n" +
                 "2. One tile will uncover. Remember this tile!\n" +
-                "3. Press the same tile that was just shown to you! \n" +
+                "3. Press the same tile that was just shown to you!\n" +
                 "4. Another tile will flip.\n" +
                 "5. Press the tile shown in step 2, followed by the tile in step 4.\n" +
-                "6. The next tile will flip. Keep repeating the same pattern if you can remember!\n" +
-                "7. Good luck and thanks for playing!");
+                "6. The next tile will flip. Repeat the process above.\n" +
+                "7. Note that every time a new tile is shown you will need to start your move from the first tile.\n" +
+                "8. Keep repeating the same pattern if you can remember!");
     }
 
 }
