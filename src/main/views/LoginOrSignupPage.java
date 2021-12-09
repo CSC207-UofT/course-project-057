@@ -26,7 +26,7 @@ public class LoginOrSignupPage {
      */
     public LoginOrSignupPage(User user) {
         //initialize JComponent
-        frame = new JFrame(user.getUsername());
+        frame = new JFrame("Memory Game");
         panel = new JPanel();
         login = new JButton("Login");
         signup = new JButton("Sign Up");
@@ -35,24 +35,24 @@ public class LoginOrSignupPage {
         rules = new JButton("Rules");
         background = new JLabel();
         backgroundImg = new ImageIcon(new ImageIcon("src/main/views/pictures/rainbowCat.gif").getImage()
-                .getScaledInstance(700,540,Image.SCALE_DEFAULT));
+                .getScaledInstance(700, 540, Image.SCALE_DEFAULT));
         f = new Font(title.getFont().getName(), Font.PLAIN, 18);
         LoginOrSignupPage.user = user;
 
         //set panel
         panel.setLayout(null);
-        panel.setBounds(0,0,700,540);
+        panel.setBounds(0, 0, 700, 540);
 
         //set label
-        title.setBounds(140,88,250,55);
+        title.setBounds(140, 88, 250, 55);
         title.setFont(new Font(title.getFont().getName(), Font.BOLD, 32));
         title.setForeground(Color.WHITE);
 
         background.setIcon(backgroundImg);
-        background.setBounds(0,0,540,540);
+        background.setBounds(0, 0, 540, 540);
 
         //set buttons
-        login.setBounds(180,340,150,40);
+        login.setBounds(180, 340, 150, 40);
         login.setFont(f);
         login.setBackground(Color.CYAN);
         login.setOpaque(true);
@@ -63,7 +63,7 @@ public class LoginOrSignupPage {
             new LoginPage(user);
         });
 
-        signup.setBounds(180,390,150,40);
+        signup.setBounds(180, 390, 150, 40);
         signup.setFont(f);
         signup.setBackground(Color.CYAN);
         signup.setOpaque(true);
@@ -74,7 +74,7 @@ public class LoginOrSignupPage {
             new SignUpPage(user);
         });
 
-        guest.setBounds(180,440,150,40);
+        guest.setBounds(180, 440, 150, 40);
         guest.setFont(f);
         guest.setBackground(Color.CYAN);
         guest.setOpaque(true);
@@ -83,20 +83,23 @@ public class LoginOrSignupPage {
             LoginOrSignupPage.user.setGuest(true);
             JOptionPane.showMessageDialog(new JFrame(), "Play as guest!");
             Random rand = new Random();
-            user.setUsername("guest"+rand.nextInt(1000));
+            user.setUsername("guest" + rand.nextInt(1000));
             new StartPage(user);
             frame.setVisible(false);
         });
 
-        rules.setBounds(450,460,80,40);
+        rules.setBounds(450, 460, 80, 40);
         rules.setFont(new Font(title.getFont().getName(), Font.BOLD, 12));
         rules.setBackground(Color.GRAY);
         rules.setOpaque(true);
         rules.setBorderPainted(false);
-        rules.addActionListener(e -> {new GameRulesPage(user); frame.setVisible(false);});
+        rules.addActionListener(e -> {
+            new GameRulesPage(user);
+            frame.setVisible(false);
+        });
 
         //add all JComponents to frame and set frame visible
-        frame.setSize(540,540);
+        frame.setSize(540, 540);
         frame.setResizable(false);
         panel.add(title);
         //panel.add(test);
@@ -108,13 +111,6 @@ public class LoginOrSignupPage {
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-    }
-
-    /**
-     * @return user
-     */
-    public static User getUser() {
-        return LoginOrSignupPage.user;
     }
 }
 
